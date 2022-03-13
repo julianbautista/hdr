@@ -1,0 +1,105 @@
+\documentclass[english]{amu_these}
+
+\begin{document}
+
+										%% page de titre
+	\chead{}
+	\pdfbookmark[0]{Page de titre}{titre}
+	\thispagestyle{empty}
+	\input{tex/titre.tex}
+										%% licence
+	\newpage
+	\pdfbookmark[0]{Affidavit}{affidavit}
+	\thispagestyle{empty}
+	\input{tex/licence}
+
+
+	\chapter*{Résumé}					%% résumé
+    \addcontentsline{toc}{chapter}{Résumé}
+	\input{tex/resume}
+
+
+	\chapter*{Abstract}					%% abstract
+    \addcontentsline{toc}{chapter}{Abstract}
+	%\selectlanguage{english}
+	\input{tex/abstract}
+	%\selectlanguage{french}
+
+
+	\chapter*{Acknowledgements}			%% remerciements
+    \addcontentsline{toc}{chapter}{Acknowledgements}
+	\input{tex/remercie}
+
+
+
+    \microtypesetup{protrusion=false}	%% désactive la protrusion (TOC LOFT GLS)
+	\tableofcontents					%% TOC
+	% \listoffigures						%% LOF
+	% \listoftables						%% LOT
+	% \printglossary[						%% Acronymes
+	% 	type=\acronymtype,
+	% 	title={Liste des acronymes},
+	% 	toctitle={Liste des acronymes}
+	% 	]
+	% \printglossary[						%% Glossaire
+	% 	title={Glossaire},
+	% 	toctitle={Glossaire}
+	% 	]
+	% \printglossary[						%% Nomenclature
+	% 	type=notation,
+	% 	title={Nomenclature},
+	% 	toctitle={Nomenclature}
+	% 	]
+    \microtypesetup{protrusion=true}	%% rétabli la protrusion
+
+	\ohead{\leftmark\ifstr{\rightmark}{\leftmark}{}{ -- \rightmark}}	%% place le chapître et la partie en en-tête
+
+	\chapter{Introduction}
+	\label{chap:intro}
+	%\addcontentsline{toc}{chapter}{Introduction}
+	\input{tex/intro}
+
+	\chapter{ Observing the Universe with spectroscopy}
+	\label{chap:spectro}
+	\input{tex/spectro}
+
+	\chapter{ The high-redshift Universe and its forests }
+	\label{chap:forests}
+	\input{tex/forests}
+
+	\chapter{ The mid-redshift Universe and its galaxies }
+	\label{chap:galaxies}
+	\input{tex/galaxies}
+
+	\chapter{ The low-redshift Universe and its velocities }
+	\label{chap:velocities}
+	\input{tex/velocities}
+
+	\chapter*{Conclusion}
+	\addcontentsline{toc}{chapter}{Conclusion}
+	\input{tex/conc}
+
+	\appendix
+
+	\newpage
+	\printbibliography[					%% bibliographie
+	heading=bibintoc
+	]	
+	% \newpage
+	% \printindex							%% index
+	% \newpage
+	% \printendnotes						%% notes
+
+	%% annexes
+	%\setcounter{chapter}{0}
+	%\renewcommand{\thesection}{\Alph{section}}
+	
+	%\chapter*{Appendix}
+	%\newpage
+	%\addcontentsline{toc}{chapter}{Appendix}
+	
+	%\input{tex/annexe1}
+	%\newpage
+	%\input{tex/annexe2}
+
+\end{document}
