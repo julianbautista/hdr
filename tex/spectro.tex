@@ -1,20 +1,96 @@
 \chaptertoc{}
 
+
 \vspace{1em}
 
-In the last two decades, spectroscopy became one of the most important
-methods to survey the Universe. 
+In the last two decades, spectroscopy became one of the most powerful
+techniques to survey the Universe. Particularly thanks to its 
+capability to obtain precise redshifts, spectroscopy allows
+us to build precise maps of the Universe in three dimensions. 
 
-Base this chapter on the Sloan Digital Sky Survey III and IV. 
+This chapter is an overview on how to observe galaxies with 
+spectroscopy and how the data is treated all the way to the 
+redshifts. I also expose my work on improving the spectroscopic
+data reduction pipeline for the extended Baryon Oscillation 
+Spectroscopic Survey (eBOSS). Naturally, this chapter will 
+focus on the spectroscopic observations with the 
+Sloan Digital Sky Survey (SDSS).
+
 
 \section{Selecting the objects to observe}
+\label{spectro:target}
 
+The first step to build a spectroscopic survey is to pre-select 
+objects to be observed. This step, known as \emph{target
+selection}, is required since SDSS uses optical fibers to 
+capture the light from an object, and therefore cannot simply
+observe all objects in a given field. 
+
+For the target selection, a prior \emph{photometric or imaging} 
+survey is required. In the first N years of SDSS, a photometric
+survey was carried out, covering more than 
+XXX deg$^2$ of the sky \cite{yorkSloanDigitalSky2000}. 
+The focal plane was equiped with six rows of five 
+charge coupled device (CCD), each one covered with one of 
+the SDSS filters: \textit{u, g, r, i} or \textit{z} 
+\cite{gunnSloanDigitalSky1998, doiPhotometricResponseFunctions2010}.
+A technique named drift-scanning was used to continuously observe 
+``stripes'' of constant declination during the night.
+SDSS was the first of its kind to produce a systematic survey 
+of the Universe in optical.
+
+Images were reduced using the SDSS photometric pipeline 
+\cite{sdss_photo_pipe}. Fluxes/magnitudes and their uncertainties 
+were computed for each detected object in five colour bands. 
+Based on their fluxes and angular sizes relative to the 
+point-spread function (PSF), each object received a 
+photometric classification as star or galaxy (others?).
+
+The final list of objects with their respective fluxes and 
+angular positions is the input for targeting algorithms. 
+These algorithms aim to select a given type of object for 
+spectroscopic follow-up, based solely on their fluxes and colors. 
+For galaxy surveys, it is vital to be able to distinguish between 
+galaxies - the objects of our interest - and stars - which belong
+to our own galaxy and have a distinct scientific purpose. 
+For cosmology, since we are interested in the clustering of 
+galaxies, is is also important to obtain a relatively 
+homogeneous angular density of targets so to avoid spurious 
+correlations. 
+
+List of target selection papers 
+(see \url{https://www.sdss.org/science/technical_publications})
+
+\begin{itemize}
+    \item SDSS Main Galaxy Sample
+    \item BOSS Low-z galaxies 
+    \item BOSS CMASS galaxie 
+    \item BOSS \lya forest quasars \cite{nick_ross}
+    \item eBOSS LRGs \cite{}
+    \item eBOSS ELGs \cite{}
+    \item eBOSS quasars as tracers \cite{}
+    \item eBOSS \lya quasars 
+\end{itemize}
 
 \section{Pointing fibres to the sky}
+\label{spectro:fibers}
 
+Tiling, plate drilling, fibers, pluggin by hand, 
+spectrographs, CCDs, observations, ...
 
 \section{From electrons to redshifts}
+\label{spectro:pipeline}
 
+Description of automated data reduction pipeline, 
+emphasis on eBOSS. 
+
+spec2d...
+
+spec1d...
 
 \section{From redshifts to cosmology}
+\label{spectro:catalogs}
+
+Description of catalog generation. Shall this go on 
+the clustering part ? 
 

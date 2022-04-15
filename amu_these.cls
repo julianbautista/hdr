@@ -198,6 +198,7 @@
 \newcommand{\emiss}[2][]{\ensuremath{\varepsilon_{#2}^{#1}}\xspace}
 \newcommand{\dinteg}{\mathrm{d}}
 
+
 %%% commandes pour la page de titre
 \definecolor{blueamu}{RGB}{0, 101, 189}
 \definecolor{cyanamu}{RGB}{61, 183, 228}
