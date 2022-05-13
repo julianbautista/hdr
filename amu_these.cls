@@ -192,10 +192,6 @@
 %\loadglsentries{tex/gloss}					%% fichiers sources glossaires
 
 %%% commandes personnelles (macros)
-\newcommand{\langue}{\emph}					%% mots en langues étrangères en italique
-\newcommand{\citital}{\emph}				%% citation en italique
-\newcommand{\acc}{\ensuremath{\omega ^{2}=\omega ^{2}_{0}+2\alpha \theta}\xspace}
-\newcommand{\emiss}[2][]{\ensuremath{\varepsilon_{#2}^{#1}}\xspace}
 \newcommand{\dinteg}{\mathrm{d}}
 
 
