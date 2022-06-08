@@ -193,6 +193,15 @@
 
 %%% commandes personnelles (macros)
 \newcommand{\dinteg}{\mathrm{d}}
+\newcommand{\angstrom}{\si{\angstrom}}
+\newcommand{\hmpc}{$h^{-1}$Mpc}
+\newcommand{\ihmpc}{$h$ Mpc$^{-1}$}
+\newcommand{\rperp}{{r_\perp}}
+\newcommand{\rpara}{{r_\parallel}}
+\newcommand{\aperp}{{\alpha_\perp}}
+\newcommand{\apara}{{\alpha_\parallel}}
+\newcommand{\lya}{\,$\text{Ly}\alpha$\,}
+\newcommand{\lyb}{\,$\text{Ly}\beta$\,}
 
 
 %%% commandes pour la page de titre
@@ -233,4 +242,3 @@
 \g@addto@macro\bfseries{\boldmath}
 \makeatother
 
-\newcommand{\lya}{\,$\text{Ly}\alpha$\,}
