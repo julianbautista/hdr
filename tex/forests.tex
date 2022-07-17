@@ -734,6 +734,150 @@ the full-shape of the correlation function \cite{cuceuCosmologyBAO3D2021}.
 This section also concerns work led by Samantha Youles, PhD candidate under 
 my supervision at the University of Portsmouth between 2018 and 2022. 
 
+Weak-gravitational lensing is a powerful cosmological probe since it is 
+sensitive to the total (baryons and dark) matter density field, as 
+discussed in section~\ref{intro:probes:wl}. The quasar and \lya forest 
+samples used in the measurement of BAO lie at $2.0 < z < 4.0$ and are 
+subject to the effect of lensing from the matter distribution between 
+$0 < z < 2.0$. Current BAO analysis such as the one described in section
+\ref{forests:bao} do not take any lensing effect into account. 
+In this section we describe how one could potentially extract weak-lensing 
+information from a realistic set of \lya forests. 
+
+Until now, no measurement of weak gravitational lensing with sources at 
+$z\sim 2$ has been produced, though it has been studied theoretically and 
+with simplified simulations. 
+\cite{croftWeakLensingLyman2018}, 
+\cite{metcalfNoiseEstimatesMeasurements2018}, and 
+\cite{metcalfReconstructingGravitationalLensing2020a} looked into a regular grid 
+of mock quasars with arcminute separations, populated with Gaussian random 
+forests. The close, regular spacing of the forests created a near-continuous field
+enabling the use of a quadratic estimator adapted from 21cm intensity mapping analyses
+\cite{pourtsidouWeakLensing212014, pourtsidouGravitationalLensingCosmological2015}.
+Even though these techniques are able to reconstruct the lensing potential, 
+they are not yet readily applicable to real survey data given its non-regular
+sampling, noise, volumes and densities probed. 
+
+
+Figure~\ref{fig:weak_lensing_forests} illustrates the impact of lensing 
+over a pair of \lya forests caused by an intervening overdensity. 
+The lens creates an image of the pair at a slighly larger angle with 
+respect to the observer, virtually increasing the transverse separation 
+$\rperp$ between the two forests to a larger value $r_\perp^L$. Of course, 
+the expected correlation function between two given pixels is unchanged 
+and given by $\xi(\rperp, \rpara) = \langle \delta_1 \delta_2 \rangle$ 
+where the brackets indicate an ensemble average. When observing a set 
+of lensed quasars, the measured correlations are wrongly assigned to 
+the separation given by $(r_\perp^L, \rpara) \neq (\rperp, \rpara)$. 
+Here we assume that the radial separations changes are negligible, 
+$r_\parallel^L \sim \rpara$. If one could measure the correlation function 
+uniquely using pairs of forests that are background of overdense lenses, 
+the results would be a dilated correlation function in the transverse 
+direction. Alternatively, considering only underdense lenses, the effect 
+would be an opposite dilation in the transverse direction. 
+
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{fig/forests/unlensed_forests.png}
+    \includegraphics[width=0.9\textwidth]{fig/forests/lensed_forests.png}
+    \caption{Illustration of the effect of gravitational lensing over a pair
+    of \lya forests. The top figure shows the unlensed case, the arrows 
+    define the parallel and transverse separations, $r_\parallel$ and $r_\perp$
+    respectively, of a pair of \lya forest pixels (or a pixel-quasar pair). 
+    The bottom panel shows the lensed case, where an overdense region acts 
+    as a ``thin'' lens, creating the illusion that the background pairs are actually 
+    farther away from each other in the transverse direction. 
+    The measured correlations should be the same in both cases, though in the lensed 
+    case this correlation is assigned to a wrong transverse separation. 
+    The radial effect is relatively small.  
+    }
+    \label{fig:weak_lensing_forests}
+\end{figure}
+
+I describe how we attempt to reconstruct the lensing signal 
+from a simpler estimator. 
+One should first note that when averaging correlations over all available pairs in a survey, 
+the lensing effect from over and underdense lenses averages to a negligible net impact 
+on the correlation function, though it increases its noise.
+However, we can attempt to detect a difference 
+between the average correlation function $\bar{\xi}(\rpara, \rperp)$ 
+and the local correlation function in a given patch of the sky 
+$\xi(\hat{n}, \rpara, \rperp)$. 
+We can write a first-order approximate relation between the local 
+difference $\Delta \xi \equiv  \xi(\hat{n}, \rpara, \rperp) - \bar{\xi}(\rpara, \rperp)$
+and the local convergence field $\kappa(\hat{n})$.
+In practice, each pair of forest given us an estimate of $\xi(\hat{n}, \rpara, \rperp)$,
+though very noisy. 
+Our estimates of the convergence $\hat{\kappa}(\hat{n})$ are assigned into a 
+map by choosing $\hat{n}$ to  be  the mid-point between each pair of lines of sight. 
+Convergence maps are constructed using both the auto-correlation function of forests 
+and the quasar-\lya cross-correlation function, denoted $\hat{\kappa}_{\alpha \alpha}$ 
+and $\hat{\kappa}_{q \alpha}$ respectively. 
+Given the fact that auto- and cross-correlations are close to be independent 
+(see section~\ref{forests:bao:correlations}), the convergence maps from auto and cross
+can be combined into a single map, denoted $\hat{\kappa}_{q \alpha + \alpha \alpha}$. 
+
+Angular power spectra are computed from the estimated maps as a function of 
+angular multipole number $\ell$. 
+Since our convergence maps are quite noisy, computing the auto 
+power spectra of these maps, e.g. $\langle \hat{\kappa} \hat{\kappa} \rangle_\ell$, 
+is not convenient since these would also be dominated by noise. 
+Instead, we use high signal-to-noise ratio convergence maps to compute cross 
+angular power spectra. In real cases, one can use a lensing convergence or potential 
+maps derived from the cosmic microwave background or one can construct a 
+density map of foreground sources from galaxy surveys. 
+
+We tested our methodology using simulations. 
+We used the 5-year DESI mock catalogues of \lya forests also used in the study of redshift
+errors (section~\ref{forests:zerrors}). 
+Gaussian lensing convergence maps were created from a fiducial cosmology and the 
+linear matter power spectrum computed with \textsl{camb}. 
+We displaced the quasars following these ``input'' convergence maps 
+and applied our methodology to build convergence maps 
+from the auto- and cross-correlation functions. 
+The analysis was performed 100 times with different realisations of the convergence maps
+(the forests were kept the same). 
+
+Figure~\ref{fig:forest_lensing_power_spectra} shows the resulting power spectra
+compared to the input convergence maps as a function of multipole $\ell$. 
+There are two effects to be taken into account when comparing to theory. 
+First, the survey mask changes the amplitude of the power spectra by a factor equal 
+to the fraction of sky covered (to first order). The resulting power is shown as a blue line. 
+Second, the power spectra depend on the choice of maximum transverse separation $r_\perp^\mathrm{max}$ 
+between quasars used to build the convergence maps. 
+We refer to this non-trivial function of $\ell$ describing 
+the variation of power with $r_\perp^\mathrm{max}$
+as ``damping''. Both effects combined are shown as a purple line.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig/forests/forest_lensing_power_spectra.png}
+    \caption{Angular power spectra of convergence maps from simulations of the 5-year DESI sample of \lya forests. 
+    The blue line indicates the auto power spectra of the input convergence when 
+    accounting for effect of survey mask. The purple line also includes the effect of 
+    the choice of maximum transverse separation between lines of sight used when 
+    building the convergence maps. The points show the estimated cross power 
+    from maps computed from the auto-correlation of forests (red), the cross-correlation 
+    between quasars and forests (blue), and the combination of both (green). 
+    }
+    \label{fig:forest_lensing_power_spectra}
+\end{figure}
+
+There is an excellent agreement, though noisy, betwen estimated cross-power spectra  
+and their input values. Of course, the ``input'' map is not available in a real setting 
+so one should consider the noise of this second map (e.g. CMB lensing map) when producing
+realistic forecasts. 
+
+The results presented in this section are still under development and have not yet  
+been published. We refer the reader to S. Youles thesis for more details on methods 
+and tests. 
+
+
+
+
 \section{Voids in tomographic maps}
 \label{forests:voids}
 

@@ -1,15 +1,122 @@
 \chaptertoc{}
 
-At redshifts between 0 and 2, galaxies can be used as tracers of
-the matter distribution. 
+\vspace{1em}
 
-\section{Galaxies as a tracer of the matter field}
+At redshifts between 0 and 2, galaxies can be used as tracers of
+the matter distribution. With the statistics of the galaxy distribution 
+we can measure characteristic scale of the baryon acoustic oscillations (BAO), 
+as well as extract information about the growth-rate of structures from 
+the anisotropies caused by redshift-space distortions (RSD). 
+As presented in Chapter~\ref{chap:intro}, BAO and RSD are powerful 
+probes of dark-energy and theories of gravity. 
+
+In this Chapter, I overview my contributions for the study of dark-energy 
+with galaxy clustering. Section~\ref{galaxies:catalogue} describes how to 
+create a galaxy clustering catalogue from the spectroscopic observations, 
+including and correcting for most observational systematic effects.
+In section~\ref{galaxies:bao} I present the BAO measurements I performed 
+with the SDSS sample of luminous red galaxies, while section~\ref{galaxies:rsd}
+focus on the RSD constraints. Section~\ref{galaxies:joint} 
+overviews recent work carried out by my PhD students Tyann Dumerchat 
+and Vincenzo Aronica on the joint analysis of galaxy clustering in 
+Fourier and configuration space. 
+
+The work described in this chapter is published in the following 
+articles: 
+\cite{bautistaSDSSIVExtendedBaryon2018, 
+bautistaCompletedSDSSIVExtended2020,
+gil-marinCompletedSDSSIVExtended2020,
+rossCompletedSDSSIVExtended2020,
+zhaoCompletedSDSSIVExtended2021,
+%dumerchatJoint2022
+}. 
+
+\section{From redshifts to galaxy clustering}
+\label{galaxies:catalogue}
+
+An essential step in the cosmological analysis of galaxy survey data is 
+to convert convert a list of galaxy redshifts (see Chapter~\ref{chap:spectro}) 
+into a catalogue from which we can define overdensities 
+$\delta_n(\vec{x}) = n(\vec{x})/\bar{n} - 1$, where $n(\vec{x})$ is the 
+number density 
+of galaxies in a volume element located at position $\vec{x}$. 
+The quantity $\bar{n}$ is the average galaxy number density over the probed 
+\emph{volume}. Therefore, it is important to define precisely what is the 
+volume observed, or in jargon terms, the survey window function. 
+
+The simplest form of survey window function would be some function of position $\vec{x}$ 
+that is 1 if the volume was ``observed'' and 0 else. 
+One way to define this function is using a Poisson random sampling 
+of the volume with points, with some arbitrary higher number density than the 
+galaxy average number density (typically between 20 or 50 times higher). 
+The list of points is referred to as the \emph{random} catalogue. 
+In practice, the random catalogue is more complicated and accounts for 
+observational completeness and systematic effects, as described below. 
+
+In SDSS analyses, the random catalogue is a combination of an angular footprint 
+and a radial distribution, both trying to matching the galaxy sample as better as possible. 
+
+I describe now the procedure to define the angular footprint. 
+The starting footprint is the same where the target selection 
+(section~\ref{spectro:target})
+was previously defined. Bad photometric regions or bright stars are masked out 
+by removing randoms belonging to these regions. 
+After tiling, fibre assignement and spectroscopic observations, the footprint 
+can be divided into an unique set of sectors. Each sector corresponds to regions
+observed by one or more plates. The \emph{fibre completeness} of each sector is 
+defined as the ratio between the number of spectroscopically observed targets and 
+the number of available targets in the sector. Random points are sub-sampled or de-weighted 
+following the fibre completeness to account for it. 
+
+Some targets cannot be observed due to 
+its proximity to another observed target and the finite size of fibres, corresponding 
+to 62 arcseconds in the sky. We refer to these events as \emph{fibre collisions}. 
+Collisions might happen not only to pairs of galaxies, but to any group of targets with 
+linking lengths smaller than 62 arcsec. Depending on the number of plates observing 
+a giving sector, some collisions might be solved but the missing ones might 
+impact the measured clustering on small scales if not corrected. 
+While there are several methods to solve collisions 
+(\cite{guoNewMethodCorrect2012, bianchiUnbiasedClusteringEstimation2017}),
+we used the simplest up-weighting technique, where the nearest observed galaxy 
+is up-weighted by the number of non-observed targets within the collision group. 
+This assumes that non-observed targets are also galaxies of the same target type and 
+that they are physically close (angularly and radially) to the observed ones.
+On scales above a few \hmpc, this simple correction is a good approximation. 
+
+Redshift failures... 
+
+Photometric systematic weights.. 
+
+Radial selection function is n(z)... 
+
+Optimal weights for clustering (FKP) \dots
+
+
+
+
+Reconstruction ... 
+
+Correlation function estimation ... 
+
+Power spectrum estimation ... 
+
+Mock catalogues ... 
+
+Covariance matrix ...  
 
 \section{Baryon acoustic oscillations with galaxies}
+\label{galaxies:bao}
 
-\section{Joint BAO analysis in Fourier and Configuration space}
+
+
 
 \section{Redshift-space distortions}
+\label{galaxies:rsd}
+
+\section{Joint clustering analysis in Fourier and Configuration space}
+\label{galaxies:joint}
+
 
 \section{Cross-correlation with radio surveys}
+\label{galaxies:radio}
 
