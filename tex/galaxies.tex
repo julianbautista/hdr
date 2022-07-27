@@ -31,7 +31,7 @@ zhaoCompletedSDSSIVExtended2021,
 %dumerchatJoint2022
 }. 
 
-\section{From redshifts to galaxy clustering}
+\section{From redshifts to clustering catalogues}
 \label{galaxies:catalogue}
 
 An essential step in the cosmological analysis of galaxy survey data is 
@@ -41,8 +41,10 @@ $\delta_n(\vec{x}) = n(\vec{x})/\bar{n} - 1$, where $n(\vec{x})$ is the
 number density 
 of galaxies in a volume element located at position $\vec{x}$. 
 The quantity $\bar{n}$ is the average galaxy number density over the probed 
-\emph{volume}. Therefore, it is important to define precisely what is the 
-volume observed, or in jargon terms, the survey window function. 
+\emph{volume}. Therefore, it is important to 1) define precisely what is the 
+volume observed, or in jargon terms, the survey window function; and 
+2) to make sure that the number density of galaxies is tracing the actual 
+cosmological fluctuations and not any spurious contamination. 
 
 The simplest form of survey window function would be some function of position $\vec{x}$ 
 that is 1 if the volume was ``observed'' and 0 else. 
@@ -59,14 +61,28 @@ and a radial distribution, both trying to matching the galaxy sample as better a
 I describe now the procedure to define the angular footprint. 
 The starting footprint is the same where the target selection 
 (section~\ref{spectro:target})
-was previously defined. Bad photometric regions or bright stars are masked out 
-by removing randoms belonging to these regions. 
+was previously defined. 
+Figure~\ref{fig:eboss_footprint} displays the eBOSS footprint for the three tracers 
+(LRGs, ELGs and QSOs) compared to the BOSS footprint and the stellar density map from Gaia. 
+Regions with bad photometric or around 
+bright stars are masked out by removing randoms belonging to these regions
+(or assigning them a null weight). 
 After tiling, fibre assignement and spectroscopic observations, the footprint 
 can be divided into an unique set of sectors. Each sector corresponds to regions
 observed by one or more plates. The \emph{fibre completeness} of each sector is 
 defined as the ratio between the number of spectroscopically observed targets and 
 the number of available targets in the sector. Random points are sub-sampled or de-weighted 
 following the fibre completeness to account for it. 
+
+\begin{figure}
+    \centering 
+    \includegraphics[width=0.9\textwidth]{fig/galaxies/eboss_footprint.png}
+    \caption{ The DR16 footprint for each eBOSS tracer: Luminous Red Galaxies (LRG), 
+    Emission Line Galaxies (ELG) and quasars (QSO). The BOSS DR12 LRGs area is also shown, 
+    as well as the density map of Gaia DR2 sources with $g < 15$ mag.
+    Figure extracted from \cite{zhaoCompletedSDSSIVExtended2021}.} 
+    \label{fig:eboss_footprint}
+\end{figure}
 
 Some targets cannot be observed due to 
 its proximity to another observed target and the finite size of fibres, corresponding 
@@ -83,40 +99,185 @@ This assumes that non-observed targets are also galaxies of the same target type
 that they are physically close (angularly and radially) to the observed ones.
 On scales above a few \hmpc, this simple correction is a good approximation. 
 
-Redshift failures... 
+Two additional sets of weights are defined to correct for spurious density 
+fluctuations which contaminate the cosmological fluctuations. 
+These weights are applied to the galaxies themselves. 
 
-Photometric systematic weights.. 
+The first set of weights corrects for angular fluctuations caused 
+by correlations between galaxy number density and photometry-related quantities,
+such as Galactic extinction, stellar density, imaging depth or sky flux.
+They are commonly referred to as \emph{photometric weights}. 
+Figure~\ref{fig:photo_systematics_lrg} displays these correlations 
+for the LRG sample both before and after corrections. 
+For the analysis of eBOSS DR16 LRGs, I have 
+implemented\footnote{\url{https://github.com/julianbautista/eboss_clustering/blob/master/python/systematic_fitter.py}} 
+a multi-dimension 
+linear regression that assumes these correlations are linear and 
+accounts for the fact that some photometric quantities are correlated between themselves 
+(e.g., stellar density and Galactic extinction).
+This multi-linear method is based on work described in \cite{prakashSDSSIVExtendedBaryon2016}.
+Of course, more advanced methods have been developed since then, based on 
+machine learning algorithms 
+(\cite{rezaieImprovingGalaxyClustering2020, chaussidonAngularClusteringProperties2021}).
+It is important to evaluate the performance of these algorithms with mock catalogues
+where we add artificial contamination 
+and quantify how well we recover the initial raw power spectrum after correcting for them. 
+There is a risk of overfitting and removing some large-scale cosmological modes which 
+can be harmful for clustering analysis, particularly those aiming at measuring 
+primordial non-Gaussianity 
+(\cite{rezaiePrimordialNonGaussianityCompleted2021, muellerClusteringGalaxiesCompleted2021}).
 
-Radial selection function is n(z)... 
+\begin{figure}
+    \centering 
+    \includegraphics[width=0.7\textwidth]{fig/galaxies/photometric_weights_lrg.png}
+    \caption{ Fluctuations in the angular LRG density as a function of 
+    various imaging properties and Galactic foregrounds. 
+    The dashed curves show these fluctuations before any correction 
+    while red points show the result of applying a linear correction for 
+    stellar density and Galactic extinction. 
+    Figure extracted from \cite{rossCompletedSDSSIVExtended2020}.} 
+    \label{fig:photo_systematics_lrg}
+\end{figure}
 
-Optimal weights for clustering (FKP) \dots
+A second set of weights corrects for the fact for the so-called \emph{redshift failures}, 
+i.e., the fact that some spectra with low signal-to-noise ratio (S/N)
+do not yield a statistically significant redshift measurement. 
+If they were randomly distributed across the sky, failures would not be an issue for 
+clustering. However, given the instrument configuration and throughput, these failures 
+imprint a pattern in the sky which contaminates clustering. 
+In the left panel of Figure~\ref{fig:eboss_zfailures} we see the average failure rate 
+of eBOSS LRGs as a function of position in the focal plane. The reason for this pattern
+is that the fibres at the side edges of the focal plane transport light to the edges 
+of the camera CCDs and therefore have a lower-than-average throughput, or lower signal-to-noise
+ratio. 
+The right panel of Figure~\ref{fig:eboss_zfailures} shows the 
+dependency of the average redshift failure rate as a function of the signal-to-noise
+ratio of the observation\footnote{The signal-to-noise ratio of an observation is 
+a function of the signal-to-noise ratio of all observed spectra and their magnitudes.}, 
+which is the actual underlying reason for the failure rates. 
+When modelling these dependencies of failure rates with S/N (or fibre number or focal plane
+position), one can correct these spurious fluctuations by assigning a weight 
+inversely proportional to the modelled rate. 
+These are the so called \emph{redshift-failure weights} and are assigned to the 
+galaxies with confident redshift measurements, to compensate for the eventual 
+non-confident ones at the same location in the focal plane. 
+
+\begin{figure}
+    \centering 
+    \includegraphics[width=0.49\textwidth]{fig/galaxies/eboss_z_failures_focalplane.png}
+    \includegraphics[width=0.49\textwidth]{fig/galaxies/eboss_z_failures_sn.png}
+    \caption{ 
+        Average redshift efficiency as a function of physical position of the optical 
+        fiber in the focal plane (left panel) and as a function of the observation
+        signal-to-noise squared (right panel).  
+        The left panel shows how redshift-failures imprint a pattern on the sky 
+        and therfore must be corrected. The right panel shows the underlying reason 
+        for the failures. The model (red line) is used to compute correction weights.
+    Figures extracted from \cite{bautistaSDSSIVExtendedBaryon2018}.} 
+    \label{fig:eboss_zfailures}
+\end{figure}
+
+Once all galaxies have their correction weights (fibre collision, photometric and 
+redshift-failure) and the randoms are corrected by fibre completeness, 
+the radial selection function. The idea is to assign redshifts to randoms 
+such that they follow the same redshift distribution as the galaxies. 
+The redshift distribution is often quantified by the comoving galaxy (weighted)
+number density $\bar{n}(z)$. 
+Figure~\ref{fig:eboss_z_distrib} shows the comoving density of eBOSS tracers 
+as a function of redshift. 
+For randoms to match this distribution, we randomly assign the actual galaxy 
+redshifts to each random, with repetition. Another possibility is to 
+fit some smooth function over the observed $\bar{n}(z)$ and draw random redshifts
+from the resulting model. In any case, these methods will introduce the so called 
+\emph{radial integral constraint}, i.e., the fact that the observed $\bar{n}(z)$ is 
+not the true ensemble averaged function of the Universe, it is just one 
+volume-limited realisation of it. The impact on clustering of the radial integral 
+constraint is inversely proportional to the area of the footprint
+(\cite{demattiaIntegralConstraintsSpectroscopic2019}) and it is significant 
+for surveys such as the eBOSS ELG (see Figure~\ref{fig:eboss_footprint} and 
+\cite{tamoneCompletedSDSSIVExtended2020, demattiaCompletedSDSSIVExtended2021}). 
+
+
+\begin{figure}
+    \centering 
+    \includegraphics[width=0.6\textwidth]{fig/galaxies/eboss_z_distribution.png}
+    \caption{ The weighted comoving number densities $\bar{n}(z)$ of eBOSS DR16 tracers
+    and BOSS DR12 CMASS LRGs, with all the photometric and spectroscopic
+    systematic weights included. 
+    The comoving distances and volumes are computed assuming a flat-$\Lambda$CDM 
+    cosmology with $\Omega_m = 0.31$. 
+    %The three horizontal dashed lines show the number densities of the cubic LRG, ELG, and QSO    
+    %EZmockcatalogues,i.e. $3.2 \times 10^{-4}$, $6.4 \times 10^{-4}$, and $2.4 \times 10^{-5} h^3 \text{Mpc}^{-3}$, respectively.
+    Figure extracted from \cite{zhaoCompletedSDSSIVExtended2021}.} 
+    \label{fig:eboss_z_distrib}
+\end{figure}
+
+The final step of the catalogue consists in adding an additional set of weights 
+to galaxies that optimise the signal-to-noise ratio of clustering measurements 
+when the redshift distribution is not uniform. These weights were first introduced 
+by \cite{feldmanPowerSpectrumAnalysisThreedimensional1994} and have been applied 
+to all clustering analysis ever since. They are commonly referred to as 
+\emph{FKP weights} and can be written for a galaxy $i$ as
+\begin{equation}
+    w_\text{i, FKP} = \frac{1}{1 + \bar{n}(z_i)P_0}
+\end{equation}
+where $P_0$ is a rough value of the power spectrum of the tracers at some 
+particular scale of choice, usually BAO scales for large-scale clustering measurements.
+For eBOSS analyses, we chose a scale of $k \sim 0.1 h\, \text{Mpc}^{-1}$ for which 
+$P_0 = 10000 h^{-3}\text{Mpc}^{3}$ for LRGs, 
+$P_0 = 4000 h^{-3}\text{Mpc}^{3}$ for ELGs and 
+$P_0 = 6000 h^{-3} \text{Mpc}^{3}$ for QSOs. 
+
+\section{Reconstruction of linear density field} 
+\label{galaxies:reconstruction}
+
+Why recon? Cite papers on methods
+
+Zeldovich reconstruction 
 
 
 
+\section{Mock catalogues}
+\label{galaxies:mocks}
 
-Reconstruction ... 
+Why mocks ? Test of methodology (bias and uncertainties), covariance matrix, 
+impact of systematics
+
+Describe ezmocks, nseries  
+
+Describe how I implemented all systematic effects on mocks 
+
+
+\section{From catalogues to clustering estimates}
+\label{galaxies:clustering}
 
 Correlation function estimation ... 
 
 Power spectrum estimation ... 
 
-Mock catalogues ... 
-
 Covariance matrix ...  
 
-\section{Baryon acoustic oscillations with galaxies}
+\section{Baryon acoustic oscillations}
 \label{galaxies:bao}
 
+Model 
 
-
+Constraints with DR16 
 
 \section{Redshift-space distortions}
 \label{galaxies:rsd}
+
+Model 
+
+Constraints with DR16 
 
 \section{Joint clustering analysis in Fourier and Configuration space}
 \label{galaxies:joint}
 
 
+
+
 \section{Cross-correlation with radio surveys}
 \label{galaxies:radio}
 
+\cite{wolzHIConstraintsCrosscorrelation2021}
