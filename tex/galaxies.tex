@@ -228,34 +228,135 @@ $P_0 = 10000 h^{-3}\text{Mpc}^{3}$ for LRGs,
 $P_0 = 4000 h^{-3}\text{Mpc}^{3}$ for ELGs and 
 $P_0 = 6000 h^{-3} \text{Mpc}^{3}$ for QSOs. 
 
+As summary, the random catalogue describes the angular and radial selection functions
+of the galaxy survey. 
+Each random has a weight $w_r = w_\text{comp} w_\text{FKP}$, where $w_\text{comp}$ accounts
+the spectroscopic completeness of targets and $w_\text{FKP}$ are optimal weights for clustering. 
+Each galaxy has a weight given by $w_g = w_\text{col} w_\text{photo} w_\text{fail} w_\text{FKP}$,
+where $w_\text{col}$ accouns for fibre collisions, $w_\text{photo}$ corrects fluctuations caused 
+by photometry and $w_\text{fail}$ corrects redshift failures. 
+These weights are used computing correlation functions or power spectra (see~\ref{galaxies:clustering}).
+
 \section{Reconstruction of linear density field} 
 \label{galaxies:reconstruction}
 
-Why recon? Cite papers on methods
+Bulk motions of galaxies on scales of tens of Mpc impact their two-point statistics, 
+acting as a smoothing of the clustering (\cite{eisensteinRobustnessAcousticScale2007}).  
+These motions smooth/broaden the BAO peak, reducing the precision on our measurement of its position. 
+In the past decades, several methods have been proposed to reconstruct
+the linear density field and remove these bulk motions from a galaxy survey,
+therefore sharpening the BAO peak.
+These methods are referred to as \emph{reconstruction} methods. 
+Reconstruction is now an essential part of standard BAO measurements from galaxy surveys,
+since they improve significantly their precision. 
 
-Zeldovich reconstruction 
+The simplest form of reconstruction is based on a theoretical relationship between 
+the galaxy density field on large scales (our observable) and the displacement field connecting 
+the observed field (Eulerian frame) to its past version (Lagrangian frame). 
+Lagrangian perturbation theory (LPT) can predict these displacements 
+(see \cite{bernardeauLargeScaleStructureUniverse2002} for a review). 
+To first order, the relation between displacements and density is linear 
+(\cite{zeldovichGravitationalInstabilityApproximate1970}) and works quite well in 
+recovering the linear BAO peak 
+(\cite{nusserTracingLargeScaleFluctuations1992, eisensteinImprovingCosmologicalDistance2007}).
+The first order LPT reconstruction is often called \emph{Zeldovich reconstruction}. 
+Extending to second order LPT does not improve BAO reconstruction significantly 
+(\cite{seoHighprecisionPredictionsAcoustic2010}) but it helps on recovering the 
+velocity field (\cite{kitauraEstimatingCosmicVelocity2012}).
+Zeldovich reconstruction has been used in all BAO measurements from SDSS (BOSS and eBOSS).
+I implemented a python version\footnote{\url{https://github.com/julianbautista/eboss_clustering/}} of 
+the Zeldovich reconstruction that uses Fast Fourier Transforms while accounting for the 
+large angle effects 
+(\cite{burdenEfficientReconstructionLinear2014, burdenReconstructionFourierSpace2015}). 
+Alternatively, displacements can be computed 
+in configuration space using finite difference approximations (\cite{padmanabhanCentDistance352012})
+though these are slower and less precise than iterative FFTs. 
 
+There are other backward reconstruction techniques such as those based on the least action principle (LAP).
+First proposed by \cite{peeblesTracingGalaxyOrbits1989}, it was extended to cosmological applications 
+by \cite{nusserLeastActionPrinciple2000, sarpaBAOReconstructionSwift2019}. 
+\cite{sarpaExtendedFastAction2021} applied it for the BAO measurement of the BOSS DR12 galaxy sample. 
 
+Reconstruction is essential to improve the precision on BAO measurements. However, 
+due to imperfections in recovering the true initial conditions, 
+reconstruction has not yet been used in attempts to derive cosmological 
+constraints from the full-shape of the reconstructed two-point statistics.
+Therefore, analysis of redshift-space distortions are based on the non reconstructed 
+clustering (see section~\ref{galaxies:rsd}).  
 
 \section{Mock catalogues}
 \label{galaxies:mocks}
 
-Why mocks ? Test of methodology (bias and uncertainties), covariance matrix, 
-impact of systematics
+An important limitation in cosmology is that we only have a single realisation of our Universe. 
+Therefore simulations are an essential tool to overcome this limitation. 
 
-Describe ezmocks, nseries  
+We can recognise two types of simulations mainly used in cosmology. First, 
+n-body simulations (eventually including gas) solve numerically for the formation of structures
+and are computationally expensive. They focus on the fully non-linear aspects and require a 
+higher resolution setting, preventing them to simulate very large volumes or producing numerous 
+realisations. N-body simulations are still the baseline for tests of perturbation theory models. 
+The second type of simulations are the so-called \emph{mock catalogues} or simply \emph{mocks}. 
+They are lower resolution and do not fully describe the non-linear clustering but they are 
+faster to produce both in large volumes and in large number of realisations.
+Their are key for the understanding of biases in best-fitted quantities and on their uncertainties. 
+Given the large number of realisations, mocks have been used to estimate covariance matrices of 
+clustering. Also, mocks allow us to study statistically the impact of observational systematic effects on our 
+measurements. The last cosmological measurements from galaxy surveys have all an associated set of 
+n-body simulations and a set of mock catalogues. I will describe the example I was involved in, 
+the case of \textsc{EZmocks} produced for the eBOSS DR16 clustering measurements. 
 
-Describe how I implemented all systematic effects on mocks 
+A set of 1000 \textsc{EZmock} realisations was used in eBOSS DR16 clustering measurements 
+for LRGs, ELGs and QSOs. They are fully described in \cite{zhaoCompletedSDSSIVExtended2021}. 
+These mocks employ an effective Zeldovich approximation to evolve 
+the density field in longer time steps (\cite{chuangEZmocksExtendingZel2015}). 
+By construction, these mocks match the large-scale clustering 
+of the target data sample, both 2 and 3-point statistics. 
+They have some extra free parameters to simulate a biased galaxy sample. 
+The eBOSS \textsc{EZmocks} also include light-cone effects produced by interpolating boxes
+at different redshifts. 
+
+The last step in the production of \textsc{EZmocks} was the addition of systematic effects. 
+I was responsible of implementing all known observational effects from the data. 
+A simple script\footnote{\url{https://github.com/julianbautista/eboss_clustering/blob/master/bin/ezmocks_add_systematics.py}}
+gathers the information from the real catalogues and simulates fibre collisions, spurious 
+fluctuations caused by photometry and spectroscopy (redshift failures). 
+These contaminated mocks are then corrected using the same algorithms as for the real data, 
+as described in section~\ref{galaxies:catalogue}. The clustering before and after adding 
+those effects is extensively compared to real data (\cite{zhaoCompletedSDSSIVExtended2021}) 
+and the agreement is found to be excellent on the scales of interest for BAO and RSD measurements. 
+
 
 
 \section{From catalogues to clustering estimates}
 \label{galaxies:clustering}
 
 Correlation function estimation ... 
+\begin{equation}
+ \xi(r, \mu) = \frac{DD - 2DR}{RR} + 1 
+ \label{eq:landy-szalay}
+\end{equation}
 
 Power spectrum estimation ... 
+\begin{equation}
+ P_\ell(k) = 
+\end{equation}
 
 Covariance matrix ...  
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig/galaxies/DR16LRG_data_ezmock_prerecon.pdf}
+    \caption{asd}
+    \label{fig:LRG_data_ezmock_correlations_prerec}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\textwidth]{fig/galaxies/DR16LRG_data_ezmock_postrecon.pdf}
+    \caption{asd}
+    \label{fig:LRG_data_ezmock_correlations_postrec}
+\end{figure}
+
 
 \section{Baryon acoustic oscillations}
 \label{galaxies:bao}
