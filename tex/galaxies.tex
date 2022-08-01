@@ -272,6 +272,15 @@ Alternatively, displacements can be computed
 in configuration space using finite difference approximations (\cite{padmanabhanCentDistance352012})
 though these are slower and less precise than iterative FFTs. 
 
+Since we do not observe the actual density of matter, an assumed bias relation between galaxy number density 
+and matter density has to be assumed in reconstruction. Usually we assume a linear bias relation, where the 
+bias value is estimated from the clustering of the standard galaxy catalogue. This is a reasonable approximation 
+since reconstruction uses fluctuations on scales larger than $\sim 15$\hmpc. 
+If one wants to remove redshifts-space distortions, one has to assume a value for the growth-rate of structures $f$
+(see section~\ref{intro:probes:rsd}) in order to convert displacements into velocities. 
+Therefore, the clustering of reconstructed catalogues depend on the fiducial values of bias and $f$, 
+but less on the distance-redshift relation (\cite{carterImpactFiducialCosmology2020}). 
+
 There are other backward reconstruction techniques such as those based on the least action principle (LAP).
 First proposed by \cite{peeblesTracingGalaxyOrbits1989}, it was extended to cosmological applications 
 by \cite{nusserLeastActionPrinciple2000, sarpaBAOReconstructionSwift2019}. 
@@ -330,33 +339,191 @@ and the agreement is found to be excellent on the scales of interest for BAO and
 \section{From catalogues to clustering estimates}
 \label{galaxies:clustering}
 
-Correlation function estimation ... 
+Once the catalogue of galaxies and the associated random catalogue are ready, 
+any statistical quantity can be computed, such as $n$-point statistics. 
+As discussed in section~\ref{intro:lss}, these statistics can be computed 
+in either configuration space or Fourier space. 
+This section describes how to obtain 2-point function estimates, 
+in both spaces, which are the statistics I worked with. 
+
+\subsection{Correlation function}
+\label{galaxies:clustering:correlation_function}
+
+The estimate of the correlation function $\xi(\vec{r})$ is based on counting pairs of galaxies 
+in bins of separation $\vec{r}$ and comparing it to same numbers obtained from the random catalogue. 
+For the estimator we use, there is no need to calculate galaxy number densities $n(\vec{x})$  
+or overdensities $\delta_n(\vec{x})$ in some mesh. To optimise the variance of the estimator 
+while keeping it unbiased, \cite{landyBiasVarianceAngular1993} proposed to include the cross-pairs  
+between galaxies and randoms in the estimator, yielding:
 \begin{equation}
- \xi(r, \mu) = \frac{DD - 2DR}{RR} + 1 
+ \xi(\vec{r}_i) = \frac{DD(\vec{r}_i) - 2DR(\vec{r}_i)}{RR(\vec{r}_i)} + 1,
  \label{eq:landy-szalay}
 \end{equation}
+where $DD(\vec{r}_i)$ (or $RR(\vec{r}_i)$) are the normalised paircounts between galaxies (or randoms) 
+at bin $i$ corresponding to separation $\vec{r}_i$, 
+$DR(\vec{r}_i)$ is the normalised cross-paircounts between galaxies and randoms. 
+The normalisation of the paircounts is given by the total number of unique pairs in the catalogue, 
+i.e., $N(N-1)/2$ if the catalogue contains $N$ galaxies or $N_g N_r$ for the cross pairs. 
+When using weights as described in section~\ref{galaxies:catalogue}, nothing changes except 
+that each pair of galaxies (or randoms) are weighted as $w_{ij} = w_i w_j$, where $w_i, w_j$ are the 
+weights of each element of the pair. 
 
-Power spectrum estimation ... 
+More recently, new ways to account for fibre collisions 
+or incompleteness have been proposed 
+(\cite{bianchiUnbiasedClusteringEstimation2017, percivalUsingAngularPair2017}) where each pair 
+of galaxies would have a weight $w_{ij} \neq w_i w_j$, i.e., not a product of individual weights. 
+This makes the calculation slighly slower since these weights have to be defined for each pair. 
+These new estimators were first used with the eBOSS tracers
+(\cite{mohammadCompletedSDSSIVExtended2020}) and are currently being employed within DESI. 
+
+The estimator in Eq.~\ref{eq:landy-szalay} changes slightly when dealing with catalogues 
+resulting from reconstruction algorithms,
+where both galaxies and randoms are shifted in order to reduce the impact of bulk motions 
+(see section~\ref{galaxies:reconstruction}). 
+The Landy-Szalay estimator is now written as  
 \begin{equation}
- P_\ell(k) = 
+    \xi^\text{recon}(\vec{r}_i) = \frac{DD(\vec{r}_i) - 2DS(\vec{r}_i) + SS(\vec{r}_i)}{RR(\vec{r}_i)},
+    \label{eq:landy-szalay-recon}
+\end{equation}
+where $S$ represents the shifted random catalogue and the $R$ is the usual random catalogue as before. 
+See \cite{padmanabhanReconstructingBaryonOscillations2009, padmanabhanCentDistance352012} 
+for a detailed derivation of this estimator. 
+
+Most analyses of the two-point correlation function do not use the full $\xi(\vec{r}_i)$,
+where $\vec{r}_i$ are bins in 2D separations such as bins in $(\rpara, \rperp)$ or $(r, \mu_r)$.
+Most analysis further compress the estimated correlation function into a new basis with fewer 
+degrees of freedom. Some analyses uses the correlation function 
+\emph{wedges} $\xi_{\mu_{r1}, \mu_{r}}(r)$, which are 
+averages of $\xi$ over $\mu_{r1} < \mu < \mu_{r2}$, as already discussed in section~\ref{forests:bao:correlations}. 
+Other analyses, such as the one described in this chapter, decompose $\xi$ into a basis of 
+Legendre polynomials $L_\ell(\mu_r)$ such that $\xi(r, \mu_r) = \sum_\ell \xi_\ell(r) L_\ell(\mu_r)$, 
+where $\xi_\ell(r)$ are the correlation function \emph{multipoles}. 
+Usually two or three wedges or multipoles are considered when comparing to clustering models.  
+
+One of the most recent codes to compute correlation function accounting for all 
+features described above is 
+\textsc{pycorr}\footnote{\url{https://github.com/cosmodesi/pycorr}} 
+which is being currently developed for DESI.
+
+\subsection{Power spectrum}
+\label{galaxies:clustering:power_spectrum}
+
+The power spectrum is the analogous of the correlation function in Fourier space. 
+It requires a Fourier Transform of the galaxy overdensity field, which introduces 
+some effects that have to be correctly taken into account when fitting for clustering models. 
+The power spectrum estimation is based on work by 
+\cite{feldmanPowerSpectrumAnalysisThreedimensional1994,
+bianchiMeasuringLineofsightdependentFourierspace2015,
+handOptimalFFTbasedAnisotropic2017} and it is shortly described here. 
+
+The first step is to assign galaxies and randoms into a three-dimensional mesh, 
+defining an ``overdensity'' function $F(\vec{x}_i)$ as 
+\begin{equation}
+    F(\vec{x}_i) = w_\text{FKP}(\vec{x}_i) \left[ n(\vec{x}_i) - \alpha n_\text{rand}(\vec{x}_i) \right],
+    \label{eq:overdensity_fourier}
+\end{equation}
+where $w(\vec{x}_i)$ is the total weight assigned to voxel $i$ at comoving location 
+$\vec{x}_i$, $n$ and $n_\text{rand}$ are the \emph{weighted} number of galaxies and randoms in that voxel, 
+$\alpha \equiv \sum_i w_i / \sum_j w^\text{rand}_j$ is the ratio of the total weighted numbers of galaxies to 
+randoms. 
+
+The field $F(\vec{x})$ can be Fourier transformed numerically using Fast Fourier Transform (FFT) 
+algorithms. The power spectrum would be defined as the absolute value squared of this field. 
+Power spectrum \emph{multipoles} are commonly 
+used, as it was the case in configuration space. 
+They can be expressed as: 
+\begin{equation}
+ P_\ell(k) = \frac{1}{I_{22}} \left[ (2\ell+1) \left\langle F_0(\vec{k})F_\ell(-\vec{k}) \right\rangle_{V_k} - (1+\alpha)I_{12} \right]
+ \label{eq:power_spectrum_multipoles}
+\end{equation}
+where the brakets $\langle \cdot \rangle$ indicate average over spherical shells in k-space with radius $|\vec{k}|$, 
+$F_\ell(\vec{k})$ are the overdensity multipoles in k-space given by 
+\begin{equation}
+    F_\ell(\vec{k}) = \int \text{d}^3x F(\vec{x}) \text{e}^{i \vec{k}\cdot \vec{r}} L_\ell( \hat{k} \cdot \hat{x}), 
+\end{equation}
+and the normalisation factors $I_{ab}$ are defined as 
+\begin{equation}
+ I_{ab} \equiv \int \text{d}^3 x [n(\vec{x})]^a [w_\text{FKP}(\vec{x})]^b. 
+ \label{eq:normalisation_power_spectrum}
 \end{equation}
 
-Covariance matrix ...  
+The first term in Eq.~\ref{eq:power_spectrum_multipoles} is the usual term defining the power spectrum, i.e., 
+the square of the absolute value of Fourier fluctuations, while the second term is the so called \emph{shot-noise} 
+and only affects the power spectrum monopole. 
+
+Since we use Fourier transforms which rely on periodic boundary conditions, the mesh used to compute $F(\vec{x})$
+has to be large enough to encompass the survey and should contain some padding around it. 
+Also, because of the assumption of periodicity, the estimated power spectra will be convolved by the window/selection function of the survey.
+This window has to be correctly computed using the randoms and it is a key ingredient to be accounted for when modelling the clustering. 
+
+Since we use numerical FFTs, the resolution of the mesh defines the amount of memory to be used. 
+Typically resolutions of 512 or 1024 mesh voxels on a side are sufficient to cover the scales of interest 
+for BAO or RSD analyses. If the mesh has a total comoving size of $L$ on a side and has $N$ voxels on a side, 
+the fundamental mode is given by $k_F = \pi/L$ while the highest (or Nyquist) frequency is $k_\text{Ny} = \pi N/L$. 
+
+The estimated power spectra are also affected by the discreteness nature of the mesh on scales close 
+the Nyquist frequency. The assignement of galaxies to the mesh can be optimised to reduce those effects. 
+Also, interlacing techniques can also further reduce mesh effects. T
+The effects and solutions are described in detail in \cite{sefusattiAccurateEstimatorsCorrelation2016}
+and are implemented in the package \textsc{nbodykit}\footnote{\url{https://nbodykit.readthedocs.io/}}
+or \textsc{pypower}\footnote{\url{https://github.com/cosmodesi/pypower}}. 
+
+\subsection{The clustering of eBOSS DR16 LRGs}
+\label{galaxies:clustering:eboss_dr16_lrgs}
+
+Figure~\ref{fig:LRG_data_ezmock_correlations_prerec} and \ref{fig:LRG_data_ezmock_correlations_postrec}
+show the power spectrum $P_\ell(k)$ and correlation function $\xi_\ell(r)$ multipoles for $\ell = 0, 2, 4$
+for the combined sample of BOSS DR12 and eBOSS DR16 luminous red galaxies and their respective \textsc{EZmock}
+catalogues. Figure~\ref{fig:LRG_data_ezmock_correlations_prerec} shows results from standard catalogues while 
+Figure~\ref{fig:LRG_data_ezmock_correlations_postrec} displays results from reconstructed catalogues. 
 
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{fig/galaxies/DR16LRG_data_ezmock_prerecon.pdf}
-    \caption{asd}
+    \caption{Pre-reconstruction multipoles of the two-point statistics for the combination of BOSS DR12 and 
+    eBOSS DR16 luminous red galaxies. Left panels contain the power spectrum multipoles (scaled by $k$) 
+    and right panels the correlation function multipoles (scaled by $r^2$). 
+    Points with errorbars are real data while shaded regions show the mean and standard deviation 
+    of 1000 realisations of \textsc{EZmocks}. 
+    }
     \label{fig:LRG_data_ezmock_correlations_prerec}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=0.8\textwidth]{fig/galaxies/DR16LRG_data_ezmock_postrecon.pdf}
-    \caption{asd}
+    \caption{Same as Figure~\ref{fig:LRG_data_ezmock_correlations_prerec} but for reconstructed 
+    catalogues. We used the Zeldovich reconstruction method with removal of redshift-space distortions. 
+    The BAO features are more proeminent and the quadrupole is significantly reduced compared 
+    to results with the standard catalogues.    
+    }
     \label{fig:LRG_data_ezmock_correlations_postrec}
 \end{figure}
 
+The uncertainties on our measurements of $P_\ell$ and $\xi_\ell$ were derived by measuring the 
+same statistics on the full sample of 1000 realisations of \textsc{EZmocks}. By reproducing with 
+high fidelity the observational features and systematic effects, the covariance matrix obtained 
+with mocks should account for the extra scatter induced by them. However on small scales the 
+clustering of the mocks is not accurate compared to real data or to more realistic n-body simulations. 
+Figure~\ref{fig:covariance_ezmock} shows the resulting covariance matrices normalised by the 
+diagonal elements (correlation coefficients). We see how power spectra multipoles are generally 
+less correlated than correlation function multipoles. Reconstruction also helps reducing these 
+correlations. Also shown are the cross-covariance between Fourier space and configuration space 
+measurements, which will be discussed in section~\ref{galaxies:joint}. As expected, these
+two spaces are highly correlated since they originate from the same sample of galaxies and randoms. 
+
+\begin{figure}
+    \centering 
+    \includegraphics[width=0.49\textwidth]{fig/galaxies/covariance_prerecon.pdf}
+    \includegraphics[width=0.49\textwidth]{fig/galaxies/covariance.pdf}
+    \caption{Correlation coefficients from covariance matrices obtained from 1000 measurements
+    of power spectrum and correlation function multipoles, $P_\ell$ and $\xi_\ell$ respectively,
+    from \textsc{EZmocks} reproducing the combined BOSS DR12 and eBOSS DR16 LRG sample.
+    Left panel shows results from the standard catalogues while the right panel 
+    shows the results from Zeldovich reconstructed catalogues. 
+    }
+    \label{fig:covariance_ezmock}
+\end{figure}
 
 \section{Baryon acoustic oscillations}
 \label{galaxies:bao}
