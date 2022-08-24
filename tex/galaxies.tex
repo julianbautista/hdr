@@ -271,7 +271,9 @@ Lagrangian perturbation theory (LPT) can predict these displacements
 To first order, the relation between displacements and density is linear 
 (\cite{zeldovichGravitationalInstabilityApproximate1970}). From the observed 
 density field in our survey, we can compute the corresponding linear displacements
-and move galaxies back. This procedure successfully removes most of the broadening of the BAO peak
+and move galaxies back. Since we want to ``move'' the density field, we also move randoms 
+by the same displacements. 
+This procedure successfully removes most of the broadening of the BAO peak
 (\cite{nusserTracingLargeScaleFluctuations1992, eisensteinImprovingCosmologicalDistance2007}).
 The first order LPT reconstruction is often called \emph{Zeldovich reconstruction}. 
 Extending to second order LPT does not improve BAO reconstruction significantly 
@@ -441,13 +443,12 @@ handOptimalFFTbasedAnisotropic2017} and it is shortly described here.
 The first step is to assign galaxies and randoms into a three-dimensional mesh, 
 defining an ``overdensity'' function $F(\vec{x}_i)$ as 
 \begin{equation}
-    F(\vec{x}_i) = w_\text{FKP}(\vec{x}_i) \left[ n(\vec{x}_i) - \alpha n_\text{rand}(\vec{x}_i) \right],
+    F(\vec{x}_i) =  n(\vec{x}_i) - \alpha n_\text{rand}(\vec{x}_i),
     \label{eq:overdensity_fourier}
 \end{equation}
-where $w(\vec{x}_i)$ is the total weight assigned to voxel $i$ at comoving location 
-$\vec{x}_i$, $n$ and $n_\text{rand}$ are the \emph{weighted} number of galaxies and randoms in that voxel, 
-$\alpha \equiv \sum_i w_i / \sum_j w^\text{rand}_j$ is the ratio of the total weighted numbers of galaxies to 
-randoms. 
+where $n_\text{rand}$ are the \emph{weighted} number density of galaxies and randoms in voxel centered at $\vec{x}_i$, 
+$\alpha$ is the ratio of the total weighted number of galaxies to the total weighted number of randoms. 
+The field $F(\vec{x})$ is also kwown as the FKP field. 
 
 The field $F(\vec{x})$ can be Fourier transformed numerically using Fast Fourier Transform (FFT) 
 algorithms. The power spectrum would be defined as the absolute value squared of this field. 
@@ -455,7 +456,7 @@ Power spectrum \emph{multipoles} are commonly
 used, as it was the case in configuration space. 
 They can be expressed as: 
 \begin{equation}
- P_\ell(k) = \frac{1}{I_{22}} \left[ (2\ell+1) \left\langle F_0(\vec{k})F_\ell(-\vec{k}) \right\rangle_{V_k} - (1+\alpha)I_{12} \right]
+ P_\ell(k) = \frac{1}{I_{22}} \left[ (2\ell+1) \left\langle F_0(\vec{k})F_\ell(-\vec{k}) \right\rangle_{V_k} - (1+\alpha)I_{12} \delta_{0\ell} \right]
  \label{eq:power_spectrum_multipoles}
 \end{equation}
 where the brakets $\langle \cdot \rangle$ indicate average over spherical shells in k-space with radius $|\vec{k}|$, 
@@ -474,19 +475,21 @@ the square of the absolute value of Fourier fluctuations, while the second term 
 and only affects the power spectrum monopole. 
 
 Since we use Fourier transforms which rely on periodic boundary conditions, the mesh used to compute $F(\vec{x})$
-has to be large enough to encompass the survey and should contain some padding around it. 
+has to be large enough to encompass the survey volume with some padding around it. 
 Also, because of the assumption of periodicity, the estimated power spectra will be convolved by the window/selection function of the survey.
-This window has to be correctly computed using the randoms and it is a key ingredient to be accounted for when modelling the clustering. 
+This window has to be correctly computed using the randoms and 
+it is a key ingredient to be accounted for when modelling the clustering. 
 
-Since we use numerical FFTs, the resolution of the mesh defines the amount of memory to be used. 
-Typically resolutions of 512 or 1024 mesh voxels on a side are sufficient to cover the scales of interest 
-for BAO or RSD analyses. If the mesh has a total comoving size of $L$ on a side and has $N$ voxels on a side, 
+Since we use numerical FFTs, the resolution of the mesh defines the scales being probed. 
+If the mesh has a total comoving size of $L$ on a side and has $N$ voxels on a side, 
 the fundamental mode is given by $k_F = \pi/L$ while the highest (or Nyquist) frequency is $k_\text{Ny} = \pi N/L$. 
+Typically meshes with 512 or 1024 voxels on a side are sufficient to cover the scales of interest 
+for BAO or RSD analyses in current survey volumes, $0.01 < k < 0.30 (\text{Mpc}/h)^{-1}$. 
 
 The estimated power spectra are also affected by the discreteness nature of the mesh on scales close 
 the Nyquist frequency. The assignement of galaxies to the mesh can be optimised to reduce those effects. 
-Also, interlacing techniques can also further reduce mesh effects. T
-The effects and solutions are described in detail in \cite{sefusattiAccurateEstimatorsCorrelation2016}
+Also, interlacing techniques can also further reduce mesh effects. 
+These effects and proposed solutions are described in detail in \cite{sefusattiAccurateEstimatorsCorrelation2016}
 and are implemented in the package \textsc{nbodykit}\footnote{\url{https://nbodykit.readthedocs.io/}}
 or \textsc{pypower}\footnote{\url{https://github.com/cosmodesi/pypower}}. 
 
@@ -575,10 +578,11 @@ We also decompose the peak part from the smooth part of the model,
 scaling only the peak part by the dilation factors $\apara$ and $\aperp$, 
 defined in Eqs.~\ref{eq:alpha_parallel} and \ref{eq:alpha_perp}.
 The fit is performed in the space of multipoles instead of fitting for the 
-full two-point statistics. Smooth power-laws are added in order to marginalise 
-any potential information coming from the smooth part of the correlation function. 
+full two-point statistics. Smooth power-laws of separation are added with free amplitudes 
+in order to marginalise any potential information coming from 
+the smooth part of the correlation function. 
 To account for the removal of redshift-space distortions after reconstruction, 
-an empirical damping term is added to the model, such that the RSD term 
+an empirical damping term is added to the model, such that the linear RSD term 
 $(1+\beta \mu^2)$ becomes $(1+ S(k) \beta \mu^2)$ where 
 $S(k)\equiv 1- \text{e}^{-k^2\Sigma^2_\text{rec}/2}$ 
 (\cite{seoModelingReconstructedBAO2016}). 
@@ -626,14 +630,261 @@ $\Omega_m^\text{fid}$, which is reassuring.
     \label{fig:bao_bias_mocks}
 \end{figure}
 
-Constraints with DR16 
+Another important test of our methodology consists in checking uncertainity estimation. 
+With the sample of 1000 BAO measurements from mocks, we can study them statistically. 
+Our uncertainties are derived by scanning the likelihood profile and finding the intervals
+where the parameters $\aperp$ and $\apara$ increase the $\chi^2$ by 
+unity\footnote{In the case marginalised errors in one parameter. For two parameters, 
+the 68 and 95\% confidence intervals are defined by $\Delta \chi^2 = 2.3, \ 5.9$ respectively.} 
+relative to its minimum. 
+First, we compare the standard deviation of all best-fit values to the average uncertainty
+found in all 1000 mocks. If uncertainties are correctly estimated then these two numbers 
+match. Second, we could look at the pull distribution of each parameter $x_i$, defined as 
+$Z_i \equiv (x_i - \bar{x}_i)/\sigma_{x_i}$. If the uncertainties are well behaved and Gaussian, 
+then we should obtain $\bar{Z_i}=0$ and $\text{Var}(Z_i) = 1$. 
+Table 6 in \cite{bautistaCompletedSDSSIVExtended2020} shows these statistics for BAO measurements. 
+The results validate our methodology and we applied it to data.  
+
+Figure~\ref{fig:eboss_dr16_lrg_bao} shows the best-fit correlation function model and 
+the BAO constraints for the eBOSS DR16 LRG sample. 
+Converting the constraints in $(\aperp,\apara)$ into ratios of distances, we obtained: 
+\begin{equation}
+    \mathbf{D}_{\text{ BAO},{\xi_\ell}} =
+    \begin{pmatrix}
+   D_M/r_d \\
+   D_H/r_d 
+    \end{pmatrix}=
+    \begin{pmatrix}
+     17.86 \pm 0.33 \\
+     19.34 \pm 0.54 
+     \end{pmatrix},
+\end{equation}
+which correspond to a BAO measurement at 1.9 per cent in the transverse direction 
+and 2.8 per cent in the radial direction. 
+Radial and transverse BAO measurements are correlated by -33\% for this dataset.  
+These are the best constraints obtained from galaxies at redshifts above $0.6$.
+
+\begin{figure} 
+    \centering 
+    \includegraphics[width=0.33\textwidth]{fig/galaxies/eboss_dr16_lrg_bao_mono.png}
+    \includegraphics[width=0.33\textwidth]{fig/galaxies/eboss_dr16_lrg_bao_quad.png}
+    \includegraphics[width=0.33\textwidth]{fig/galaxies/eboss_dr16_lrg_bao_contours.png}
+    \caption{Two left panels show the best-fit model for the correlation function monopole and 
+    quadrupole for the reconstructed eBOSS LRG sample. The right panel shows the two-dimensional 
+    constraints on the distance to sound horizon ratios, for the configuration and Fourier space 
+    BAO analyses. The consensus BAO result is shown in grey. The star points to the prediction 
+    of a flat $\Lambda$CDM model with Planck 2018 best-fit parameters. }
+    \label{fig:eboss_dr16_lrg_bao}
+\end{figure}
 
 \section{Redshift-space distortions}
 \label{galaxies:rsd}
 
-Model 
+The analysis of redshift-space distortions (RSD) aims to measure the growth-rate of structures $f$, 
+as introduced in section~\ref{intro:probes:rsd}, by quantifying the anisotropies in the clustering 
+of galaxies. As we seen before, assuming an incorrect fiducial cosmology when converting redshifts 
+into distances also introduces anisotropies (the AP effect). Therefore in practice, an RSD analysis
+yields simultaneously the combination $f(z)\sigma_8(z)$ and the distance ratios $D_H(z)/r_\text{drag}, D_M(z)/r_\text{drag}$. 
 
-Constraints with DR16 
+The main differences with respect to the BAO analysis (see previous section) is that the information 
+about anisotropies come from the full shape of the two-point statistics, not only the peak. 
+This complicates the RSD analysis in that we need to have accurate models for the full shape of 
+the clustering down to some scale, and we cannot add empirical terms to be marginalised over as we did in the BAO analysis. 
+Due to non-linearities of matter clustering and galaxy bias, it is increasingly hard to model scales below 
+those well described by linear theory. For these midly non-linear scales, we need more advanced perturbation theory models. 
+A huge variety of theoretical models have been developed in the past years (see \cite{bernardeauLargeScaleStructureUniverse2002}
+for a review). 
+
+In the analysis of eBOSS data, we used to types of models: 
+the first one is based on regularised perturbation theory with second order bias and RSD correction terms
+(\cite{taruyaBaryonAcousticOscillations2010, taruyaDirectFastCalculation2012}). We commonly refer to it as 
+the \emph{TNS model}. The second one is based on convolution Lagrangian perturbation theory with Gaussian streaming
+(\cite{carlsonConvolutionLagrangianPerturbation2013, wangAnalyticModelRedshiftspace2014}). We refer to it as 
+the \emph{CLPT-GS model}. I implemented these models in python language in the package 
+\textsc{baopy}\footnote{\url{https://baopy.readthedocs.io/}}. 
+
+The TNS model is expressed as:
+\begin{equation}
+    P_g(k, \mu_k) = D_\text{FoG}(k, \mu_k) 
+    \left[ 
+        P_{g, \delta \delta}(k) + 2 f \mu_k^2 P_{g, \delta \theta}(k) + f^2 \mu_k^4 P_{\theta \theta}(k)
+        + b_1^3 A(k, \mu_k, \beta) + b_1^4 B(k, \mu_k, \beta)
+    \right],
+    \label{eq:tns_model}
+\end{equation}
+where $b_1$ is the first order linear galaxy bias, $\beta \equiv f/b_1$, 
+$(P_{g, \delta \delta}, P_{g, \delta \theta},P_{\theta \theta})$ are the non-linear isotropic galaxy 
+auto power spectrum, galaxy-velocity divergence cross power spectrum and the velocity divergence auto power spectrum, respectively, 
+which are themselves functions of first and second order bias parameters. These functions are provided by 
+the RegPT scheme, implemented in \textsc{pyregpt}\footnote{\url{https://github.com/adematti/pyregpt}}.
+The functions $A$ and $B$ are the RSD correction terms. The function $D_\text{FoG}$ can be either a Gaussian or a Lorentzian
+of $k_\parallel = k\mu_k$
+with characteristic scale $\sigma_\text{FoG}$ corresponding to the velocity dispersion on small scales. 
+This model is computed in Fourier space, but it can be Fourier transformed to obtain a model in configuration space. 
+
+The CLPT-GS model is uniquely defined in configuration space, and writtes as: 
+\begin{equation}
+ 1 + \xi_{g,s}(\rperp, \rpara) = 
+  \int  \frac{1}{\sqrt{2\pi \left[\sigma_{12}^2(r)+\sigma^2_\text{FoG}\right]}}
+  \left[1+\xi_g(r)\right] 
+  \exp{ - \frac{[r_\parallel-y-\mu v_{12}(r)]^2}
+               {2\left[\sigma_{12}^2(r)+\sigma^2_\text{FoG}\right]}} dy
+ %\begin{split}
+ %   1+\xi_{\rm X}(r_\perp,r_\parallel)= & \int \frac{1}{\sqrt{2\pi \left[\sigma_{12}^2(r)+\sigma^2_{\rm FoG}\right]}}[1+\xi_{\rm X}(r)]\\
+ %   & \times \exp{-\frac{[r_\parallel-y-\mu v_{12}(r)]^2}{2\left[\sigma_{12}^2(r)+\sigma^2_{\rm FoG}\right]}} dy,
+ %   \end{split}
+ \label{eq:clptgs_model}
+\end{equation}
+where $\xi_g(r)$, $v_{12}(r)$, and $\sigma_{12}(r)$ are obtained 
+from CLPT and contains two bias terms. The dependency with $f$ is via a scaling of 
+the functions $v_{12}, \sigma_{12}$ that are proportional to velocity. 
+The integral corresponds to the convolution by velocities in the radial direction, 
+characteristic of the Gaussian streaming formalism. 
+
+Both the TNS and CLPT-GS models had to be tested agains n-body simulations. 
+We were particularly interested in the scales of validity of these models 
+for the case of the eBOSS LRG sample. Given the number of available realisations, 
+we used the n-body suite of 84 realisations of \textsc{Nseries} simulations 
+produced for the BOSS CMASS sample. We fitted the average correlation function 
+of these simulations and measured the parameters $f\sigma_8, \aperp, \apara$. 
+Figure~\ref{fig:rsd_bias_mocks} presents the results compared to expected values 
+for both TNS and CLPT-GS models. The shaded green area shows the fiducial choice 
+to be used in the data. 
+
+\begin{figure}
+    \centering 
+    \includegraphics[width=0.7\textwidth]{fig/galaxies/rsd_rmin_nseries.pdf}
+    \caption{Biases in the measurement of $f\sigma_8, \apara, \aperp$ obtained 
+    from full-shape fits to the average of 84 multipoles from the \textsc{Nseries} 
+    mocks as a function of the separation range used. 
+    The y-axis displays the value of the minimal separation $r_\text{min}$ 
+    used in fits of the monopole, quadrupole (MQ) and hexadecapole (H). 
+    Top and mid rows display results for the TNS model when fixing or letting free 
+    the bias parameter $b\Gamma_3$ respectively. 
+    Bottom row presents results for the CLPT-GS model. 
+    The blue circles correspond to the analysis using $\Omega_m^\text{fid} = 0.286$ 
+    (the true value of simulations) while the red circles correspond to 
+    $\Omega_m^\text{fid} = 0.31$. The crosses in the $f\sigma_8$ panels correspond 
+    to their values before the scaling of $\sigma_8$ discussed in Figure~\ref{fig:rsd_fid_cosmo}. 
+    The gray shaded areas correspond to 1 per cent errors in $\aperp, \apara$ and 
+    to 3 per cent in $f\sigma_8$. 
+    The green shared area shows our choice for baseline analysis for TNS and CLPT-GS models.}
+    \label{fig:rsd_bias_mocks}
+\end{figure}
+
+Using the same simulations, we tested the dependency of our constraints to the choice of 
+fiducial cosmology. Note that the fiducial cosmology enters twice in the modelling, first
+when converting redshifts to distances; second, when computing the linear matter power spectrum 
+template $P_m^\text{lin}(k)$, used as main ingredient for both models. 
+Figure~\ref{fig:rsd_fid_cosmo} presents the results for three choices of fiducial cosmology. 
+While for $\aperp, \apara$ the biases or trends are negligible, $f\sigma_8$ shows 
+a strong dependency with $\Omega_m^\text{fid}$, shown as crosses in the figure. 
+This dependency is mainly caused by the assumed $\sigma_8$ value, that corresponds to the 
+one derived from the fiducial $P_m^\text{lin}(k)$ via Eq.~\ref{eq:variance_linear_field_smoothed}.
+The resulting $f$ of the fit is scaled by this $\sigma_8$. 
+We can reduce this dependency by recomputing $\sigma_8$ using $R=8\alpha$\hmpc,
+where $\alpha \equiv \aperp^(2/3)\apara^(1/3)$ is the isotropic dilation factor obtained from the best-fit $\aperp,\apara$.
+In effect, this keeps the scale at which $\sigma_8$ is fitted fixed relative 
+to the data in units of $h^{-1}$Mpc, which only depends on $\Omega_m^\text{fid}$. 
+This is an alternative approach to the recently proposed $\sigma_{12}$ parametrisation 
+(\cite{sanchezArgumentsUsingMpc2020}), where the radius of the top-hat function is set to 
+$R=12$~Mpc (in units of Mpc) instead of $R=8$\hmpc (in units of \hmpc). 
+The circles in the right panel of Figure~\ref{fig:rsd_fid_cosmo} shows the results with 
+the recomputed $\sigma_8$ for each case, showing that this procedure indeed reduces the 
+trend of $f\sigma_8$ with $\Omega_m^\text{fid}$. 
+This topic is also discussed in Appendix A of \cite{alamCompletedSDSSIVExtended2021}. 
+
+\begin{figure}
+    \centering 
+    \includegraphics[width=0.6\textwidth]{fig/galaxies/rsd_nseries_fidcosmo_updated.pdf}
+    \caption{Biases in best-fit parameters for both CLPT-GS (blue) and TNS (red) 
+    models from fits to the average multipoles of 84 \textsc{Nseries} mocks.
+    Shaded grey areas show the equivalent of 1 per cent error for $\aperp,\apara$
+    and 3 per cent for $f\sigma_8$. In the right panel, crosses indicate $f\sigma_8$ values
+    when $\sigma_8$ is not recomputed as described in Section~\ref{sec:fs8_scaling}. 
+    The true cosmology of the mocks is $\Omega_m = 0.286$. 
+    For reference, the errors on our data sample are $\sim$ 2, 3 and 10 per cent for 
+    $\aperp, \apara, f\sigma_8$ respectively. }
+    \label{fig:rsd_fid_cosmo}
+\end{figure}
+
+After validating the model, we tested the impact of different halo occupation distribution (HOD) models 
+and observational effects, both introduced in simulations. We found that none of these modifications 
+introduces significant biases our contraints of $(f\sigma_8, \aperp, \apara)$, though the shifts we observe 
+were added as systematic uncertainties in quadrature to the statistical ones. 
+Table 10 of \cite{bautistaCompletedSDSSIVExtended2020} summarises the systematic errors which are assumed to be
+diagonal (no covariance between the three parameters) for simplicity. For our RSD analysis, 
+systematic errors are about half of the statistical ones for $f\sigma_8$ and slightly less for $\aperp, \apara$. 
+In quadrature, final uncertainties increase by up to 20\% due to systematic errors. 
+
+We also attempted to analyse our biases and uncertainties statistically with the set of 1000 \textsc{EZmocks}. 
+However, an important caveat is that these mocks only solve approximatively the clustering, and therefore are not 
+the better suited to test RSD fitting. We proceeded to fit the 1000 realisations and we compared 
+the average uncertainty to the standard deviation of best-fit parameters among all mocks. These numbers 
+agree sufficiently well, particularly for $f\sigma_8$. The pull distributions of each parameters do not 
+point to any under/over estimation of uncertainties.  
+
+Figure~\ref{fig:eboss_dr16_lrg_rsd_bestfit} presents the best-fit TNS and CLPT-GS models to the correlation function 
+multipoles of the eBOSS DR16 LRG sample. 
+Both models are basically indistinguishable even though their are derived differently. The constraints are also 
+similar between the two models, so we combined them into a single results by averaging their best-fit parameters 
+and their covariances. 
+Figure~\ref{fig:eboss_dr16_lrg_rsd_contours} show the final constraints on $f\sigma_8$ and the distance ratios, 
+compared to the same analysis in Fourier space. We also show the consensus result computed using the method 
+by \cite{sanchezClusteringGalaxiesCompleted2017a}, which assumes Gaussianity of each posterior distribution 
+(see the next section for a further discussion). 
+The final RSD constraints from the correlation function fits are:
+\begin{equation}
+    \mathbf{D}_{\text{RSD}, {\xi_\ell}} =  
+    \begin{pmatrix}
+   D_M/r_d \\
+   D_H/r_d \\
+   f\sigma_8 
+    \end{pmatrix}=
+    \begin{pmatrix}
+    17.42 \pm 0.40 \\
+    20.46 \pm 0.70 \\
+    0.460 \pm 0.050
+    \end{pmatrix}
+\end{equation}
+which correspond to a 11\% measurement of $f\sigma_8$ at $z_\text{eff} = 0.7$. 
+This uncertainty is slightly reduced when combining with the Fourier space results 
+and with BAO results from the previous section. 
+The combination between Fourier and configuration space results
+will be discussed in the following section. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.33\textwidth]{fig/galaxies/DR16_LRG_RSD_v7_2_bestfits_mono.pdf}
+    \includegraphics[width=0.33\textwidth]{fig/galaxies/DR16_LRG_RSD_v7_2_bestfits_quad_scaler1.pdf}
+    \includegraphics[width=0.33\textwidth]{fig/galaxies/DR16_LRG_RSD_v7_2_bestfits_hexa_scaler1.pdf}
+    \caption{Best-fits models of redshift-space distortions (RSD) to the 
+    eBOSS DR16 LRG multipoles. 
+    Left, mid and right panel display mono, quad and hexadecapole, respectively. 
+    Note that only the monopole is scaled by $r^2$ while the others are scaled by $r$.
+    The CLPT-GS model is shown by the blue dashed line while the TNS
+    model is shown by the red solid line. 
+    }
+    \label{fig:eboss_dr16_lrg_rsd_bestfit}
+\end{figure}
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\textwidth]{fig/galaxies/DR16_LRG_consensus_rsd_planck.pdf}
+    \caption{Constraints on $D_M/r_d, D_H/r_d$ and $f\sigma_8$ $z_\text{eff} = 0.7$ 
+    from the full-shape 
+    RSD analysis of the completed eBOSS LRG sample.
+    Contours show 68 and 95 per cent confidence regions for the analyses in 
+    configuration space (blue), Fourier space (red) 
+    and the combined (grey). 
+    The expected values in a flat $\Lambda$CDM 
+    model with best-fit parameters from Planck 2018 results 
+    is indicated as a black star.}
+    \label{fig:eboss_dr16_lrg_rsd_contours}
+\end{figure}
+
+
 
 \section{Joint clustering analysis in Fourier and Configuration space}
 \label{galaxies:joint}
