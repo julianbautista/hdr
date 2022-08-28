@@ -889,10 +889,213 @@ will be discussed in the following section.
 \section{Joint clustering analysis in Fourier and Configuration space}
 \label{galaxies:joint}
 
+From the same catalogue of angular positions and redshifts, we can perform 
+two different clustering analyses: one in Fourier space (FS) and the other in 
+Configuration space (CS). How to define a consensus result from both analysis 
+which might yield slightly different results? In this section I expose the work 
+lead by my PhD students Tyann Dumerchat and Vincenzo Aronica on how to combine  
+BAO and RSD constraints from both spaces into a single consensus result. 
 
+\cite{sanchezClusteringGalaxiesCompleted2017a} proposed a method to combine
+two correlated Gaussian posteriors into a single one. I refer to it as the 
+Gaussian approximation (GA) method. The GA method was used in 
+BOSS (\cite{alamClusteringGalaxiesCompleted2017}) and it was slightly improved 
+in eBOSS (\cite{bautistaCompletedSDSSIVExtended2020}). 
+The main idea is that we want to combine a set of vectors containing the best-fit 
+parameters of different analysis (and their respective error matrix) into a single vector 
+of parameters and a single error matrix. 
+For example in BOSS and eBOSS, we aimed at combining 
+the vectors $\vec{p} \equiv {f\sigma_8, \aperp, \apara}$ obtained from FS and CS analyses. 
+The GA method uses an estimate the correlations between $\vec{p}_\text{FS}$ and $\vec{p}_\text{CS}$,
+and built a large covariance matrix used to combine the vectors and error matrices. 
+Currently the best method to obtain these correlations between FS and CS results is using mock catalogues.
+This provides with an estimate of a sort of ``ensemble averaged'' correlations (though limited by the 
+number of realisations). However, the real data is a single realisation of the ensemble, and 
+the correlations between FS and CS are also suceptible to fluctuate, just as the individual parameters 
+and their uncertainties. In \cite{bautistaCompletedSDSSIVExtended2020} we developed 
+a method to account for this fact, where we adjust the correlations for each realisation based on 
+the vectors $\vec{p}$ and their error matrices of that particular realisation. 
+
+In \cite{dumerchatJoint2022}, we developed an analysis where we fit jointly 
+the correlation function and power spectrum while accounting for their covariance.
+I refer to it as the joint space (JS) method.  
+The covariance is built at the multipole level, using a set of mock catalogues.
+Figure~\ref{fig:covariance_ezmock} shows the correlation coefficients of CS and FS multipoles, 
+including the cross-correlation terms. The wiggles observed in the cross-correlation terms 
+can be simply explained by the fact that CS and FS are related via Hankel transforms 
+(see Appendix A of \cite{dumerchatJoint2022} for an explicit derivation). 
+We tested and validated this framework on the BAO analysis of the eBOSS LRG sample 
+(section~\ref{galaxies:bao}) where we fit for a single $\aperp$ and $\apara$, though 
+amplitudes of power-laws are independent for each space. 
+The main advantage of the JS method is that we do not assume Gaussian posteriors at the parameter level, 
+only at the multipole level when fitting our model (which is quite common assumption). 
+The posteriors on the resulting $(\aperp, \apara)$ can also be non-Gaussian. 
+Figure~\ref{fig:non_gaussian_contours} displays few examples from BAO fits to mock realisations where 
+the CS and FS posteriors are Gaussian (left) or non-Gaussian (right panels), 
+and the resulting combination from GA and JS methods. 
+For the non-Gaussian cases, the GA method fails to correctly describe the posterior, 
+underestimating uncertainties. 
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.45\textwidth]{fig/galaxies/gaussian_contours0.pdf}  
+    \includegraphics[width=0.45\textwidth]{fig/galaxies/non_gaussian_contours1.pdf}  
+    \includegraphics[width=0.45\textwidth]{fig/galaxies/gaussian_contours1.pdf}  
+    \includegraphics[width=0.45\textwidth]{fig/galaxies/non_gaussian_contours2.pdf}  
+    \includegraphics[width=0.45\textwidth]{fig/galaxies/gaussian_contours2.pdf}  
+    \includegraphics[width=0.45\textwidth]{fig/galaxies/non_gaussian_contours3.pdf}  
+  \caption{Posteriors on the BAO fits of some \textsc{EZmocks} realisations 
+  realisations. We display cases where contours found in 
+  configuration or Fourier space are Gaussian (left) and non Gaussian(right). 
+  Red contours are for Fourier space (FS), blue for configuration space (CS), 
+  black for the Gaussian approximation (GA) and green for the joint space (JS) fits.  
+  The expected value is the intersection of the dotted black lines,
+  and the best fit values are described by a star for the JS and GA methods. 
+  We can see how the JS method yields better combined results that are not necessarily Gaussian.
+  Extracted from \cite{dumerchatJoint2022}. 
+  }
+  \label{fig:non_gaussian_contours}
+  \end{figure}
+
+Vincenzo Aronica is currenlty working on the application of joint space analysis 
+for the case of redshift-space distortions (RSD). 
+He implemented the TNS model (section~\ref{galaxies:clustering:eboss_dr16_lrgs}) 
+in Fourier and configuration space in the \textsc{baopy} package. 
+The tests on the suite of 84 realisations of \textsc{nseries} n-body simulations are 
+promising, though there are some subtleties to solve related to the relative normalisation 
+(or linear bias) amplitudes between FS and CS. Currently we use the same values of biases 
+for both space, in addition to $\aperp, \apara, f\sigma_8$. 
+Vincenzo will recompute power spectra for a given set of mock 
+catalogues using a consistent normalisation and window function calculations provided by 
+\textsc{pypower}. 
+
+The work on BAO and RSD joint fits in Fourier and configuration space 
+will be discussed and hopefully applied to the analysis of DESI data. 
 
 
 \section{Cross-correlation with radio surveys}
 \label{galaxies:radio}
 
-\cite{wolzHIConstraintsCrosscorrelation2021}
+The study of large-scale structures will soon be improved thanks to 
+observations of the distribution of neutral hydrogen (HI) via the emission 
+of photons from the 21cm hyperfine transition of the electron. 
+Future 21cm surveys such as the Square Kilometer Array (SKA) will be able to 
+observe the Universe with intensity mapping up to redshifts of 3, 
+opening an alternate window to that provided by spectroscopic surveys. 
+The term \emph{intensity mapping} refers to the fact that we measure 
+the integrated flux from unresolved sources at a given location in space.
+
+During my postdoctoral stay at the University of Portsmouth, 
+I contributed to the study of a currently available 21cm survey produced by the Green Bank Telescope (GBT).
+I was particularly interested in the study of cross-correlations between the 21cm 
+observed by GBT and the eBOSS galaxies observed in the same volume. 
+With the cross-correlation function we could infer the product of the average neutral hydrogen fraction 
+$\Omega_\text{HI}$ at redshift $z_\text{eff} = 0.8$ with the bias of HI $b_\text{HI}$.  
+These parameters are important ingredients for models of clustering of the 21cm emission.
+I overview the main findings of this work in this section but further details 
+are described in \cite{wolzConstraintsCrosscorrelationEBOSS2022}. 
+
+The use of 21cm intensity mapping to measure the large-scale structures has been 
+extensively studied theoretically 
+(\cite{bharadwajUsingHIProbe2001,
+battyeNeutralHydrogenSurveys2004,
+mcquinnCosmologicalParameterEstimation2006,
+changBaryonAcousticOscillation2008a}) 
+and with simulations 
+(\cite{mesinger21CMFASTFastSeminumerical2011,
+villaescusa-navarroIngredients21Cm2018} and references therein). 
+On large scales, 21cm flux fluctuations trace those of dark matter density, while on smaller scales 
+the physics of the gas and its connection to halos complexifies the modelling.  
+Including redshift-space distortions, a linear model for the 21cm power spectrum is essentially the 
+same as the linear model for galaxy clustering. 
+In \cite{villaescusa-navarroIngredients21Cm2018}, an extensive study using the IllustrisTNG 
+n-body hydro simulation quantified several ingredients commonly used in more complex models of 
+the 21cm power spectra, such as the HI content of halos, the HI probability density function, 
+the HI bias with respect to matter and others. 
+
+The data sets we used in our study were
+the eBOSS luminous red galaxy (LRG) and emission line galaxy (ELG) samples in one hand, 
+and the Green Bank Telescope (GBT) 21cm maps in the other hand.
+The eBOSS LRG sample is already described in section~\ref{galaxies:catalogue} while the
+ELG sample is described in \cite{raichoorCompletedSDSSIVExtended2020}. 
+The GBT maps are observations of a 100 deg$^2$ patch of sky at frequencies from 700 to 900 MHz divided into 256 channels, 
+corresponding to HI emission between $0.6 < z < 1.0$, perfectly overlapping with our galaxy samples in area and redshift. 
+The angular resolution of HI observations varies from 0.31 deg at 700 MHz to 0.25 deg at 900 MHz. 
+In order to reduce the impact of varying PSF, all channels are convolved by an artificial beam of 0.44 deg. 
+The maps we used are an extension to those produced by \cite{masuiMeasurement21Cm2013}, including extra scans
+which increase the area and depth. 
+The raw data is contaminated by radio frequency interference and some channels are therefore masked. 
+Foregrounds are removed with a technique named \emph{FastICA}, which stands for fast independent 
+component analysis. I was provided several maps with different number of foreground components removed.
+Once the final area of GBT maps was fixed, I cut the eBOSS LRG and ELG samples to the same area. 
+Figure~\ref{fig:gbt_footprint} shows a redshift slice (or one channel) of the foreground-cleaned GBT HI map
+and the LRG and ELG angular distribution in the same patch of sky. 
+
+\begin{figure}
+    \centering 
+    \includegraphics[width=0.6\textwidth]{fig/galaxies/gbt_map.png}
+    \includegraphics[width=\textwidth]{fig/galaxies/gbt_eboss_galaxies.png}
+    \caption{Top panel: a redshift slice of the 21cm HI map from the Green Bank Telescope after foreground removal. 
+    Bottom panels: the angular distribution of all eBOSS LRGs and ELGs falling in the same sky area. }
+    \label{fig:gbt_footprint}
+\end{figure}
+
+The cross-correlations between eBOSS galaxies and 21cm temperature maps was computed 
+in Fourier space by \cite{wolzConstraintsCrosscorrelationEBOSS2022} and in configuration space by me. 
+The cross-correlation estimator I used is the same used for the quasar-\lya forest cross-correlation 
+described in section~\ref{forests:bao:correlations}, which assumes that galaxies (in this case)
+are shot-noise dominated and that voxels of the 21cm map are independent. These assumptions are 
+not quite valid for our sample but I left further developments for future work. 
+For instance, one could perfom 
+the study of cross-correlations with a maximum likelihood method 
+(see e.g. section~\ref{velocities:maximum_likelihood}) or in Fourier space but correctly accounting for 
+the convolution by the window function of these surveys, which was not explicitly done in 
+\cite{wolzConstraintsCrosscorrelationEBOSS2022}.
+
+Figure~\ref{fig:gbt_cross_correlation} displays the monopoles and quadrupoles of the cross-correlation function 
+between 21cm temperature fluctuations and eBOSS galaxies. Both ELG and LRG show non-zero correlations with the 
+temperature maps that extend to cosmological scales. 
+In particular, we clearly see a non-zero quadrupole, which was measured for the first time in this analysis.  
+The covariance matrix of the multipoles was computed with the jacknife technique, 
+using 96 independent subsets of the data. Due to the estimator I used, neighbouring separation bins in the 
+monopole are strongly correlated. 
+
+\begin{figure}
+    \centering 
+    \includegraphics[width=\textwidth]{fig/galaxies/gbt_mono_quad.png}
+    \caption{Cross-correlation function multipoles between 21cm temperature fluctuation maps from the Green Bank Telescope 
+    and the eBOSS samples of Luminous Red Galaxies (left) and Emission Line Galaxies (right). 
+    Uncertainties are computed with jacknife resampling and solid lines correspond to the best-fit models. 
+    }
+    \label{fig:gbt_cross_correlation}
+\end{figure}
+
+I attempted to fit the temperature-galaxy cross-correlation with the following model:  
+\begin{equation}
+    P(k, \mu) = \frac{b_\text{gal}b_\text{ HI}\bar{T}_\text{ HI}}
+                     {(1+k^2\mu^2\Sigma_\text{FoG}^2)^2}
+                (1+\beta_\text{gal}\mu^2)(1+\beta_\text{HI}\mu^2)P_\text{lin}(k)e^{-k^2 R_\text{beam}^2(1-\mu^2)/2}
+    \label{eq:model_hi_gal}
+\end{equation}
+which includes a term for Fingers-of-God with dispersion $\Sigma_\text{FoG}$,
+and a damping in the transverse (angular) direction to account for the effect of the beam of the GBT instrument, with 
+characteristic scale $R_\text{beam}$. 
+The solid lines in Figure~\ref{fig:gbt_cross_correlation} show the best-fit models, which have in total 6 free parameters. 
+The $\chi^2$ values are also shown in the figure, which correspond to 30 data points (24 degrees of freedom). 
+The fits are generally well behaved. 
+I do not show values for the best-fit parameters and their uncertainties because of the caveats I mentioned before
+related to the estimator and the covariance matrices. Also at the time of my analysis, we did not have mock catalogues 
+to test my methodology.  
+
+\cite{wolzConstraintsCrosscorrelationEBOSS2022} proceeded with the analysis of the cross power spectrum monopole
+and fitted for the amplitude of the signal, after testing our methods on mock catalogues. 
+Using different scale ranges, we obtained constraints on the combination $\Omega_\text{HI}b_\text{HI}r$ at $z_\text{eff}=0.8$,
+where $r$ is an empirical cross-correlation term that depends on the galaxy sample. 
+Table 1 of \cite{wolzConstraintsCrosscorrelationEBOSS2022} summarises results. For instance, 
+for conservative choices for the analysis, we find $\Omega_\text{HI}b_\text{HI}r = (0.48\pm0.12)\times 10^{-3}$ for GBT x ELGs 
+and $(0.38\pm0.12)\times 10^{-3}$ for GBT x LRGs, corresponding to 5 and 4.2$\sigma$ detections respectively. 
+
+This work is on the pathway for precision measurements with future 21cm surveys such as SKA 
+(\cite{squarekilometrearraycosmologyscienceworkinggroupCosmologyPhaseSquare2020}).
+
