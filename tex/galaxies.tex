@@ -30,11 +30,11 @@ Fourier and configuration space.
 The work described in this chapter is published in the following 
 articles: 
 \cite{bautistaSDSSIVExtendedBaryon2018, 
-bautistaCompletedSDSSIVExtended2020,
+bautistaCompletedSDSSIVExtended2021,
 gil-marinCompletedSDSSIVExtended2020,
 rossCompletedSDSSIVExtended2020,
 zhaoCompletedSDSSIVExtended2021,
-%dumerchatJoint2022
+%dumerchatBaryonAcousticOscillations2022
 }. 
 
 \section{From redshifts to clustering catalogues}
@@ -562,7 +562,7 @@ in the correlation function multipoles
 In this section I describe how we measure the BAO scale, which 
 is used as a standard ruler in the study of the expansion of the Universe. 
 The work is detailed further in 
-\cite{bautistaCompletedSDSSIVExtended2020,
+\cite{bautistaCompletedSDSSIVExtended2021,
 gil-marinCompletedSDSSIVExtended2020}.
 
 The model used to fit BAO is based on the linear matter power spectrum with a simplified
@@ -642,7 +642,7 @@ found in all 1000 mocks. If uncertainties are correctly estimated then these two
 match. Second, we could look at the pull distribution of each parameter $x_i$, defined as 
 $Z_i \equiv (x_i - \bar{x}_i)/\sigma_{x_i}$. If the uncertainties are well behaved and Gaussian, 
 then we should obtain $\bar{Z_i}=0$ and $\text{Var}(Z_i) = 1$. 
-Table 6 in \cite{bautistaCompletedSDSSIVExtended2020} shows these statistics for BAO measurements. 
+Table 6 in \cite{bautistaCompletedSDSSIVExtended2021} shows these statistics for BAO measurements. 
 The results validate our methodology and we applied it to data.  
 
 Figure~\ref{fig:eboss_dr16_lrg_bao} shows the best-fit correlation function model and 
@@ -801,7 +801,7 @@ This topic is also discussed in Appendix A of \cite{alamCompletedSDSSIVExtended2
     models from fits to the average multipoles of 84 \textsc{Nseries} mocks.
     Shaded grey areas show the equivalent of 1 per cent error for $\aperp,\apara$
     and 3 per cent for $f\sigma_8$. In the right panel, crosses indicate $f\sigma_8$ values
-    when $\sigma_8$ is not recomputed as described in Section~\ref{sec:fs8_scaling}. 
+    when $\sigma_8$ is not recomputed as described in the text. 
     The true cosmology of the mocks is $\Omega_m = 0.286$. 
     For reference, the errors on our data sample are $\sim$ 2, 3 and 10 per cent for 
     $\aperp, \apara, f\sigma_8$ respectively. }
@@ -812,7 +812,7 @@ After validating the model, we tested the impact of different halo occupation di
 and observational effects, both introduced in simulations. We found that none of these modifications 
 introduces significant biases our contraints of $(f\sigma_8, \aperp, \apara)$, though the shifts we observe 
 were added as systematic uncertainties in quadrature to the statistical ones. 
-Table 10 of \cite{bautistaCompletedSDSSIVExtended2020} summarises the systematic errors which are assumed to be
+Table 10 of \cite{bautistaCompletedSDSSIVExtended2021} summarises the systematic errors which are assumed to be
 diagonal (no covariance between the three parameters) for simplicity. For our RSD analysis, 
 systematic errors are about half of the statistical ones for $f\sigma_8$ and slightly less for $\aperp, \apara$. 
 In quadrature, final uncertainties increase by up to 20\% due to systematic errors. 
@@ -900,7 +900,7 @@ BAO and RSD constraints from both spaces into a single consensus result.
 two correlated Gaussian posteriors into a single one. I refer to it as the 
 Gaussian approximation (GA) method. The GA method was used in 
 BOSS (\cite{alamClusteringGalaxiesCompleted2017}) and it was slightly improved 
-in eBOSS (\cite{bautistaCompletedSDSSIVExtended2020}). 
+in eBOSS (\cite{bautistaCompletedSDSSIVExtended2021}). 
 The main idea is that we want to combine a set of vectors containing the best-fit 
 parameters of different analysis (and their respective error matrix) into a single vector 
 of parameters and a single error matrix. 
@@ -912,18 +912,18 @@ Currently the best method to obtain these correlations between FS and CS results
 This provides with an estimate of a sort of ``ensemble averaged'' correlations (though limited by the 
 number of realisations). However, the real data is a single realisation of the ensemble, and 
 the correlations between FS and CS are also suceptible to fluctuate, just as the individual parameters 
-and their uncertainties. In \cite{bautistaCompletedSDSSIVExtended2020} we developed 
+and their uncertainties. In \cite{bautistaCompletedSDSSIVExtended2021} we developed 
 a method to account for this fact, where we adjust the correlations for each realisation based on 
 the vectors $\vec{p}$ and their error matrices of that particular realisation. 
 
-In \cite{dumerchatJoint2022}, we developed an analysis where we fit jointly 
+In \cite{dumerchatBaryonAcousticOscillations2022}, we developed an analysis where we fit jointly 
 the correlation function and power spectrum while accounting for their covariance.
 I refer to it as the joint space (JS) method.  
 The covariance is built at the multipole level, using a set of mock catalogues.
 Figure~\ref{fig:covariance_ezmock} shows the correlation coefficients of CS and FS multipoles, 
 including the cross-correlation terms. The wiggles observed in the cross-correlation terms 
 can be simply explained by the fact that CS and FS are related via Hankel transforms 
-(see Appendix A of \cite{dumerchatJoint2022} for an explicit derivation). 
+(see Appendix A of \cite{dumerchatBaryonAcousticOscillations2022} for an explicit derivation). 
 We tested and validated this framework on the BAO analysis of the eBOSS LRG sample 
 (section~\ref{galaxies:bao}) where we fit for a single $\aperp$ and $\apara$, though 
 amplitudes of power-laws are independent for each space. 
@@ -953,7 +953,7 @@ underestimating uncertainties.
   The expected value is the intersection of the dotted black lines,
   and the best fit values are described by a star for the JS and GA methods. 
   We can see how the JS method yields better combined results that are not necessarily Gaussian.
-  Extracted from \cite{dumerchatJoint2022}. 
+  Extracted from \cite{dumerchatBaryonAcousticOscillations2022}. 
   }
   \label{fig:non_gaussian_contours}
   \end{figure}

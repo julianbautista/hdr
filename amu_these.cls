@@ -72,14 +72,15 @@
 %%% appareil de référence (sauf glossaires)
 \PassOptionsToPackage{						%% options biblatex
 	backend=biber,							%% compilateur par défaut pour biblatex
-	maxcitenames=1,								%% nombre max. de noms auteurs
+	maxcitenames=2,								%% nombre max. de noms auteurs
 	mincitenames=1,								%% nombre min. de noms auteurs
 	sorting=nyt,							%% trier par nom, année, titre
 	citestyle=authoryear,					%% style de citation auteur-année
-	bibstyle=alphabetic,					%% style de bibliographie alphabétique
+	bibstyle=authoryear,					%% style de bibliographie alphabétique
 %	bibstyle=iso-authoryear,				%% style de bibliographie ISO 690
 	backref=true,							%% liens retour des références (cf. p.)
-	maxbibnames=99,
+	maxbibnames=6,
+	uniquelist=false,
 	url=false
 	}
 	{biblatex}
@@ -244,3 +245,5 @@
 \g@addto@macro\bfseries{\boldmath}
 \makeatother
 
+% Unicode characters
+% α 
