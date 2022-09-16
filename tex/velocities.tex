@@ -517,10 +517,24 @@ at the field level or at the two-point function level.
 
 Several measurements were made in the past decade using a variety of distance surveys, 
 galaxy surveys and methods. 
-Table~\ref{tab:pv_current_measurements} attemps to summarise all measurements 
-and their methodologies. 
+Table~\ref{tab:pv_current_measurements} summarises most measurements in the literature.
+They are also visually represented in Figure~\ref{fig:pv_current_measurements}. 
+All these measurements of the growth-rate $f\sigma_8$ correspond to an effective redshift between zero and 0.1. 
+These results are in good agreement with the predictions from a $\Lambda$CDM+GR model, with 
+cosmological parameters from \cite{planckcollaborationPlanck2018Results2020}. 
+However, one can notice how they do not have the same uncertainties, even if, for some cases, they 
+use the same datasets. Few analyses quote systematic uncertainties which can be quite significant for  
+some methods. 
+
+The goal of the project I am currently leading at CPPM is to deeply understand those variations 
+while optimising the analysis. Also we plan to work closely to the data reduction teams 
+in order to produce the best set of simulated data. 
+Mock catalogues will be essential to estimate biases 
+in best-fit parameters, statistical and systematic uncertainties. 
+In the following section I will introduce two datasets that will be used in our project: DESI and ZTF. 
 
 \begin{table}
+    \small 
     \centering
     \caption{Measurements of the growth-rate of structures from peculiar velocity 
     and galaxy survey data. }
@@ -530,15 +544,14 @@ and their methodologies.
         \hline 
         Reference  &  Dataset  &  Method   &   $f\sigma_8$  \\ 
         \hline 
-\cite{beutler6dFGalaxySurvey2012a}          & 6dFGSz    & RSD               & $ 0.423 \pm 0.055 $           \\
-\cite{blakePowerSpectrumMultipoles2018}     & 6dFGSz    & RSD               & $ 0.380 \pm 0.120 $ \\
-
+%\cite{beutler6dFGalaxySurvey2012a}          & 6dFGSz    & RSD               & $ 0.423 \pm 0.055 $           \\
+%\cite{blakePowerSpectrumMultipoles2018}     & 6dFGSz    & RSD               & $ 0.380 \pm 0.120 $ \\
 \cite{johnson6dFGalaxySurvey2014}           & 6dFGSv    & Max-likelihood    & $ 0.428^{+0.079}_{-0.068} $   \\
 \cite{hutererTestingLCDMLowest2017}         & 6dFGSv    & Max-likelihood    & $ 0.428^{+0.048}_{-0.045} $   \\
 \cite{adamsJointGrowthrateMeasurements2020} & 6dFGSz,6dFGSv & Max-likelihood & $ 0.384 \pm 0.052^\text{(stat)} \pm 0.061^\text{(syst)} $ \\  
 \cite{laiConstrainingGrowthRate2022}        & SDSS-FP   & Max-likelihood    & $ 0.405^{+0.076 \text{(stat)}}_{-0.071} \pm 0.009^\text{(syst)} $ \\
 \cite{qinRedshiftspaceMomentumPower2019}    & 6dFGSv,2MTF & Compressed 2pt  & $ 0.404^{+0.082}_{-0.081} $ \\
-\cite{howlett2MTFVIMeasuring2017}           & 2MTF      & Compressed 2pt    & $ 0.510^{+-0.090}_{-0.080} $ \\
+\cite{howlett2MTFVIMeasuring2017}           & 2MTF      & Compressed 2pt    & $ 0.510^{+0.090}_{-0.080} $ \\
 \cite{nusserVelocitydensityCorrelationsCosmicflows32017} 
                                             & CF3,2MRS  & Compressed 2pt    & $  0.400 \pm 0.080 $ \\ 
 \cite{dupuyEstimationLocalGrowth2019}       & CF3       & Compressed 2pt    & $ 0.430 \pm 0.030^\text{obs} \pm 0.110^\text{cosmic} $ \\ 
@@ -553,6 +566,15 @@ and their methodologies.
     \end{tabular}
 \end{table}
 
+\begin{figure}
+    \centering 
+    \includegraphics[width=0.8\textwidth]{fig/velocities/plot_fs8_pv.pdf}
+    \caption{Measurements of the growth-rate of structures $f\sigma_8$ from peculiar velocity 
+    and galaxy survey data. The references and values are listed in Table~\ref{tab:pv_current_measurements}.
+    The light error bars include systematic errors. In the case of Dupuy et al. 2019, the extra contribution 
+    is from cosmic variance, instead. }
+    \label{fig:pv_current_measurements}
+\end{figure}
 
 \section{DESI and ZTF}
 \label{velocities:desi_ztf}
@@ -670,5 +692,212 @@ DESI BGS + ZTF SNIa  &  0.2 &  0.10 &  0.13 \\
 \end{table}
 
 
+\section{Growth-rate measurement from simulated ZTF data}
+\label{velocities:ztf_fs8}
 
+Bastien Carreres, PhD student I co-supervise with Benjamin Racine and Dominique Fouchez at CPPM, 
+is currently developing the whole analysis chain to measure the growth-rate of structures 
+from peculiar velocities derived from ZTF type-Ia supernovae (SNIa) data. 
+He has been developing a code based on the maximum-likelihood method 
+(section~\ref{velocities:methods:maximum_likelihood}) and validating it with 
+the most realistic set of simulated ZTF data that he also produced. 
+In this section, I summarise his findings which will be detailed in 
+Carreres et al. (in prep). 
+
+\subsection{Simulating ZTF type-Ia supernovae with peculiar velocities}
+\label{velocities:ztf_fs8:sims}
+
+The goal of the simulations is to create a set of light-curves from SNIa 
+which contain realistic and correlated peculiar velocities. 
+
+The best source of peculiar velocities are n-body simulations. 
+We currently use two sets of large-scale cosmological n-body simulations 
+with matter only. The first set is named Dark Energy and Massive Neutrino Universe 
+(DEMNUni, \cite{castorinaDEMNUniClusteringLargescale2015}) aimed at account correctly for 
+the impact of massive neutrinos in the formation of structures. 
+They were produced with the tree particle mesh-smoothed particle hydrodynamics 
+(TreePM-SPH) code Gadget-3 with a recipee given by \cite{vielEffectNeutrinosMatter2010} 
+to simulate massive neutrinos. The DEMNUni boxes are 2 $h^{-1}$Gpc on a side, 
+and contain 2048$^3$ matter particles and $2048^3$ neutrino particles. Initial conditions 
+are set at $z=99$ and evolved assuming a flat $\Lambda$CDM universe with parameters 
+from Planck 2013 results (\cite{planckcollaborationPlanck2013Results2014a}). 
+Different simulations were ran with varying mass of neutrino species (0, 0.16, 0.32, and 0.48 eV)
+and varying equations-of-state for dark energy. 
+Haloes were defined using a Friend-of-friends algorithm, assembling a minimum number of 32 
+matter particles. This first set of simulations is not yet public and access it only granted 
+by demand to the authors. 
+The second set of simulations we use are the AbacusSummit suite (\cite{maksimovaABACUSSUMMITMassiveSet2021}), 
+which use the Abacus code (\cite{garrisonABACUSCosmologicalNbody2021}) to produce 
+150 boxes of 2 $h^{-1}$Gpc on a side, containing 6912$^3$ particles and 
+spanning 97 cosmological models. These cosmological models have different 
+values for $\omega_b$, $\omega_\text{cdm}$, $h$, $A_s$, $n_s$, $\alpha_s$, 
+$N_\text{eff}$, $w_0$ and $w_a$. Initial conditions are created using 
+first order Lagrangian perturbation theory with the public code
+\textsc{zeldovich-PLT}\footnote{\url{https://github.com/abacusorg/zeldovich-PLT}}.
+Halos are found using the CompaSO tehcnique (\cite{hadzhiyskaCOMPASONewHalo2022}).
+These simulations and several data products are publicly available and 
+documented\footnote{\url{https://abacussummit.readthedocs.io/}}. 
+The AbacusSummit suite is currently the state-of-the-art in the market 
+and are currently being used by the DESI collaboration. 
+
+ZTF observes spectroscopically classified SNIa 
+up to redshifts of 0.1, which corresponds to a comoving distance 
+of $\sim 293$\hmpc in a Planck 2018 best-fit cosmology. 
+This means that we can subdivide a $(2~h^{-1}\text{Gpc})^3$ simulation box into 
+roughly 9 ZTF SNIa volumes (full-sky, even though ZTF observes the Northern sky).  
+Because of large-scale correlations, these sub-boxes are not completely independent of each other. 
+We place the observer at the center of each sub-box and compute the radial 
+component of peculiar velocities for each halo. 
+Eventually we convert comoving distances into redshifts assuming a fiducial cosmology. 
+At this step, we can also include the effect of redshift-space distortions (RSD) using the radial velocities.
+Currently we do not apply any halo mass cuts in our halo samples. 
+
+With halo samples in hand, we randomly assing SNIa events following a given rate of 
+events per volume, e.g., $(2.35 \pm 0.24) \times 10^4 \text{Gpc}^{-3} \text{yr}^{-1}$ 
+(\cite{perleyZwickyTransientFacility2020}).
+Using observation logs from real ZTF observations, we can know which exposures 
+could observe our SNIa events within some time window comparable to the duration of 
+a SNIa light-curve. For each observed SNIa, we draw strech and colour parameters 
+defined as in the SALT2 formalism (\cite{guySALT2UsingDistant2007}) and following 
+realistic distributions
+(\cite{scolnicMEASURINGTYPEIA2016, nicolasRedshiftEvolutionUnderlying2021}).
+Intrinsic scatter is added by hand on the peak magnitudes. 
+The fluxes are simulated using the \textsc{SNCosmo} package\footnote{\url{https://sncosmo.readthedocs.io/}}.
+Each exposure contains information about the seeing, airmass, and noise, which are then combined 
+to obtain fluxes and their uncertainties. 
+The peculiar velocity information is included in the observed redshift of the SNIa event
+and accounted for when deriving fluxes in each band. 
+
+Once light-curves are computed for all observed SNIa, we simulate 
+selection effects. First, we define a photometric cut to emulate detection.
+We exclude any light-curve without two epochs with flux signal-to-noise ratio 
+above 5. Second, we emulate the spectroscopic follow-up for classification.
+The selection for spectro follow-up is essentially a magnitude cut (roughly $r<18.5$),
+which ensures enough signal in spectra.  
+This second cut is the main responsible for the limit of $z \sim 0.1$ of the SNIa sample 
+as seen in Figure~\ref{fig:nz_desi_ztf}. 
+A mock ZTF SNIa sample with peculiar velocities is the result of this procedure. 
+The package producing these mock catalogues is publicly 
+available and documented\footnote{\url{https://snsim.readthedocs.io/}}. 
+
+\section{Measuring peculiar velocities and the growth-rate}
+\label{velocities:ztf_fs8:measurements}
+
+With a realistic mock catalogue of ZTF SNIa data in hand, we proceed to the measurement of 
+their peculiar velocities and the estimate of the growth-rate of structures $f\sigma_8$. 
+
+Figure~\ref{fig:ztf_snsim_lightcurves} shows a few examples of light-curves from mock ZTF data.
+These light-curves are then fitted with the same SALT2 models used to produce them. 
+The fits yield values for the stretch, colour, peak brightness and the time of peak brightness, 
+with their uncertainties. 
+A Hubble diagram is fitted including terms accounting for correlations between brightness and 
+stretch/colour (Tripp relation). 
+Since we are at such low redshifts, we can model $H(z)$ as a linear function since 
+the cosmological dependency with $\Omega_m$ or $\Omega_\Lambda$ only kicks in at $z \sim 0.4$, 
+much higher than our sample. 
+The peculiar velocity estimator uses the residuals of the observed distance moduli to the
+best-fit Hubble diagram. While most of the displacements due to velocities happen in the redshift direction,
+the noise is much larger in the distance moduli diretion, so the most convient observable is 
+the Hubble residual $\Delta \mu \equiv \mu_\text{obs} - \mu_\text{model}(z_\text{obs})$. 
+Using a linear expansion of the Hubble diagram, one can write an approximation of the corresponding 
+peculiar velocity, though its noise properties become non-Gaussian. Therefore most studies 
+simply use $\Delta \mu$ as the peculiar velocity observable. 
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{fig/velocities/snsim_lightcurves.png}
+    \caption{Three simulated type-Ia supernovae light-curves as observed by ZTF, ranging from low to mid and high redshift. 
+    The solid line represents the input light-curve model while points with errorbars are simulated observed fluxes 
+    including instrumental noise. The flux is in arbitraty units. Figure extracted from Carreres et al. (in prep). }
+    \label{fig:ztf_snsim_lightcurves}
+\end{figure}
+
+Figure~\ref{fig:ztf_snsim_hubble_diagram} displays the residuals of the Hubble diagram 
+fitted on simulated samples of ZTF light-curves, relative to the true input Hubble diagram. 
+The average of eight independent realisations is also displayed with errorbars. 
+A clear bias relative to the input model is seen at $z > 0.06$, 
+due mainly to the selection for spectroscopic follow-up. 
+If the simulations are realistic enough, this bias is an indication that ZTF SNIa samples 
+are \emph{complete} up to $z \sim 0.06$, defining a so called \emph{volume limited} sample. 
+Above this limit, we need to correctly 
+account for biases if one is interested in constraining cosmology with the Hubble diagram. 
+In this work, we studied the impact of this selection bias in the measurement of peculiar 
+velocities and subsequently on the estimates of the growth-rate $f\sigma_8$.  
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{fig/velocities/bastien_hd_residuals.pdf}
+    \caption{Distance moduli inferred from simulated ZTF SNIa light-curves compared to the input cosmological model. 
+    Grey lines show 8 different realisations while points with error bars are their average. 
+    Selection effects cause a bias in distance moduli estimates at $z>0.06$. 
+    Figure extracted from Carreres et al. (in prep).}
+    \label{fig:ztf_snsim_hubble_diagram}
+\end{figure}
+
+For our measument of $f\sigma_8$ using peculiar velocities, we are currently employing 
+the maximum-likelihodd method (section~\ref{velocities:methods:maximum_likelihood}). 
+Instead of using a linear matter power spectrum as a model for the velocity divergence 
+power spectrum, we are trying to use improved models including regularised perturbation 
+theory (RegPT, \cite{taruyaDirectFastCalculation2012}) and empirical formulas derived
+from n-body simulations (\cite{belAccurateFittingFunctions2019}). 
+These models include some level of non-linearities which would allow us to use 
+a larger range of scales when constraining growth. Also, linear theory is knwon to break 
+at quite large scales $k\sim 0.1$, particularly at $z\sim0$. 
+
+When building the model covariance matrix used in the likelihood (Eq.~\ref{eq:likelihood})
+for $N_v$ measurements of peculiar velocities, the resulting matrix will have $N_v^2$ elements, 
+which can become prohibitively large and slow to compute. We expect that ZTF will produce a set 
+of about 5000 SNIa which is still feasible, but larger sets require a different solution. 
+One of the solutions is to assign the velocities to a mesh, effectively reducing the number of 
+measurements. This also has the advantage of smoothing out a fraction of the non-linear clustering. 
+The mesh smoothing is taken into account in the model covariance matrix. 
+
+There are three free parameters in the model covariance matrix: $f\sigma_8$ which is simply to overall 
+amplitude of velocity-velocity correlations, $\sigma_v$ accounting for the remaining non-linear 
+velocities, $\sigma_u$ accouting for the change in the signal due to redshift-space distortions. 
+We use the \textsc{iMinuit} package\footnote{\url{https://iminuit.readthedocs.io/}} to find the maximum 
+of the likelihood and to estimate uncertainties. We also explore the full posterior distribution 
+using a Monte Carlo Markov Chain (MCMC). 
+
+Figure~\ref{fig:ztf_snsim_posterior} shows one example of the posterior on the three fitter parameters. 
+In order to avoid selection biases, we restrain our dataset to SNIa at $z<0.06$, 
+which yields about 2000 objects for this case.
+Contours show the 68 and 95\% confidence levels. Green contours are the result of analysing the 
+peculiar velocities directly from the halo catalogue, without any source of noise. Red contours 
+are the result when including all the effects of a realistic dataset and analysis. 
+Both measurements are consistent with the expected value for $f\sigma_8$, even though uncertainties 
+are quite large.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{fig/velocities/bastien_posterior_fs8.png}
+    \caption{ Figure extracted from Carreres et al. (in prep).}
+    \label{fig:ztf_snsim_posterior}
+\end{figure}
+
+Figure~\ref{fig:ztf_snsim_fs8_bias} shows how best-fit values of $f\sigma_8$ change when 
+increasing the dataset up to $z_\text{max}$. We clearly see the impact of selection biases 
+when considering SNIa beyond $z\sim 0.08$, based on the average of 8 mock realisations. 
+This would indicate that an unbiased measurement of $f\sigma_8$ is possible with ZTF SNIa
+if one restricts the analysis to the volume limited sample. 
+Another interesting result is that the uncertainty in $f\sigma_8$ does not seem to 
+decrease significantly when increasing $z_\text{max}$. This is simply a manifestation 
+of the quick fall in the comoving density of SNIa beyond $z\sim0.08$, as seen in 
+Figure~\ref{fig:nz_desi_ztf}. 
+Also in the same redshift range, a large set of DESI galaxies will be available to 
+perform a joint density-velocity analysis. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\textwidth]{fig/velocities/bastien_fs8_bias.pdf}
+    \caption{Estimates of the growth-rate $f\sigma_8$ from mock ZTF SNIa data. 
+    We compare the measurements between the estimated peculiar velocities to the 
+    same measurements performed on the true velocities. 
+    Each measurement considers SNIa up to maximum redshift $z_\text{max}$.
+    The selection bias from Figure~\ref{fig:ztf_snsim_hubble_diagram} manifests itself
+    on growth-rate estimates from $z_\text{max}>0.08$. 
+    Figure extracted from Carreres et al. (in prep).}
+    \label{fig:ztf_snsim_fs8_bias}
+\end{figure}
 
