@@ -33,104 +33,122 @@ who graduated on the 18th of March 2022.
 The \lya forest is the name for a series of absorption lines observed in quasar
 spectra caused by the presence of neutral hydrogen along the line of 
 sight between us and the quasars. 
-Figure \textbf{XX} shows an example of a optical quasar spectrum with its \lya forest.
-These lines are seen bluewards of the \lya emission peak of the quasar,
-which lies at the quasar rest-frame wavelength $\lambda_\mathrm{rest}=1216~\angstrom$.
+Figure~\ref{fig:forest} shows an example of a optical quasar spectrum with its \lya forest.
+The forest is seen bluewards of the \lya emission peak of the quasar at $\lambda_\text{obs} \sim 4900$~\angstrom.
+corresponding to a quasar rest-frame wavelength of $\lambda_\mathrm{rest}=1216~\angstrom$. 
 The absorption is not limited to the first transition; bluewards of the 
-Ly$\beta$ peak ($\lambda_\mathrm{rest} = 1025~\angstrom$) we also observe 
-Ly$\beta$ absorption lines on top of the \lya ones, and similarly for all
+Ly$\beta$ peak ($\lambda_\text{obs} \sim 4200~\angstrom$ or $\lambda_\mathrm{rest} = 1025~\angstrom$) 
+we also observe Ly$\beta$ absorption lines on top of the \lya ones, and similarly for all
 Lyman series until the Lyman break at 912~$\angstrom$.
 
-The advatage of the forests is that it provides a tomographic 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig/forests/forest_example.png}
+    \caption{Example of a \lya and Ly$\beta$ forests from a high signal-to-noise ratio 
+    eBOSS quasar spectrum as a function of observed wavelength. 
+    The two solid curves give the two independent best-fit models for the product of the mean continuum times the mean absorption. 
+    Grey dashed vertical lines show the positions of the \lya and Ly$\beta$ broad emission lines of the quasar. 
+    Figure extracted from \cite{dumasdesbourbouxhelionCompletedSDSSIVExtended2020}.}
+    \label{fig:forest}
+\end{figure}
+
+The advantage of the forests is that it provides a tomographic 
 view of the matter distribution along the line of sight of the quasar. 
 This is because, as the light propagates outwards of the quasar, the 
 Universe expands, causing the whole spectrum to be redshifted. 
 When the redshifted spectrum hits a hydrogen atom, the light being
 absorbed at the \lya transition in the \emph{atom} rest-frame 
 is no longer at the \lya wavelength in the \emph{quasar} rest-frame:
-it a bluer wavelength. If a given quasar sits at a redshift $z_q$ and 
+it is light from a bluer wavelength. 
+If a given quasar sits at a redshift $z_q$ and 
 a given intervening atom sits at a redshift $z_a < z_q$, the \lya photon being absorbed
 by the atom corresponds to a photon at $\lambda_\mathrm{rest}= 1216(1+z_a)/(1+z_q)~\angstrom$
-in the quasar rest-frame. In our frame, the observed wavelength of the 
-atom absorption, or equivalently of its \lya line, is 
-$\lambda_\mathrm{obs}= 1216(1+z_a)~\angstrom$. Note the 
-observed wavelength does not depend on the quasar redshift.
-We only need the quasar redshift to identify where the \lya forest is 
-in the observed spectrum, such that we can assign each observed wavelength
-to a quasar rest-frame wavelength. 
+in the quasar rest-frame. 
+In our frame, the atom absorb \lya photons at the observed wavelength
+$\lambda_\mathrm{obs}= 1216(1+z_a)~\angstrom$ which does not depend on the quasar redshift.
+Quasar redshifts are only needed to identify the \lya forest regions in quasar spectra. 
 The result is that a single forest of lines maps the neutral
-hydrogen density accros a large range in redshifts. One single
-quasar spectrum can yield a map of the large-scale distribution 
-of matter along its line of sight over up to several hundreds of 
-megaparsecs (Mpc). 
+hydrogen density across a large range in redshifts. 
+One single quasar spectrum can yield a high-resolution one-dimensional map of 
+the distribution of neutral hydrogen along its line of sight, 
+across several hundreds of megaparsecs (Mpc). 
 
 How much neutral hydrogen is needed to create a forest of \lya 
-absorption lines? Not a lot as it turns out. Given the 
-high cross-section of the \lya resonance, very low densities of neutral 
-hydrogen are sufficient to create a line. 
+absorption lines? Not a lot as it turns out. 
+Given the high cross-section of the \lya resonance, 
+very low densities of neutral hydrogen are sufficient to create a visible absorption line. 
 At redshifts $2 < z < 4$ where \lya forests are observed in the optical, 
-typical densities found in the intergalactic medium (IGM), $n_\mathrm{HI} \sim 10^{XXX}~\si{\cm}^{-3}$,
-are enough to absorb a significant fraction of the photons. 
+typical densities found in the intergalactic medium (IGM) are of the order of 
+$n_\mathrm{HI} \sim 10^{-11}~\si{\cm}^{-3}$,
+enough to absorb a significant fraction of the photons. 
+This HI density corresponds to 
+less than 1 part in $10^5$ of the total amount of baryons: most of the HI is ionised.
+
 Denser regions completely absorb the light and create saturated lines (zero flux). 
 This is the case of the so-called \emph{high-column density systems} (HCDs), 
 which are often associated with galaxies or proto-galaxies. The extreme cases 
-can be observed with high-resolution spectrocopy, where we can also observe a non-saturated
+can be observed with high-resolution spectroscopy, where we can also observe a non-saturated
 \emph{deuterium} absorption from which we derive constraints on big-bang nucleosynthesis (BBN, 
 see section~\ref{intro:probes:bbn}). 
 
 The \lya forest, and therefore the amounts of neutral hydrogen in the IGM, 
-is tighly connected with the process of reionisation of the Universe. 
+is tightly connected with the process of reionisation of the Universe. 
 As more stars and quasars form, more ultraviolet light is produced, 
 progressively ionising the neutral hydrogen. On top of that, the Universe
 continuously expands, diluting it. 
-Thus, the average absorption of forests decreases with time, or increases with redshift.
-At redshifts above 6, most of the light bluewards of the \lya emission is absorbed, 
+Thus, the average absorption of forests decreases with time (increases with redshift).
+At redshifts above 6, most of the light in the forest is absorbed, 
 while at redshifts below 1, the \lya absorption is minimal. 
-Forests from $z_q>6$ quasars are used to put constraints on reionisation (ref?). 
+Forests from $z_q>6$ quasars can be used to put constraints on parameters 
+describing the process of reionisation. 
 
 The \lya forest and its connection with the large-scale structures have been studied 
-theoretically since works by \cite{gunnDensityNeutralHydrogen1965}. Most of recent 
-advances are thanks to numerical simulations. In order to simulate forests, 
+theoretically since works by \cite{gunnDensityNeutralHydrogen1965}. 
+Most of recent advances are thanks to numerical simulations. 
+In order to simulate forests, 
 a full hydrodynamic n-body simulations are required, including all the 
-complex baryonic physics. \textbf{Add more refs. }
+complex baryonic physics. 
 On large scales, it has been shown that the forest can be considered as 
 linear tracer of the underlying matter field 
-\cite{mcdonaldObservedProbabilityDistribution2000, mcdonaldMeasurementCosmologicalGeometry2003, 
-mcdonaldLinearTheoryPower2005}. On smaller scales, the gas physics is more 
-complex to model given the effects of pressure and thermal velocities. 
+(\cite{mcdonaldObservedProbabilityDistribution2000, mcdonaldMeasurementCosmologicalGeometry2003, 
+mcdonaldLinearTheoryPower2005}). On smaller scales, the gas physics is more 
+complex to model given the effects of pressure and thermal velocities
+(\cite{arinyo-i-pratsNonLinearPowerSpectrum2015}).
 Feedback from supernovae explosions, AGN or star forming galaxies also play 
 an important role to model the small-scale clustering (\cite{chabanierImpactAGNFeedback2020}). 
-The small scales are 
-interesting due to their potential to constrain neutrino masses for instance. 
-
+The small scales are interesting due to their potential to constrain neutrino masses for instance. 
 
 The first measurements of clustering using the \lya forests 
 were based solely on the two-point statistics along the same 
 line of sight (\cite{croftPowerSpectrumMass1999, mcdonaldLyAlphaForest2006}). 
-Given the good wavelength sampling of a forest, 
-limited by the resolution of our spectrographs, the small scales 
-are easily accessible in the radial/wavelength direction. 
-This type of measurement is still 
-performed today and allow us to obtain tight upper limits on 
-the total mass of neutrino species (\cite{palanque-delabrouilleHintsNeutrinoBounds2020}), 
-when combined with measurements of the cosmic microwave background. 
+Given the high sampling in wavelengths of a forest, the small scales 
+are easily accessible in the radial direction. 
+The smallest scales that can be probed are set by the spectrographs resolution in wavelength.
+This type of measurement is still performed today and allow us to obtain tight upper limits on 
+the total mass of neutrino species or warm dark matter candidates, 
+when combined with measurements of the cosmic microwave background
+(\cite{palanque-delabrouilleHintsNeutrinoBounds2020}). 
 
-It is only with the Baryon Oscillation Spectroscopic Survey (BOSS) from SDSS-III 
-that we could study the clustering of \lya forests in three dimensions. 
+The Baryon Oscillation Spectroscopic Survey (BOSS) from SDSS-III 
+was the first to be able to study the clustering of \lya forests in three dimensions.
 Thanks to the density of quasars observed by BOSS, of about 15~deg$^{-2}$, 
 it was possible for the first time to estimate correlations using absorption 
-from neighboring lines of sight. Also thanks to the large area of sky covered by 
-BOSS, the first measurement of baryon acoustic oscillations (BAO) using forests was achieved 
-\cite{buscaBaryonAcousticOscillations2013, slosarMeasurementBaryonAcoustic2013, kirkbyFittingMethodsBaryon2013}.
+from neighbouring lines of sight. Also thanks to the large area of sky covered by 
+BOSS, the first measurement of baryon acoustic oscillations (BAO) using forests was possible 
+\cite{buscaBaryonAcousticOscillations2013, 
+slosarMeasurementBaryonAcoustic2013, 
+kirkbyFittingMethodsBaryon2013}.
 
 Quasars also trace the matter field. While their density is not homogenous enough across the sky 
-to measure clustering using these quasars alone, they can be cross-correlated with 
+to measure clustering using quasars alone, they can be used to compute cross-correlations with 
 the forests. The cross-correlation between quasars and \lya forests is interesting 
 because it is mostly independent of the \lya forest auto-correlation. 
-This is mainly because the quasar sample has a low density (shot-noise dominated).
+This is mainly because the quasar sample has a low density (shot-noise dominated)
+compared to the amplitude of the power spectrum on large scales ($\bar{n}P_0 \ll 1$).
 The first measurement of BAO in the quasar-forest cross-correlation was also possible with 
-BOSS (\cite{font-riberaQuasarLymanAlphaForest2014}). The BAO constraints from 
-the auto and cross correlations could be combined assuming that these two are independent. 
+BOSS data (\cite{font-riberaQuasarLymanAlphaForest2014}). 
+The BAO constraints from the auto and cross correlations 
+were combined assuming that these two are independent. 
 
 Since the first measurements of BAO using forests, the BOSS and eBOSS collaborations 
 published BAO constraints with increasingly larger samples and improved analysis.
@@ -147,6 +165,8 @@ They are associated with the official SDSS Data Releases (DR):
  \item DR16: Final \lya BAO measurements of SDSS (\cite{dumasdesbourbouxhelionCompletedSDSSIVExtended2020}).
 \end{itemize}
 
+My main contributions were given to publications with DR11 and DR12 data. 
+
 \section{Baryon acoustic oscillations in the forests}
 \label{forests:bao}
 
@@ -154,25 +174,26 @@ In this section I detail the methodology I used in my past work
 to measure BAO with a set of \lya forests, highlighting my 
 personal contributions. I consider the case of SDSS forests, 
 which are observed in the optical domain with low-resolution spectroscopy.
-Forest have a rather low signal-to-noise ratio on average, 
-so the methods are fit to this type of data. 
-Similar methods are employed in the measurement of the line-of-sight
-(or one-dimensionnal) power-spectrum, but we focus on BAO here. 
+Forests have a rather low signal-to-noise ratio on average, 
+so the methods discussed here are adapted to this type of data. 
+Similar methods are employed on the measurement of the line-of-sight
+(or one-dimensional) power-spectrum, but we focus on BAO here. 
 
-The main steps of the BAO analysis with \lya forests are:
+The main steps of the BAO analysis with \lya forests can be summarised in the following steps:
 \begin{itemize}
     \item estimate of the transmission field and their associated weights;
     \item estimate of the two-point correlation functions, including the cross-correlation with quasars;
     \item estimate of correction matrices due to distortions of continuum fitting and metals; 
     \item fit of the BAO model over measured correlations.
 \end{itemize}
+I will present now in more detail each of these steps. 
 
 \subsection{Transmission field}
 \label{forests:bao:transmission}
 
 As described in section~\ref{forests:intro}, the amount of absorbed 
 flux at a given wavelength (redshift) is related to the density 
-of neutral hydrogen and therefore is a tracer of structures.  
+of neutral hydrogen and is therefore a tracer of structures.  
 
 The main observable used to compute correlations is the so-called
 \emph{transmission} $F$, defined as 
@@ -182,7 +203,7 @@ The main observable used to compute correlations is the so-called
 \end{equation} 
 where 
 $f(\hat{n}, \lambda)$ is the observed flux and 
-$C(\hat{n}, \lambda)$ is the unabsorbed/original flux level, 
+$C(\hat{n}, \lambda)$ is the unabsorbed/source flux level, 
 for a quasar line-of-sight at angular position $\hat{n}$ 
 and observer-frame wavelength $\lambda$, which can be linked to the
 absorber redshift $z = \lambda/\lambda_\alpha - 1$ if the absorption is 
@@ -192,9 +213,10 @@ optical depth $\tau$ as in the right-hand side of Eq.~\ref{eq:transmission}.
 The challenge is to estimate transmissions from the observed fluxes of a set of quasar
 spectra, particularly given that our data is low-resolution and relatively noisy.
 This makes it hard to ``see'' the unabsorbed flux level $C$, also known as the 
-\emph{continuum} level, requiring automated methods. Several past attemps to achive this 
+\emph{continuum} level, requiring automated methods. 
+Several past attempts to achieve this goal
 used either principal-component analysis techniques 
-(\cite{leeMeanfluxregulatedPrincipalComponent2012}) where the templates were built from 
+(\cite{leeMeanfluxregulatedPrincipalComponent2012}), where the templates were built from 
 high-resolution and high signal-to-noise data; or maximum likelihood methods accounting
 for the non-Gaussian nature of the probability density function of $F$ 
 (\cite{buscaBaryonAcousticOscillations2013}). 
@@ -202,14 +224,15 @@ During my PhD, I particularly tried to merge these
 last two methods into a single one, without success. 
 Those methods, while more sophisticated and flexible in their modelling of $C$, 
 they suffer from the additional noise added to the estimated transmission 
-due to noisier estimates of $C$. The simplest method will prevail in the latest
+due to noisier estimates of $C$. 
+The simplest method will prevail in the latest
 analyses, which consists in averaging forests in their rest-frame to obtain a
-single average shape for $C$, or \emph{mean continuum} $\bar{C}$. 
-This shape is then fitted to each individual forest with a linear tilt in $\log \lambda$,
+single average shape for $C(\lambda_\text{rest})$ denoted \emph{mean continuum} $\bar{C}(\lambda_\text{rest})$. 
+This shape is then adjusted onto each individual forest with a linear tilt in $\log \lambda$,
 i.e., $C(\hat{n}, \lambda) \equiv \bar{C}(\lambda) [ a_0(\hat{n}) + a_1(\hat{n})\log \lambda]$,
 where $a_0$ and $a_1$ are fitted coefficients per quasar. 
 
-Once the continnum level $C$ is estimated for each forest, one can compute 
+Once the continuum level $C$ is estimated for each forest, one can compute 
 the transmission $F$ and their \emph{fluctuations} $\delta_F$ around the mean,
 defined as 
 \begin{equation}
@@ -232,43 +255,58 @@ to estimate $\langle F \rangle$, by stacking forests in their observer-frame
 though this requires a good estimate of $C$. 
 If one express $\delta_F$ as a function of 
 the observed flux $f$, the continuum $C$ and the average transmission $\langle F \rangle$,
-one sees that there are degeneracies. 
-The latest BAO analyses therefore fits a linear function 
-that models the product $C \langle F \rangle$ simultaneously. 
+appear to be degenerate. 
+The latest BAO analyses therefore fit a linear function 
+that models directly the product $C \langle F \rangle$. 
 
 All methods to estimate the transmission fluctuations also suffer from the fact 
-that they use information the forests themselves to estimate $C$ or $C \langle F \rangle$.
-This creates spurious correlations between a given pixel in a given forest and a neighboring 
-pixel in the same forest. As I will discuss in section~\ref{forests:bao:matrices},
-spurious correlations are also introduced between pixels in different lines-of-sight, 
-distorting the correlation function. We name this effect the \emph{distortion
-by continuum fitting}; it needs to be correctly modelled when fitting the 
-correlation function.
+that they use information from the forests themselves to estimate $C$ or $C \langle F \rangle$.
+The continuum fitting add extra correlations among pixels in the same forest. 
+As I will discuss in section~\ref{forests:bao:matrices},
+these correlations also manifest when considering pixels in different lines-of-sight, 
+distorting the cosmological correlation function. 
+We name this effect the \emph{distortion by continuum fitting} 
+and we attempt to model it when fitting the measured correlation function.
 
-Typical ranges chosen to define the \lya forest and extract the transmission field
-are between 1040 and $1200~\angstrom$ in the quasar rest-frame. Recent analyses also 
-consider the Ly$\beta$ forest region, between 920 and 1020~\angstrom, 
+Typical wavelength ranges chosen to define the \lya forest and extract the transmission field
+are between 1040 and $1200~\angstrom$ in the quasar rest-frame. 
+Recent analyses also consider the Ly$\beta$ forest region, between 920 and 1020~\angstrom, 
 where both \lya and Ly$\beta$ absorption are present. The absorption in this region 
 can be assigned a redshift that depends on the choice of $\lambda_\mathrm{rest}$, 
-that can be either \lya$ = 1216~\angstrom$  or Ly$\beta = 1025$~\angstrom. 
+which can be either \lya$ = 1216~\angstrom$  or Ly$\beta = 1025$~\angstrom. 
 These rest-frame wavelengths are separated enough such that both can be used 
 in clustering measurements without much contamination at separations below 200\hmpc.
 
 Uncertainties of the transmission fluctuations are also estimated from the data 
 themselves. Typically two major components are taken into account when defining 
-uncertainties: instrumental noise and the instrinsic variance of absorbers.
+uncertainties: instrumental noise and the intrinsic variance of absorbers.
 The former is essentially the output of the data reduction pipeline, described 
-in Chapter~\ref{chap:spectro}, corrected with some normalisation factor. 
+in chapter~\ref{chap:spectro}, corrected with some normalisation factor. 
 The latter is estimated from the variance of $\delta_F$ observed in the data. 
 The intrinsic variance of $\delta_F$ is an increasing function of redshift, 
-while the instrumental noise is typically decreasing with observer-frame wavelength, 
-since forest mostly lie at the blue end of the spectrographs. 
+while the instrumental noise is typically decreasing with observer-frame wavelength.
 The inverse of the final pixel uncertainty squared is used as a weight in the estimates of 
 the correlation function.  
 
-Word on DLAs ? 
+As mentioned previously, high-column density systems (HCDs) leave stronger absorption profiles 
+in the forests and have to be treated differently than standard forest absorption.
+Several algorithms to automatically find HCDs in noisy data have been developed 
+(e.g. \cite{garnettDetectingDampedLy2017}).
+Once they are found, the central part of the absorption profile is masked out, while their 
+wings are fitted with a Voigt profile. Only HCDs above a certain column density 
+threshold are efficiently detected, while those below this threshold remain in the forests.
+The unidentified HCDs increase the large-scale bias of the clustering and alters the 
+amplitude of redshift-space distortions 
+(\cite{font-riberaLargescaleCrosscorrelationDamped2012, 
+perez-rafolsSDSSDR12LargescaleCrosscorrelation2018}).
+Between 15 and 20\% of lines of sight contain detectable HCDs. 
 
-Word on calibration residuals and my work to find/fix the problem ? 
+Broad absorption lines (BALs) are a more complex type of forest contaminant. 
+The BALs are created due to gas flows near the accretion disk of the quasar. 
+These flows create irregular absorption features close to the broad emission lines. 
+Given the complexity of these flows, there are tricky to detect on data but 
+a few algorithms exist. Commonly, forests containing BAL are removed from the analysis,
+which represents roughly 10 to 15\% of the sample. 
 
 \subsection{Two-point correlation functions}
 \label{forests:bao:correlations}
@@ -276,7 +314,7 @@ Word on calibration residuals and my work to find/fix the problem ?
 Once the transmission fluctuations $\delta_F$ and their weights $w$ are estimated
 for all pixels of all forests, we compute their auto-correlation function and 
 their cross-correlation with quasars (or any other point tracer) in three dimensions, 
-as a function of comoving radial and transverse separations. 
+as a function of radial and transverse separations. 
 
 The first step is to convert redshifts to comoving distances using a fiducial cosmology. 
 With angular positions and distances, we can obtain the separation $\vec{r} = (\rperp, \rpara)$
@@ -289,20 +327,23 @@ with quasars, the radial separation can be negative, meaning that the absorber i
 than the quasar from us. Let $A$ be the index of a separation bin, the auto-correlation is 
 defined as 
 \begin{equation}
-\xi^\mathrm{auto}_A = \frac{\sum_{i, j ~ \mathrm{if} ~ \vec{r}_{ij} \in A} w_i w_j \delta_{F, i} \delta_{F, j}}{\sum_{i, j ~ \mathrm{if} ~ \vec{r}_{ij} \in A} w_i w_j}
+\xi^\mathrm{auto}_A = \frac{\sum_{i, j ~ \mathrm{if} ~ \vec{r}_{ij} \in A} w_i w_j \delta_{F, i} \delta_{F, j}}
+                           {\sum_{i, j ~ \mathrm{if} ~ \vec{r}_{ij} \in A} w_i w_j}
 \label{eq:autocorrelation} 
 \end{equation}
-where the indexes $i, j$ denote a given pixel in the forest. The sum is over all pairs of 
-absorbers for which the separation $\vec{r}_{ij} = \vec{r}_i - \vec{r}_j$ falls inside bin $A$. 
+where the indexes $i, j$ denote pixels in the forests. 
+The sum is over all pairs of absorbers for which the separation 
+$\vec{r}_{ij} = \vec{r}_i - \vec{r}_j$ falls inside separation bin $A$. 
 
 The cross-correlation of absorbers with quasars is estimated with the following estimator: 
 \begin{equation}
-    \xi^\mathrm{cross}_A = \frac{\sum_{i, j ~ \mathrm{if} ~ \vec{r}_{ij} \in A} w_i w_j \delta_{F, i}}{\sum_{i, j ~ \mathrm{if} ~ \vec{r}_{ij} \in A} w_i w_j},
+    \xi^\mathrm{cross}_A = \frac{\sum_{i, j ~ \mathrm{if} ~ \vec{r}_{ij} \in A} w_i w_j \delta_{F, i}}
+                                {\sum_{i, j ~ \mathrm{if} ~ \vec{r}_{ij} \in A} w_i w_j},
     \label{eq:crosscorrelation} 
 \end{equation}
 which is very similar to the auto-correlation one in Eq.~\ref{eq:autocorrelation}.
 The index $i$ runs over absorbers while $j$ runs over quasars, but there is no $\delta_{F,j}$ term. 
-This estimator is valid under a few assumptions: sparcity of quasars, weak cross-correlation 
+This estimator is valid under a few assumptions: sparsity of quasars, weak cross-correlation 
 and weak auto-correlation. These assumptions are discussed in detail in the appendix B of
 \cite{font-riberaLargescaleCrosscorrelationDamped2012}. 
 
@@ -317,7 +358,7 @@ where $W_A^s$ is the total weight in bin $A$ of sub-sample $s$ and $W_A \equiv \
 This estimator has been tested with 100 realisations of synthetic datasets (mocks) and 
 it shows to be robust at the current precision level. 
 
-The data vector contains around 50x50 bins, making the covariance too large (2500x2500)
+The data vector contains around 50x50 bins, making the covariance matrix too large (2500x2500)
 for the usual number of available sub-samples ($\sim 1000$). To avoid the matrix to be 
 singular, we apply a smoothing to it. The smoothing procedure considers that the 
 correlation coefficients, defined as $\rho_{AB} = C_{AB}/\sqrt{C_{AA} C_{BB}}$, 
@@ -377,7 +418,7 @@ separated by 21\hmpc but it is the cross-correlation between \lya and \textsc{Si
 absorption at near \emph{zero} separation. It is the same region in the 
 Universe absorbing both in \lya and in \textsc{SiIII}, though the latter 
 has a smaller amplitude. This happens for all metals with rest-frame 
-wavelenghts close to \lya. For instance, one of the \textsc{SiII} transitions 
+wavelengths close to \lya. For instance, one of the \textsc{SiII} transitions 
 creates a spike at 111\hmpc, right at the BAO peak. 
 Since \cite{delubacBaryonAcousticOscillations2015}, I worked on carefully 
 adding metal absorption to mock forests in order to quantify their impact on 
@@ -388,7 +429,7 @@ can be described as a matrix times the \lya-\lya correlation function.
 This matrix is referred to as the \emph{metal matrix}. The amplitude of 
 \lya-metal correlations is a free parameter in the BAO fits. 
 We found that marginalising over these amplitudes makes BAO constraints 
-slighly larger, though more conservative and robust.   
+slightly larger, though more conservative and robust.   
 
 \subsection{The model}
 \label{forests:bao:model}
@@ -425,10 +466,10 @@ which can be relatively large for quasars ($\sim 500$\kms).
 This term can be modelled as a Gaussian or as a Lorentzian, as a function of a 
 velocity dispersion parameter $\sigma_v$ (in units of \kms).
 The impact of redshift errors was studied in detail in 
-\cite{youlesEffectQuasarRedshift2022} and it is also described in 
+\cite{youlesEffectQuasarRedshift2022a} and it is also described in 
 section~\ref{forests:zerrors}.
 
-The effect of high-column density systems, if indentified and modelled 
+The effect of high-column density systems, if identified and modelled 
 when fitting the continuum, is negligible. For the HCDs that are 
 not identified, the extended absorption (called ``wings'') causes 
 $k_\parallel$-dependent broadening of the clustering 
@@ -478,10 +519,10 @@ also introduces spurious correlations between spectra.
 For instance, sky-subtraction and flux calibration are two processes 
 that induce correlation between two pixels at the same observed wavelength 
 but in two distinct lines-of-sight, provided they are observed with the 
-same spectrograph (set of 500 fibers). These correlations have been 
-studied using quasar spectral regions deprovided of \lya absorption,
+same spectrograph (set of 500 fibres). These correlations have been 
+studied using quasar spectral regions deprived of \lya absorption,
 such as the MgII spectral region ($\lambda_\mathrm{rf} \in [2600, 2760]$\angstrom).
-An empirical model for this effect is included: a Gaussian, function of $\rperp$, centered in $\rperp = 0$ 
+An empirical model for this effect is included: a Gaussian, function of $\rperp$, centred in $\rperp = 0$ 
 but only when $\rpara = 0$. 
 Due to the effect of distortion caused by continuum fitting, these spurious
 correlations due to data reduction also propagate to pairs with $\rpara \neq 0$.  
@@ -579,7 +620,7 @@ Extracted Figure 12 from \cite{dumasdesbourbouxhelionCompletedSDSSIVExtended2020
 
 This section concerns work led by Samantha Youles, PhD candidate under 
 my supervision at the University of Portsmouth between 2018 and 2022. 
-The full details are presented in \cite{youlesEffectQuasarRedshift2022}. 
+The full details are presented in \cite{youlesEffectQuasarRedshift2022a}. 
 
 A key element in the BAO analysis using forests is the quasar redshifts, 
 which can be challenging to measure precisely when compared to galaxy redshifts. 
@@ -601,7 +642,7 @@ In addition to statistical uncertainties in the determination of redshift,
 broad emission lines of quasars have intrinsic scatter and systematic shifts
 of the order of hundreds of \kms with respect to the host galaxy redshift. 
 Current redshift fitting algorithms based on templates do not account for these shifts. 
-While \cite{youlesEffectQuasarRedshift2022} studies the impact of scatter, 
+While \cite{youlesEffectQuasarRedshift2022a} studies the impact of scatter, 
 we did not study in detail the impact of systematic shifts. 
 
 
@@ -674,7 +715,7 @@ line-of-sight. Using other mock catalogues with increasing values of
 $\sigma_{v, z}$ (not shown here) makes these features stronger. 
 This work puts in evidence this effect for the first time. 
 
-In \cite{youlesEffectQuasarRedshift2022}, we claim that the oscillatory
+In \cite{youlesEffectQuasarRedshift2022a}, we claim that the oscillatory
 features appearing when adding redshift errors to quasars is due to 
 two main factors: the smoothing of emission lines in the continua and 
 the clustering of the quasars. These two factors \emph{combined} create this new 
@@ -699,8 +740,8 @@ on the clustering thanks to the fact that quasars themselves are clustered.
 %\end{wrapfigure}
 \end{figure}
 
-We tested our hyphotesis by creating two special sets of mock catalogues, one 
-where quasars are deprovided of forest absorption, and one where quasars are 
+We tested our hypothesis by creating two special sets of mock catalogues, one 
+where quasars are deprived of forest absorption, and one where quasars are 
 not clustered. With the first set of mocks, features are still present with the 
 same amplitudes as the standard mocks. 
 This points to the fact that the \lya forest and their correlations do not play 
@@ -725,7 +766,7 @@ in their uncertainties.
 
 We believe that for the final analysis of the 5-year DESI sample the impact 
 of redshift errors has to be correctly modelled in order to reduce the 
-uncertainites in BAO parameters or to extract cosmological information from  
+uncertainties in BAO parameters or to extract cosmological information from  
 the full-shape of the correlation function \cite{cuceuCosmologyBAO3D2021}.
 
 \section{Weak-lensing of forests}
@@ -750,7 +791,7 @@ with simplified simulations.
 \cite{croftWeakLensingLyman2018}, 
 \cite{metcalfNoiseEstimatesMeasurements2018}, and 
 \cite{metcalfReconstructingGravitationalLensing2020a} looked into a regular grid 
-of mock quasars with arcminute separations, populated with Gaussian random 
+of mock quasars with arc minute separations, populated with Gaussian random 
 forests. The close, regular spacing of the forests created a near-continuous field
 enabling the use of a quadratic estimator adapted from 21cm intensity mapping analyses
 \cite{pourtsidouWeakLensing212014, pourtsidouGravitationalLensingCosmological2015}.
@@ -761,7 +802,7 @@ sampling, noise, volumes and densities probed.
 
 Figure~\ref{fig:weak_lensing_forests} illustrates the impact of lensing 
 over a pair of \lya forests caused by an intervening overdensity. 
-The lens creates an image of the pair at a slighly larger angle with 
+The lens creates an image of the pair at a slightly larger angle with 
 respect to the observer, virtually increasing the transverse separation 
 $\rperp$ between the two forests to a larger value $r_\perp^L$. Of course, 
 the expected correlation function between two given pixels is unchanged 
@@ -866,7 +907,7 @@ as ``damping''. Both effects combined are shown as a purple line.
     \label{fig:forest_lensing_power_spectra}
 \end{figure}
 
-There is an excellent agreement, though noisy, betwen estimated cross-power spectra  
+There is an excellent agreement, though noisy, between estimated cross-power spectra  
 and their input values. Of course, the ``input'' map is not available in a real setting 
 so one should consider the noise of this second map (e.g. CMB lensing map) when producing
 realistic forecasts. 
