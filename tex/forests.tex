@@ -379,7 +379,7 @@ joint fits (see section~\ref{forests:bao:model}).
 There are two important effects to be taken into account when modelling 
 the \lya correlation functions: the distortion by the continuum fitting, discussed 
 in section~\ref{forests:bao:transmission}, and the contamination by metal 
-absorption. The most recent analyses use matrices to convolve a binned 
+absorption. Most recent analyses use matrices to convolve a binned 
 cosmological model and obtain the final template to be compared to 
 the measured binned correlations. We describe both corrections below. 
 
@@ -407,19 +407,21 @@ astronomy for elements heavier than helium.}
 absorption is mainly due to four transitions of silicon atoms for which their 
 rest-frame wavelength is close to the \lya transition. When computing the 
 auto-correlation of forests, metal absorption creates confusion because 
-it is interpreted as a distinct \lya absorber when in fact it is the same. 
+it is interpreted as a distinct \lya absorber when in fact it is the same
+absorber but at a different wavelength.
 For example, the \textsc{SiIII} absorption happens at 
 $\lambda_\mathrm{rest} = 1207~\angstrom$, close to \lya for which $\lambda_\mathrm{rest} = 1216~\angstrom$. 
 In comoving coordinates, assuming a standard fiducial cosmology, this corresponds
-to $\Delta \rpara \approx 21$\hmpc 
-at $z \sim 2.3$. At these radial separations and when $\rperp \sim 0$, we see a 
-spike in the correlation function. This peak is not due to \lya absorption 
+to $\Delta \rpara \approx 21$\hmpc at $z \sim 2.3$. 
+At these radial separations and when $\rperp \sim 0$, we see a 
+spike in the correlation function. 
+This peak is not due to \lya absorption 
 separated by 21\hmpc but it is the cross-correlation between \lya and \textsc{SiIII}
-absorption at near \emph{zero} separation. It is the same region in the 
-Universe absorbing both in \lya and in \textsc{SiIII}, though the latter 
-has a smaller amplitude. This happens for all metals with rest-frame 
-wavelengths close to \lya. For instance, one of the \textsc{SiII} transitions 
-creates a spike at 111\hmpc, right at the BAO peak. 
+absorption at near \emph{zero} separation. 
+It is the same region in the Universe absorbing both in \lya and in \textsc{SiIII}, 
+though the latter has a smaller amplitude. 
+This happens for all metals with rest-frame wavelengths close to \lya. 
+For instance, one of the \textsc{SiII} transitions creates a spike at 111\hmpc, right at the BAO peak location. 
 Since \cite{delubacBaryonAcousticOscillations2015}, I worked on carefully 
 adding metal absorption to mock forests in order to quantify their impact on 
 BAO constraints. In \cite{bautistaMeasurementBaryonAcoustic2017}, we introduced 
@@ -429,14 +431,14 @@ can be described as a matrix times the \lya-\lya correlation function.
 This matrix is referred to as the \emph{metal matrix}. The amplitude of 
 \lya-metal correlations is a free parameter in the BAO fits. 
 We found that marginalising over these amplitudes makes BAO constraints 
-slightly larger, though more conservative and robust.   
+slightly looser, though more conservative and robust.   
 
 \subsection{The model}
 \label{forests:bao:model}
 
 The model used to fit for the BAO scale on the measured correlation functions 
 is based on a linear matter power spectrum with some empirical terms 
-that account for redshift-space distortions, non-linear clustering, 
+that account for redshift-space distortions, non-linear small-scale clustering, 
 high column density systems and binning effects. The model is constructed in 
 Fourier space and it is Fourier transformed to obtain $\xi(\rperp, \rpara)$. 
 The latest version of the model is described in \cite{dumasdesbourbouxhelionCompletedSDSSIVExtended2020}
@@ -451,7 +453,7 @@ The model can be written, in Fourier space, as
 \end{equation}
 where $\vec{k}$ is the wavevector, with modulus $k$ and $\mu_k = k_\parallel/k$;
 $b_i$ and $\beta_i$ are the linear bias and redshift-space distortions parameters, respectively,
-and $i$ is a index referring to absorbers or quasars; 
+and $i$ is an index referring to absorbers or quasars; 
 $G_\mathrm{ bin}$ accounts for the binning of the correlation function, 
 $F_\mathrm{NL}$ is a empirical term that accounts for the non-linear effects on small scales, 
 and $ P_\mathrm{ QL}$ is the linear matter power spectrum with a empirical anisotropic 
@@ -516,14 +518,13 @@ is a fitted amplitude.
 
 The spectroscopic data reduction pipeline described in section~\ref{spectro:pipeline2d}
 also introduces spurious correlations between spectra. 
-For instance, sky-subtraction and flux calibration are two processes 
-that induce correlation between two pixels at the same observed wavelength 
-but in two distinct lines-of-sight, provided they are observed with the 
-same spectrograph (set of 500 fibres). These correlations have been 
-studied using quasar spectral regions deprived of \lya absorption,
+For instance, the sky-subtraction and flux calibration processes 
+correlate pixels at the same observed wavelength in two distinct lines-of-sight, 
+provided they are observed with the same spectrograph (set of 500 fibres). 
+These correlations have been studied using quasar spectral regions deprived of \lya absorption,
 such as the MgII spectral region ($\lambda_\mathrm{rf} \in [2600, 2760]$\angstrom).
-An empirical model for this effect is included: a Gaussian, function of $\rperp$, centred in $\rperp = 0$ 
-but only when $\rpara = 0$. 
+An empirical model for this effect is included: 
+a Gaussian, function of $\rperp$, centred in $\rperp = 0$ but only when $\rpara = 0$. 
 Due to the effect of distortion caused by continuum fitting, these spurious
 correlations due to data reduction also propagate to pairs with $\rpara \neq 0$.  
 The amplitude and characteristic length of this effect are two free parameters
@@ -542,7 +543,7 @@ in order to account for any unexplained correlations and improve the fit
 to the data. These functions are used to marginalise over any potential 
 information on BAO coming from the full-shape of the correlation functions, 
 which is avoided. This is commonly done in galaxy clustering analysis 
-as I will show in Chapter~\ref{chap:galaxies}.
+as I will present in chapter~\ref{chap:galaxies}.
 
 
 \subsection{BAO constraints}
@@ -622,8 +623,8 @@ This section concerns work led by Samantha Youles, PhD candidate under
 my supervision at the University of Portsmouth between 2018 and 2022. 
 The full details are presented in \cite{youlesEffectQuasarRedshift2022a}. 
 
-A key element in the BAO analysis using forests is the quasar redshifts, 
-which can be challenging to measure precisely when compared to galaxy redshifts. 
+Quasar redshifts are a key ingredient in the BAO analysis using forests. 
+Quasar redshifts can be challenging to measure precisely when compared to galaxy redshifts. 
 Quasar spectra are basically composed of thermal continuous emission 
 from their accretion disk around their supermassive
 black holes in the centre of their host galaxies plus some broad emission lines. 
@@ -638,24 +639,24 @@ depend on the spectrograph and on which broad emission lines are visible
 for a given quasar. 
 
 In addition to statistical uncertainties in the determination of redshift, 
-\cite{shenSloanDigitalSky2016} has shown that redshifts derived from 
+\cite{shenSloanDigitalSky2016} have shown that redshifts derived from 
 broad emission lines of quasars have intrinsic scatter and systematic shifts
 of the order of hundreds of \kms with respect to the host galaxy redshift. 
 Current redshift fitting algorithms based on templates do not account for these shifts. 
 While \cite{youlesEffectQuasarRedshift2022a} studies the impact of scatter, 
-we did not study in detail the impact of systematic shifts. 
+we left the study of systematic shifts to future work. 
 
 
 The uncertainties in the redshift measurements smear the two-point statistics 
-of the quasars over separations along the line-of-sight. The smearing directly 
+of the quasars  along the line-of-sight. The smearing directly 
 impacts the BAO measurement, particularly reducing the signal-to-noise ratio 
 of estimates of $\apara$ (see section~\ref{forests:bao:model}). 
 
 Non-linearities induce large peculiar velocities on scales below a few Mpc
-and are commonly modelled as a random scatter in the radial direction.
+and also introduce random scatter in the radial direction.
 These non-linearities are known as \emph{fingers-of-God} (FoG) and they smear
 the two-point statistics in a similar manner than redshift errors, though 
-I will show the differences. 
+with some differences. 
 
 In this section, these two types of extra scatter in quasar redshifts are parametrised by
 \begin{itemize}
@@ -713,20 +714,20 @@ However, redshift errors do create a new oscillatory feature both in the auto
 and cross-correlations at separations of 20-50\hmpc but only those along the 
 line-of-sight. Using other mock catalogues with increasing values of 
 $\sigma_{v, z}$ (not shown here) makes these features stronger. 
-This work puts in evidence this effect for the first time. 
+It is the first time this effect is put into evidence. 
 
 In \cite{youlesEffectQuasarRedshift2022a}, we claim that the oscillatory
 features appearing when adding redshift errors to quasars is due to 
 two main factors: the smoothing of emission lines in the continua and 
-the clustering of the quasars. These two factors \emph{combined} create this new 
-effect. The smoothing of the mean continuum is illustrated in Figure~\ref{fig:zerrors_continua}
-for increasingly large values of $\sigma_{v, z}$. These oscillatory features 
-defined by the difference between true and estimated continua are imprinted 
+the auto correlation function of  quasars. 
+These two factors \emph{combined} create this new effect, but not individually. 
+The smoothing of the mean continuum is illustrated in Figure~\ref{fig:zerrors_continua}
+for increasingly large values of $\sigma_{v, z}$. 
+These oscillatory features defined by the difference between true and estimated continua are imprinted 
 on the clustering thanks to the fact that quasars themselves are clustered. 
 
 
 \begin{figure}
-%\begin{wrapfigure}{r}{5.5cm}
     \centering 
     \includegraphics[width=0.5\textwidth]{fig/forests/zerros_impact_continua.png}
     \caption{Effect of redshift errors on the mean continuum. 
@@ -737,7 +738,6 @@ on the clustering thanks to the fact that quasars themselves are clustered.
     The top axis on the top panel shows the radial separations between pixels and the quasar, 
     assuming that the quasar is at redshift $z_q = 2.3$.}
     \label{fig:zerrors_continua}
-%\end{wrapfigure}
 \end{figure}
 
 We tested our hypothesis by creating two special sets of mock catalogues, one 
@@ -747,24 +747,25 @@ same amplitudes as the standard mocks.
 This points to the fact that the \lya forest and their correlations do not play 
 a role in this effect. 
 For the second set of mocks, the features disappear in the correlation functions, 
-demonstrating that the quasar clustering is a key ingredient to explain the effect. 
+demonstrating that quasar clustering is a key ingredient in explaining the effect. 
 
 While this model is satisfactory to explain the features in the cross-correlation, 
 the auto-correlation seems to require an additional ingredient that we could not 
 identify. We leave this investigation for future work. 
 
 We performed BAO fits on all sets of mocks for different values of 
-$\sigma_{v, z}$ and $\sigma_\mathrm{v, FoG}$. We employ the exact same model 
-described in section~\ref{forests:bao:model}, though we did not include 
-metals or high-column density systems. We do not attempt to model 
-the effect of redshift errors when fitting for BAO. 
+$\sigma_{v, z}$ and $\sigma_\mathrm{v, FoG}$. 
+We employ the exact same model described in section~\ref{forests:bao:model}, 
+though we did not include metals or high-column density systems. 
+We do not attempt to model the effect of redshift errors when fitting for BAO,
+emulating previous analyses.  
 We see an increased value for the $\chi^2$ of the fits when increasing 
-the value of $\sigma_{v, z}$, simply because these features are not modelled
-properly. The inferred BAO parameters $\apara$ and $\aperp$ do not see 
+the value of $\sigma_{v, z}$, simply because these features are not accounted for in the model. 
+The inferred BAO parameters $\apara$ and $\aperp$ do not see 
 significant shifts or trends versus $\sigma_{v, z}$ other than a slight increase 
-in their uncertainties. 
+in their uncertainties, which is reassuring.  
 
-We believe that for the final analysis of the 5-year DESI sample the impact 
+We believe that, for the final analysis of the 5-year DESI sample, the impact 
 of redshift errors has to be correctly modelled in order to reduce the 
 uncertainties in BAO parameters or to extract cosmological information from  
 the full-shape of the correlation function \cite{cuceuCosmologyBAO3D2021}.
@@ -837,8 +838,8 @@ would be an opposite dilation in the transverse direction.
     \label{fig:weak_lensing_forests}
 \end{figure}
 
-I describe how we attempt to reconstruct the lensing signal 
-from a simpler estimator. 
+I describe now how we reconstruct the lensing signal with a new simplified estimator.
+which will be described in Youles et al. (in prep). 
 One should first note that when averaging correlations over all available pairs in a survey, 
 the lensing effect from over and underdense lenses averages to a negligible net impact 
 on the correlation function, though it increases its noise.
@@ -866,9 +867,9 @@ Since our convergence maps are quite noisy, computing the auto
 power spectra of these maps, e.g. $\langle \hat{\kappa} \hat{\kappa} \rangle_\ell$, 
 is not convenient since these would also be dominated by noise. 
 Instead, we use high signal-to-noise ratio convergence maps to compute cross 
-angular power spectra. In real cases, one can use a lensing convergence or potential 
-maps derived from the cosmic microwave background or one can construct a 
-density map of foreground sources from galaxy surveys. 
+angular power spectra. In a real setting, one can use a lensing convergence or potential 
+maps derived from the cosmic microwave background or one could construct a 
+convergence map by integrating the density of foreground sources using galaxy survey data. 
 
 We tested our methodology using simulations. 
 We used the 5-year DESI mock catalogues of \lya forests also used in the study of redshift
@@ -887,7 +888,7 @@ There are two effects to be taken into account when comparing to theory.
 First, the survey mask changes the amplitude of the power spectra by a factor equal 
 to the fraction of sky covered (to first order). The resulting power is shown as a blue line. 
 Second, the power spectra depend on the choice of maximum transverse separation $r_\perp^\mathrm{max}$ 
-between quasars used to build the convergence maps. 
+used when computing two-point functions used in our convergence estimates. 
 We refer to this non-trivial function of $\ell$ describing 
 the variation of power with $r_\perp^\mathrm{max}$
 as ``damping''. Both effects combined are shown as a purple line.
@@ -910,18 +911,12 @@ as ``damping''. Both effects combined are shown as a purple line.
 There is an excellent agreement, though noisy, between estimated cross-power spectra  
 and their input values. Of course, the ``input'' map is not available in a real setting 
 so one should consider the noise of this second map (e.g. CMB lensing map) when producing
-realistic forecasts. 
+realistic forecasts. We plan to compute realistic estimates on the expected signal-to-noise ratio 
+of these cross power spectra for a DESI like survey of forests. 
 
 The results presented in this section are still under development and have not yet  
 been published. We refer the reader to S. Youles thesis for more details on methods 
 and tests. 
 
-
-
-
-\section{Voids in tomographic maps}
-\label{forests:voids}
-
-\cite{ravouxFirstMeasurementCorrelation2022}
 
 

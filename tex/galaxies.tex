@@ -13,7 +13,7 @@ probes of dark energy and theories of gravity.
 In this chapter, I overview my contributions for the study of dark energy 
 with galaxy clustering. Section~\ref{galaxies:catalogue} describes how to 
 create a galaxy clustering catalogue from the spectroscopic observations, 
-including crrections for all known systematic effects caused by photometry 
+including corrections for all known systematic effects caused by photometry 
 or spectroscopy.
 Section~\ref{galaxies:reconstruction} describes reconstruction techniques
 used to increase the precision of BAO measurements. 
@@ -40,45 +40,44 @@ dumerchatBaryonAcousticOscillations2022a}.
 \label{galaxies:catalogue}
 
 An essential step in the cosmological analysis of galaxy survey data is 
-to convert convert a list of galaxy redshifts (see Chapter~\ref{chap:spectro}) 
+to convert convert a list of galaxy redshifts (see chapter~\ref{chap:spectro}) 
 into a catalogue from which we can define overdensities 
 $\delta_n(\vec{x}) = n(\vec{x})/\bar{n} - 1$, where $n(\vec{x})$ is the 
-number density 
-of galaxies in a volume element located at position $\vec{x}$. 
+number density of galaxies in a volume element located at position $\vec{x}$. 
 The quantity $\bar{n}$ is the average galaxy number density over the probed 
 \emph{volume}. Therefore, it is important to 1) define precisely what is the 
-volume observed, or in jargon terms, the survey window function; and 
-2) to make sure that the number density of galaxies is tracing the actual 
-cosmological fluctuations and not any spurious contamination. 
+volume observed, which is described by the survey window function; and 
+2) to ensure that the number density of galaxies is tracing the actual 
+cosmological fluctuations and is not contaminated by other types of fluctuations.  
 
-The simplest form of survey window function would be a 
-function of position $\vec{x}$ that yields 1 if $\vec{x}$ is inside the survey volume 
-and 0 else. 
-One convenient way to define this function is using a large set of randomly 
-and uniformly distributed positions emcompassing the survey volume. 
-Each random postion would have a weight of either 1 or 0, 
-depeding if it is located inside or outside the observed volume. 
-This list of positions and their weights is referred to as the \emph{random catalogue} or the \emph{randoms}.  
+The simplest form of survey window function would be a function of position $\vec{x}$ 
+that yields 1 if $\vec{x}$ is inside the survey volume and 0 else. 
+One convenient way to define this function is to use a large set of randomly 
+and uniformly distributed positions encompassing the survey volume. 
+Each random position would have a weight of either 1 or 0, 
+depending if it is located inside or outside the observed volume. 
+This list of positions and their weights is referred to as the 
+\emph{random catalogue} or simply as the \emph{randoms}.  
 Typically, randoms are sampled at some arbitrary higher number density than the 
 galaxy average number density (typically between 20 or 50 times higher), 
 to reduce the noise in the description of the window function. 
 As we will see next, the random catalogue is slightly more complex: 
-the weights are used to account for observational completeness and systematic effects. 
-In SDSS analyses, the random catalogue is a product of an angular and a radial selection function.
+weights are not simply ones or zeros because they account for observational completeness and systematic effects. 
+In SDSS analyses, the random catalogue is can be decomposed into a product of an angular and a radial selection function.
 
 I describe now the procedure to define the angular footprint. 
 The starting footprint is the one used in the process of target selection 
 (section~\ref{spectro:target}).
 Figure~\ref{fig:eboss_footprint} displays the eBOSS footprint for three tracers 
 (LRGs, ELGs and QSOs) compared to the BOSS footprint and the stellar density map from Gaia. 
-Regions with bad photometric or around 
+Regions with bad photometry or around 
 bright stars are masked out by removing randoms belonging to these regions
-(or assigning them a null weight). 
-After tiling, fibre assignement and spectroscopic observations, the footprint 
-can be divided into an unique set of sectors. Each sector corresponds to regions
-observed by one or more plates. The \emph{fibre completeness} of each sector is 
-defined as the ratio between the number of spectroscopically observed targets and 
-the number of available targets in the sector. 
+(or equivalently, by assigning them a null weight). 
+After tiling, fibre assignment and spectroscopic observations, the footprint 
+can be divided into an unique set of sectors. Each sector corresponds to a connected region
+observed by a single or several plates. 
+The \emph{fibre completeness} of each sector is defined as the ratio between 
+the number of spectroscopically observed targets to the number of available targets in the sector. 
 Randoms are sub-sampled or de-weighted following the fibre completeness to correct for its effect. 
 
 \begin{figure}
@@ -92,11 +91,12 @@ Randoms are sub-sampled or de-weighted following the fibre completeness to corre
 \end{figure}
 
 Some targets cannot be observed due to 
-its proximity to another observed target and the finite size of fibres, corresponding 
-to 62 arcseconds in the sky. We refer to these events as \emph{fibre collisions}. 
+its proximity to another observed target and the physical size of fibres, 
+corresponding to 62 arcseconds in the sky. 
+We refer to these events as \emph{fibre collisions}. 
 Collisions might happen not only to pairs of galaxies, but to any group of targets with 
 linking lengths smaller than 62 arcsec. Depending on the number of plates observing 
-a giving sector, some collisions might be solved but the missing ones  
+a giving sector, some collisions might be solved. The missing ones  
 impact the measured clustering on small scales if not corrected. 
 While there are several methods to solve collisions 
 (\cite{guoNewMethodCorrect2012, bianchiUnbiasedClusteringEstimation2017}),
@@ -119,8 +119,7 @@ Figure~\ref{fig:photo_systematics_lrg} displays these correlations
 for the LRG sample both before and after applying correction weights. 
 For the analysis of eBOSS DR16 LRGs, I have 
 implemented\footnote{\url{https://github.com/julianbautista/eboss_clustering/blob/master/python/systematic_fitter.py}} 
-a multi-dimension 
-linear regression that assumes these correlations are linear and 
+a multi-dimension linear regression that assumes these correlations are linear and 
 accounts for the fact that some photometric quantities are correlated between themselves 
 (e.g., stellar density and Galactic extinction).
 This multi-linear method is based on work described in \cite{prakashSDSSIVExtendedBaryon2016}.
@@ -134,6 +133,10 @@ There is a risk of overfitting and removing some large-scale cosmological modes 
 can be harmful for clustering analysis, particularly those aiming at measuring 
 primordial non-Gaussianity 
 (\cite{rezaiePrimordialNonGaussianityCompleted2021, muellerClusteringGalaxiesCompleted2021}).
+Vincenzo Aronica is currently working with this issue on DESI mock catalogues, 
+with a particular focus on the low-redshift BGS sample. 
+
+
 
 \begin{figure}
     \centering 
@@ -152,7 +155,7 @@ which are spectra with low signal-to-noise ratio (S/N)
 not yielding a statistically significant redshift measurement. 
 If redshift failures were randomly distributed across the sky, 
 they would not introduce any particular bias to the clustering. 
-However, given the particular configuration and throughput of the SDSS spectrographs, 
+However, given the particular configuration and throughput of the SDSS fibres and spectrographs, 
 these failures imprint a pattern in the sky which contaminates clustering. 
 The left panel of Figure~\ref{fig:eboss_zfailures} displays the average failure rate 
 of eBOSS LRGs as a function of position in the focal plane. 
@@ -185,13 +188,14 @@ non-confident ones at the same location in the focal plane.
     \label{fig:eboss_zfailures}
 \end{figure}
 
-Once all galaxies have their correction weights (fibre collision, photometric and 
-redshift-failure) and the randoms are corrected by fibre completeness, 
+Once all galaxies have their correction weights 
+(fibre collision, photometric and redshift-failure) 
+and the randoms are corrected by fibre completeness, 
 it is time to compute the radial selection function. 
 The idea is to assign redshifts to randoms 
 such that they follow the same redshift distribution as the galaxies. 
-The redshift distribution is often quantified by the comoving galaxy (weighted)
-number density $\bar{n}(z)$. 
+The redshift distribution is often quantified by the weighted
+number density $\bar{n}(z)$ of galaxies. 
 Figure~\ref{fig:eboss_z_distrib} shows the comoving density of eBOSS tracers 
 as a function of redshift. 
 For randoms to match this distribution, we randomly assign galaxy 
@@ -203,7 +207,7 @@ not the true ensemble averaged function of the Universe, but derived from the
 volume-limited realisation that we observe. 
 The impact on clustering of the radial integral constraint is 
 inversely proportional to the area of the footprint
-(\cite{demattiaIntegralConstraintsSpectroscopic2019}) and it is significant 
+(\cite{demattiaIntegralConstraintsSpectroscopic2019}) and it is a significant systematic effect 
 for surveys such as the eBOSS ELG (see Figure~\ref{fig:eboss_footprint} and 
 \cite{tamoneCompletedSDSSIVExtended2020, demattiaCompletedSDSSIVExtended2021}). 
 
@@ -222,7 +226,7 @@ for surveys such as the eBOSS ELG (see Figure~\ref{fig:eboss_footprint} and
     \label{fig:eboss_z_distrib}
 \end{figure}
 
-The final step of the catalogue production consists in adding an additional set of weights 
+The final step of the catalogue production consists in adding an extra set of weights 
 to galaxies that optimise the signal-to-noise ratio of clustering measurements 
 when the redshift distribution is not uniform. These weights were first introduced 
 by \cite{feldmanPowerSpectrumAnalysisThreedimensional1994} and have been applied 
@@ -231,7 +235,7 @@ to all clustering analysis ever since. They are commonly referred to as
 \begin{equation}
     w_\text{i, FKP} = \frac{1}{1 + \bar{n}(z_i)P_0}
 \end{equation}
-where $P_0$ is a rough value of the power spectrum of the tracers at some 
+where $P_0$ is a rough value for the power spectrum of the tracers at some 
 particular scale of choice, usually BAO scales for large-scale clustering measurements.
 For eBOSS analyses, we chose a scale of $k \sim 0.1 h\, \text{Mpc}^{-1}$ for which 
 $P_0 = 10000 h^{-3}\text{Mpc}^{3}$ for LRGs, 
@@ -243,7 +247,7 @@ of the galaxy survey.
 Each random has a weight $w_r = w_\text{comp} w_\text{FKP}$, where $w_\text{comp}$ accounts
 the spectroscopic completeness of targets and $w_\text{FKP}$ are optimal weights for clustering. 
 Each galaxy has a weight given by $w_g = w_\text{col} w_\text{photo} w_\text{fail} w_\text{FKP}$,
-where $w_\text{col}$ accouns for fibre collisions, $w_\text{photo}$ corrects fluctuations caused 
+where $w_\text{col}$ accounts for fibre collisions, $w_\text{photo}$ corrects fluctuations caused 
 by photometry and $w_\text{fail}$ corrects redshift failures. 
 These weights are employed when computing correlation functions 
 or power spectra (see~\ref{galaxies:clustering}).
@@ -254,24 +258,25 @@ or power spectra (see~\ref{galaxies:clustering}).
 Bulk motions of galaxies on scales of tens of Mpc impact their two-point statistics, 
 acting as a smoothing of the clustering (\cite{eisensteinRobustnessAcousticScale2007}).  
 In particular, these motions smooth/broaden the BAO peak, 
-reducing the precision on our measurement of its position. 
+reducing the precision in our measurement of its position. 
 In the past decades, several methods have been proposed to reconstruct
 the linear density field and remove these bulk motions from a galaxy survey,
 therefore sharpening the BAO peak.
 These methods are referred to as \emph{reconstruction} methods. 
 Reconstruction is now an essential part of standard BAO measurements from galaxy surveys,
-since they improve significantly their precision. 
+since they significantly improve their precision. 
 
 The simplest form of reconstruction is based on a theoretical relationship between 
-the galaxy density field on large scales (our observable) and the displacement field connecting 
-the observed field (Eulerian frame) to its past version (Lagrangian frame). 
+the galaxy density field on large scales (our observable) 
+and the displacement field connecting the observed field (Eulerian frame) 
+to its past version (Lagrangian frame). 
 Lagrangian perturbation theory (LPT) can predict these displacements 
 (see \cite{bernardeauLargeScaleStructureUniverse2002} for a review). 
 To first order, the relation between displacements and density is linear 
-(\cite{zeldovichGravitationalInstabilityApproximate1970}). From the observed 
-density field in our survey, we can compute the corresponding linear displacements
-and move galaxies back. Since we want to ``move'' the density field, we also move randoms 
-by the same displacements. 
+(\cite{zeldovichGravitationalInstabilityApproximate1970}). 
+From the observed density field in our survey, we can compute the corresponding linear displacements
+and move galaxies back. 
+Since we want to ``move'' the density field, we also move randoms by the same displacements. 
 This procedure successfully removes most of the broadening of the BAO peak
 (\cite{nusserTracingLargeScaleFluctuations1992, eisensteinImprovingCosmologicalDistance2007}).
 The first order LPT reconstruction is often called \emph{Zeldovich reconstruction}. 
@@ -288,7 +293,8 @@ in configuration space using finite difference approximations (\cite{padmanabhan
 though these are slower and less precise than iterative FFTs. 
 
 Since we do not observe the actual density of matter, a bias relation between galaxy number density 
-and matter density has to be assumed in reconstruction. Usually we assume a linear bias relation, where the 
+and matter density has to be assumed in reconstruction. 
+Usually we assume a linear bias relation, where the 
 bias value is estimated from the clustering of the standard galaxy catalogue. 
 This is a reasonable approximation 
 since reconstruction uses fluctuations on scales larger than $\sim 15$\hmpc. 
@@ -304,8 +310,14 @@ First proposed by \cite{peeblesTracingGalaxyOrbits1989}, it was extended to cosm
 by \cite{nusserLeastActionPrinciple2000, sarpaBAOReconstructionSwift2019}. 
 \cite{sarpaExtendedFastAction2021} applied it for the BAO measurement of the BOSS DR12 galaxy sample. 
 
-Reconstruction is essential to improve the precision on BAO measurements. However, 
-due to imperfections in recovering the true initial conditions, 
+Elena Sarpa, postdoctoral researcher in my group at CPPM, is currently leading reconstruction efforts
+in the context of the Euclid Collaboration. Also, she is working on the impact of neglecting massive 
+neutrinos in Zeldovich reconstruction, both at the level of BAO constraints and at the theoretical 
+level. Results from this study could help improving reconstruction in the presence of massive neutrinos 
+and improve mock production methods based on Zeldovich LPT. 
+
+Reconstruction is essential to improve the precision on BAO measurements. 
+However, due to imperfections in recovering the true initial conditions, 
 reconstruction has not yet been used in attempts to derive cosmological 
 constraints from the full-shape of the reconstructed two-point statistics.
 Therefore, analysis of redshift-space distortions are based on the non reconstructed 
@@ -318,8 +330,8 @@ An important limitation in cosmology is that we only have a single realisation o
 Therefore simulations are an essential tool to overcome this limitation. 
 
 We can recognise two types of simulations mainly used in cosmology. First, 
-n-body simulations (eventually including gas) solve numerically for the formation of structures
-and are computationally expensive. They focus on the fully non-linear aspects and require a 
+n-body simulations solve numerically for the formation of structures from a set of initial conditions, but these
+are computationally expensive. They focus on the fully non-linear aspects and require a 
 higher resolution setting, preventing them to simulate very large volumes or producing numerous 
 realisations. N-body simulations are still the baseline for tests of perturbation theory models.
 See \cite{anguloLargescaleDarkMatter2022} for a review on cosmological n-body simulations.  
@@ -344,18 +356,19 @@ the density field in longer time steps (\cite{chuangEZmocksExtendingZel2015}).
 By construction, these mocks match the large-scale clustering 
 of the target data sample, including 2 and 3-point statistics. 
 They have some extra free parameters to simulate a biased galaxy sample and non-linear motions on small-scales.  
-The eBOSS \textsc{EZmocks} also include light-cone effects produced by interpolating boxes
+The eBOSS \textsc{EZmocks} also include light-cone effects produced by interpolating snapshots
 at different redshifts. 
 
 The last step in the production of \textsc{EZmocks} was the addition of systematic effects. 
 I was responsible of implementing all known observational effects from the data onto the mocks. 
 A simple script\footnote{\url{https://github.com/julianbautista/eboss_clustering/blob/master/bin/ezmocks_add_systematics.py}}
-gathers the information from the real catalogues and simulates fibre collisions, spurious 
-fluctuations caused by photometry and spectroscopy. 
+gathers the information from the real catalogues and simulates them. 
+This process adds fibre collisions, spurious 
+fluctuations caused by photometry and spectroscopy to mocks. 
 These contaminated mocks are then corrected using the same algorithms as for the real data, 
 as described in section~\ref{galaxies:catalogue}. The clustering before and after adding 
 those effects is extensively compared to real data (\cite{zhaoCompletedSDSSIVExtended2021}) 
-and the agreement is found to be excellent on the scales of interest for BAO and RSD measurements. 
+and the agreement is found to be good on the scales of interest for BAO and RSD measurements. 
 
 
 
@@ -395,11 +408,11 @@ More recently, new ways to account for fibre collisions
 or incompleteness have been proposed 
 (\cite{bianchiUnbiasedClusteringEstimation2017, percivalUsingAngularPair2017}) where each pair 
 of galaxies would have a weight $w_{ij} \neq w_i w_j$, i.e., not a product of individual weights. 
-This makes the calculation slighly slower since these weights have to be defined for each pair. 
+This makes the calculation slightly slower since these weights have to be defined for each pair. 
 These new estimators were first used with the eBOSS tracers
 (\cite{mohammadCompletedSDSSIVExtended2020}) and are currently being employed within DESI. 
 
-The estimator in Eq.~\ref{eq:landy-szalay} changes slightly when dealing with catalogues 
+The estimator in Eq.~\ref{eq:landy-szalay} changes when dealing with catalogues 
 resulting from reconstruction algorithms,
 where both galaxies and randoms are shifted in order to reduce the impact of bulk motions 
 (see section~\ref{galaxies:reconstruction}). 
@@ -414,7 +427,7 @@ for a detailed derivation of this estimator.
 
 Most analyses of the two-point correlation function do not use the full $\xi(\vec{r}_i)$,
 where $\vec{r}_i$ are bins in 2D separations such as bins in $(\rpara, \rperp)$ or $(r, \mu_r)$.
-Most analysis further compress the estimated correlation function into a new basis with fewer 
+Most analyses further compress the estimated correlation function into a new basis with fewer 
 degrees of freedom. Some analyses uses the correlation function 
 \emph{wedges} $\xi_{\mu_{r1}, \mu_{r}}(r)$, which are 
 averages of $\xi$ over $\mu_{r1} < \mu < \mu_{r2}$, as already discussed in section~\ref{forests:bao:correlations}. 
@@ -445,9 +458,10 @@ defining an ``overdensity'' function $F(\vec{x}_i)$ as
     F(\vec{x}_i) =  n(\vec{x}_i) - \alpha n_\text{rand}(\vec{x}_i),
     \label{eq:overdensity_fourier}
 \end{equation}
-where $n_\text{rand}$ are the \emph{weighted} number density of galaxies and randoms in voxel centered at $\vec{x}_i$, 
-$\alpha$ is the ratio of the total weighted number of galaxies to the total weighted number of randoms. 
-The field $F(\vec{x})$ is also kwown as the FKP field. 
+where  $n$ and $n_\text{rand}$ are the \emph{weighted} number density of galaxies and randoms 
+in a voxel centreed on $\vec{x}_i$, $\alpha$ is the ratio of the total weighted number of galaxies 
+to the total weighted number of randoms. 
+The field $F(\vec{x})$ is also known as the FKP field. 
 
 The field $F(\vec{x})$ can be Fourier transformed numerically using Fast Fourier Transform (FFT) 
 algorithms. The power spectrum would be defined as the absolute value squared of this field. 
@@ -458,7 +472,7 @@ They can be expressed as:
  P_\ell(k) = \frac{1}{I_{22}} \left[ (2\ell+1) \left\langle F_0(\vec{k})F_\ell(-\vec{k}) \right\rangle_{V_k} - (1+\alpha)I_{12} \delta_{0\ell} \right]
  \label{eq:power_spectrum_multipoles}
 \end{equation}
-where the brakets $\langle \cdot \rangle$ indicate average over spherical shells in k-space with radius $|\vec{k}|$, 
+where the brackets $\langle \cdot \rangle$ indicate average over spherical shells in k-space with radius $|\vec{k}|$, 
 $F_\ell(\vec{k})$ are the overdensity multipoles in k-space given by 
 \begin{equation}
     F_\ell(\vec{k}) = \int \text{d}^3x F(\vec{x}) \text{e}^{i \vec{k}\cdot \vec{r}} L_\ell( \hat{k} \cdot \hat{x}), 
@@ -475,18 +489,18 @@ and only affects the power spectrum monopole.
 
 Since we use Fourier transforms which rely on periodic boundary conditions, the mesh used to compute $F(\vec{x})$
 has to be large enough to encompass the survey volume with some padding around it. 
-Also, because of the assumption of periodicity, the estimated power spectra will be convolved by the window/selection function of the survey.
+Also, the estimated power spectra will be convolved by the window/selection function of the survey.
 This window has to be correctly computed using the randoms and 
 it is a key ingredient to be accounted for when modelling the clustering. 
 
 Since we use numerical FFTs, the resolution of the mesh defines the scales being probed. 
 If the mesh has a total comoving size of $L$ on a side and has $N$ voxels on a side, 
 the fundamental mode is given by $k_F = \pi/L$ while the highest (or Nyquist) frequency is $k_\text{Ny} = \pi N/L$. 
-Typically meshes with 512 or 1024 voxels on a side are sufficient to cover the scales of interest 
+Typically, meshes with 512 or 1024 voxels on a side are sufficient to cover the scales of interest 
 for BAO or RSD analyses in current survey volumes, $0.01 < k < 0.30 (\text{Mpc}/h)^{-1}$. 
 
 The estimated power spectra are also affected by the discreteness nature of the mesh on scales close 
-the Nyquist frequency. The assignement of galaxies to the mesh can be optimised to reduce those effects. 
+the Nyquist frequency. The assignment of galaxies to the mesh can be optimised to reduce those effects. 
 Also, interlacing techniques can also further reduce mesh effects. 
 These effects and proposed solutions are described in detail in \cite{sefusattiAccurateEstimatorsCorrelation2016}
 and are implemented in the package \textsc{nbodykit}\footnote{\url{https://nbodykit.readthedocs.io/}}
@@ -507,7 +521,7 @@ Figure~\ref{fig:LRG_data_ezmock_correlations_postrec} displays results from reco
     \caption{Pre-reconstruction multipoles of the two-point statistics for the combination of BOSS DR12 and 
     eBOSS DR16 luminous red galaxies. Left panels contain the power spectrum multipoles (scaled by $k$) 
     and right panels the correlation function multipoles (scaled by $r^2$). 
-    Points with errorbars are real data while shaded regions show the mean and standard deviation 
+    Points with error bars are real data while shaded regions show the mean and standard deviation 
     of 1000 realisations of \textsc{EZmocks}. 
     }
     \label{fig:LRG_data_ezmock_correlations_prerec}
@@ -525,10 +539,12 @@ Figure~\ref{fig:LRG_data_ezmock_correlations_postrec} displays results from reco
 \end{figure}
 
 The uncertainties on our measurements of $P_\ell$ and $\xi_\ell$ were derived by measuring the 
-same statistics on the full sample of 1000 realisations of \textsc{EZmocks}. By reproducing with 
+same statistics on the full sample of 1000 realisations of \textsc{EZmocks}.
+Mock based covariance are computationally expensive but they account for all sources of uncertainty: 
+cosmic variance, shot-noise, and systematic effects.  By reproducing with 
 high fidelity the observational features and systematic effects, the covariance matrix obtained 
-with mocks should account for the extra scatter induced by them. However on small scales the 
-clustering of the mocks is not accurate compared to real data or to more realistic n-body simulations. 
+with mocks should account for the scatter induced by them. However on small scales the 
+clustering of the mocks is not accurate compared to real data or n-body simulations. 
 Figure~\ref{fig:covariance_ezmock} shows the resulting covariance matrices normalised by the 
 diagonal elements (correlation coefficients). We see how power spectra multipoles are generally 
 less correlated than correlation function multipoles. Reconstruction also helps reducing these 
@@ -545,6 +561,7 @@ two spaces are highly correlated since they originate from the same sample of ga
     from \textsc{EZmocks} reproducing the combined BOSS DR12 and eBOSS DR16 LRG sample.
     Left panel shows results from the standard catalogues while the right panel 
     shows the results from Zeldovich reconstructed catalogues. 
+    Figure extracted from \cite{dumerchatBaryonAcousticOscillations2022a}.
     }
     \label{fig:covariance_ezmock}
 \end{figure}
@@ -561,7 +578,8 @@ in the correlation function multipoles
 In this section I describe how we measure the BAO scale, which 
 is used as a standard ruler in the study of the expansion of the Universe. 
 The work is detailed further in 
-\cite{bautistaCompletedSDSSIVExtended2021,
+\cite{bautistaSDSSIVExtendedBaryon2018,
+bautistaCompletedSDSSIVExtended2021,
 gil-marinCompletedSDSSIVExtended2020}.
 
 The model used to fit BAO is based on the linear matter power spectrum with a simplified
@@ -591,7 +609,7 @@ and also an additional set of 84 \textsc{Nseries} n-body simulations
 (section~\ref{galaxies:mocks}). 
 In principle, BAO is a feature on large enough scales 
 such that testing the method on approximate mocks is sufficient, 
-although we also looked at results on more realistic n-body simulaltions. 
+although we also looked at results on more realistic n-body simulations. 
 In order to understand potential biases in best-fit BAO parameters, 
 we fit for BAO on the average clustering of all available realisations 
 for \textsc{EZmocks} and \textsc{Nseries} mocks,
@@ -629,7 +647,7 @@ $\Omega_m^\text{fid}$, which is reassuring.
     \label{fig:bao_bias_mocks}
 \end{figure}
 
-Another important test of our methodology consists in checking uncertainity estimation. 
+Another important test of our methodology consists in checking our uncertainty estimation. 
 With the sample of 1000 BAO measurements from mocks, we can study them statistically. 
 Our uncertainties are derived by scanning the likelihood profile and finding the intervals
 where the parameters $\aperp$ and $\apara$ increase the $\chi^2$ by 
@@ -637,7 +655,7 @@ unity\footnote{In the case marginalised errors in one parameter. For two paramet
 the 68 and 95\% confidence intervals are defined by $\Delta \chi^2 = 2.3, \ 5.9$ respectively.} 
 relative to its minimum. 
 First, we compare the standard deviation of all best-fit values to the average uncertainty
-found in all 1000 mocks. If uncertainties are correctly estimated then these two numbers 
+found in all 1000 mocks. If uncertainties are correctly estimated, then these two numbers should 
 match. Second, we could look at the pull distribution of each parameter $x_i$, defined as 
 $Z_i \equiv (x_i - \bar{x}_i)/\sigma_{x_i}$. If the uncertainties are well behaved and Gaussian, 
 then we should obtain $\bar{Z_i}=0$ and $\text{Var}(Z_i) = 1$. 
@@ -683,24 +701,28 @@ The analysis of redshift-space distortions (RSD) aims to measure the growth-rate
 as introduced in section~\ref{intro:probes:rsd}, by quantifying the anisotropies in the clustering 
 of galaxies. As we seen before, assuming an incorrect fiducial cosmology when converting redshifts 
 into distances also introduces anisotropies (the AP effect). Therefore in practice, an RSD analysis
-yields simultaneously the combination $f(z)\sigma_8(z)$ and the distance ratios $D_H(z)/r_\text{drag}, D_M(z)/r_\text{drag}$. 
+yields simultaneously the combination $f(z)\sigma_8(z)$ and 
+the distance ratios $D_H(z)/r_\text{drag}, D_M(z)/r_\text{drag}$. 
 
 The main differences with respect to the BAO analysis (see previous section) is that the information 
 about anisotropies come from the full shape of the two-point statistics, not only the peak. 
-This complicates the RSD analysis in that we need to have accurate models for the full shape of 
-the clustering down to some scale, and we cannot add empirical terms to be marginalised over as we did in the BAO analysis. 
+This complicates the RSD analysis in that we need accurate models for the full shape of 
+the clustering down to some scale, and we cannot add empirical functions of scale to be marginalised 
+over as we did in the BAO analysis. 
 Due to non-linearities of matter clustering and galaxy bias, it is increasingly hard to model scales below 
-those well described by linear theory. For these midly non-linear scales, we need more advanced perturbation theory models. 
-A huge variety of theoretical models have been developed in the past years (see \cite{bernardeauLargeScaleStructureUniverse2002}
-for a review). 
+those well described by linear theory. For these mildly non-linear scales, we need more advanced perturbation theory models. 
+A huge variety of theoretical models have been developed in the past years 
+(see \cite{bernardeauLargeScaleStructureUniverse2002} for a review). 
 
 In the analysis of eBOSS data, we used to types of models: 
 the first one is based on regularised perturbation theory with second order bias and RSD correction terms
 (\cite{taruyaBaryonAcousticOscillations2010, taruyaDirectFastCalculation2012}). We commonly refer to it as 
 the \emph{TNS model}. The second one is based on convolution Lagrangian perturbation theory with Gaussian streaming
-(\cite{carlsonConvolutionLagrangianPerturbation2013, wangAnalyticModelRedshiftspace2014}). We refer to it as 
-the \emph{CLPT-GS model}. I implemented these models in python language in the package 
-\textsc{baopy}\footnote{\url{https://baopy.readthedocs.io/}}. 
+(\cite{carlsonConvolutionLagrangianPerturbation2013, wangAnalyticModelRedshiftspace2014}). 
+We refer to it as the \emph{CLPT-GS model}. 
+I implemented these models in python language in the package 
+\textsc{baopy}\footnote{\url{https://baopy.readthedocs.io/}}
+though this version was not the one used in the analysis.  
 
 The TNS model is expressed as:
 \begin{equation}
@@ -716,12 +738,12 @@ $(P_{g, \delta \delta}, P_{g, \delta \theta},P_{\theta \theta})$ are the non-lin
 auto power spectrum, galaxy-velocity divergence cross power spectrum and the velocity divergence auto power spectrum, respectively, 
 which are themselves functions of first and second order bias parameters. These functions are provided by 
 the RegPT scheme, implemented in \textsc{pyregpt}\footnote{\url{https://github.com/adematti/pyregpt}}.
-The functions $A$ and $B$ are the RSD correction terms. The function $D_\text{FoG}$ can be either a Gaussian or a Lorentzian
-of $k_\parallel = k\mu_k$
-with characteristic scale $\sigma_\text{FoG}$ corresponding to the velocity dispersion on small scales. 
+The functions $A$ and $B$ are the RSD correction terms. 
+The function $D_\text{FoG}$ can be either a Gaussian or a Lorentzian function of $k_\parallel = k\mu_k$,
+with a characteristic scale $\sigma_\text{FoG}$ corresponding to the velocity dispersion on small scales. 
 This model is computed in Fourier space, but it can be Fourier transformed to obtain a model in configuration space. 
 
-The CLPT-GS model is uniquely defined in configuration space, and writtes as: 
+The CLPT-GS model is uniquely defined in configuration space, and writes as: 
 \begin{equation}
  1 + \xi_{g,s}(\rperp, \rpara) = 
   \int  \frac{1}{\sqrt{2\pi \left[\sigma_{12}^2(r)+\sigma^2_\text{FoG}\right]}}
@@ -738,9 +760,11 @@ where $\xi_g(r)$, $v_{12}(r)$, and $\sigma_{12}(r)$ are obtained
 from CLPT and contains two bias terms. The dependency with $f$ is via a scaling of 
 the functions $v_{12}, \sigma_{12}$ that are proportional to velocity. 
 The integral corresponds to the convolution by velocities in the radial direction, 
-characteristic of the Gaussian streaming formalism. 
+characteristic of the streaming formalism 
+(see \cite{kuruvillaStreamingModelRedshiftspace2018}
+and references therein for an introduction of the streaming model).
 
-Both the TNS and CLPT-GS models had to be tested agains n-body simulations. 
+Both the TNS and CLPT-GS models had to be tested against n-body simulations. 
 We were particularly interested in the scales of validity of these models 
 for the case of the eBOSS LRG sample. Given the number of available realisations, 
 we used the n-body suite of 84 realisations of \textsc{Nseries} simulations 
@@ -809,7 +833,7 @@ This topic is also discussed in Appendix A of \cite{alamCompletedSDSSIVExtended2
 
 After validating the model, we tested the impact of different halo occupation distribution (HOD) models 
 and observational effects, both introduced in simulations. We found that none of these modifications 
-introduces significant biases our contraints of $(f\sigma_8, \aperp, \apara)$, though the shifts we observe 
+introduces significant biases our constraints of $(f\sigma_8, \aperp, \apara)$, though the shifts we observe 
 were added as systematic uncertainties in quadrature to the statistical ones. 
 Table 10 of \cite{bautistaCompletedSDSSIVExtended2021} summarises the systematic errors which are assumed to be
 diagonal (no covariance between the three parameters) for simplicity. For our RSD analysis, 
@@ -818,17 +842,17 @@ In quadrature, final uncertainties increase by up to 20\% due to systematic erro
 
 We also attempted to analyse our biases and uncertainties statistically with the set of 1000 \textsc{EZmocks}. 
 However, an important caveat is that these mocks only solve approximatively the clustering, and therefore are not 
-the better suited to test RSD fitting. We proceeded to fit the 1000 realisations and we compared 
+the best suit to test RSD fitting. We proceeded to fit the 1000 realisations and we compared 
 the average uncertainty to the standard deviation of best-fit parameters among all mocks. These numbers 
 agree sufficiently well, particularly for $f\sigma_8$. The pull distributions of each parameters do not 
-point to any under/over estimation of uncertainties.  
+point to any large under/over estimation of uncertainties.  
 
 Figure~\ref{fig:eboss_dr16_lrg_rsd_bestfit} presents the best-fit TNS and CLPT-GS models to the correlation function 
 multipoles of the eBOSS DR16 LRG sample. 
 Both models are basically indistinguishable even though their are derived differently. The constraints are also 
 similar between the two models, so we combined them into a single results by averaging their best-fit parameters 
 and their covariances. 
-Figure~\ref{fig:eboss_dr16_lrg_rsd_contours} show the final constraints on $f\sigma_8$ and the distance ratios, 
+Figure~\ref{fig:eboss_dr16_lrg_rsd_contours} shows the final constraints on $f\sigma_8$ and the distance ratios, 
 compared to the same analysis in Fourier space. We also show the consensus result computed using the method 
 by \cite{sanchezClusteringGalaxiesCompleted2017a}, which assumes Gaussianity of each posterior distribution 
 (see the next section for a further discussion). 
@@ -910,7 +934,7 @@ and built a large covariance matrix used to combine the vectors and error matric
 Currently the best method to obtain these correlations between FS and CS results is using mock catalogues.
 This provides with an estimate of a sort of ``ensemble averaged'' correlations (though limited by the 
 number of realisations). However, the real data is a single realisation of the ensemble, and 
-the correlations between FS and CS are also suceptible to fluctuate, just as the individual parameters 
+the correlations between FS and CS are also susceptible to fluctuate, just as the individual parameters 
 and their uncertainties. In \cite{bautistaCompletedSDSSIVExtended2021} we developed 
 a method to account for this fact, where we adjust the correlations for each realisation based on 
 the vectors $\vec{p}$ and their error matrices of that particular realisation. 
@@ -957,20 +981,20 @@ underestimating uncertainties.
   \label{fig:non_gaussian_contours}
   \end{figure}
 
-Vincenzo Aronica is currenlty working on the application of joint space analysis 
+Vincenzo Aronica is currently working on the application of joint space analysis 
 for the case of redshift-space distortions (RSD). 
 He implemented the TNS model (section~\ref{galaxies:clustering:eboss_dr16_lrgs}) 
 in Fourier and configuration space in the \textsc{baopy} package. 
 The tests on the suite of 84 realisations of \textsc{nseries} n-body simulations are 
 promising, though there are some subtleties to solve related to the relative normalisation 
 (or linear bias) amplitudes between FS and CS. Currently we use the same values of biases 
-for both space, in addition to $\aperp, \apara, f\sigma_8$. 
+for both spaces, in addition to $\aperp, \apara, f\sigma_8$. 
 Vincenzo will recompute power spectra for a given set of mock 
 catalogues using a consistent normalisation and window function calculations provided by 
 \textsc{pypower}. 
 
 The work on BAO and RSD joint fits in Fourier and configuration space 
-will be discussed and hopefully applied to the analysis of DESI data. 
+will be hopefully applied to the analysis of DESI data. 
 
 
 \section{Cross-correlation with radio surveys}
@@ -979,7 +1003,7 @@ will be discussed and hopefully applied to the analysis of DESI data.
 The study of large-scale structures will soon be improved thanks to 
 observations of the distribution of neutral hydrogen (HI) via the emission 
 of photons from the 21cm hyperfine transition of the electron. 
-Future 21cm surveys such as the Square Kilometer Array (SKA) will be able to 
+Future 21cm surveys such as the Square Kilometre Array (SKA) will be able to 
 observe the Universe with intensity mapping up to redshifts of 3, 
 opening an alternate window to that provided by spectroscopic surveys. 
 The term \emph{intensity mapping} refers to the fact that we measure 
@@ -1001,7 +1025,7 @@ extensively studied theoretically
 battyeNeutralHydrogenSurveys2004,
 mcquinnCosmologicalParameterEstimation2006,
 changBaryonAcousticOscillation2008a}) 
-and with simulations 
+and with n-body simulations 
 (\cite{mesinger21CMFASTFastSeminumerical2011,
 villaescusa-navarroIngredients21Cm2018} and references therein). 
 On large scales, 21cm flux fluctuations trace those of dark matter density, while on smaller scales 
@@ -1041,16 +1065,16 @@ and the LRG and ELG angular distribution in the same patch of sky.
 \end{figure}
 
 The cross-correlations between eBOSS galaxies and 21cm temperature maps was computed 
-in Fourier space by \cite{wolzConstraintsCrosscorrelationEBOSS2022} and in configuration space by me. 
+in Fourier space by \cite{wolzConstraintsCrosscorrelationEBOSS2022} and in configuration space by myself. 
 The cross-correlation estimator I used is the same used for the quasar-\lya forest cross-correlation 
 described in section~\ref{forests:bao:correlations}, which assumes that galaxies (in this case)
 are shot-noise dominated and that voxels of the 21cm map are independent. These assumptions are 
 not quite valid for our sample but I left further developments for future work. 
-For instance, one could perfom 
+For instance, one could perform 
 the study of cross-correlations with a maximum likelihood method 
-(see e.g. section~\ref{velocities:maximum_likelihood}) or in Fourier space but correctly accounting for 
-the convolution by the window function of these surveys, which was not explicitly done in 
-\cite{wolzConstraintsCrosscorrelationEBOSS2022}.
+(see e.g. section~\ref{velocities:methods:maximum_likelihood}) 
+or in Fourier space but correctly accounting for the convolution by the window function of 
+these surveys, which was not explicitly done in \cite{wolzConstraintsCrosscorrelationEBOSS2022}.
 
 Figure~\ref{fig:gbt_cross_correlation} displays the monopoles and quadrupoles of the cross-correlation function 
 between 21cm temperature fluctuations and eBOSS galaxies. Both ELG and LRG show non-zero correlations with the 
@@ -1084,15 +1108,16 @@ The solid lines in Figure~\ref{fig:gbt_cross_correlation} show the best-fit mode
 The $\chi^2$ values are also shown in the figure, which correspond to 30 data points (24 degrees of freedom). 
 The fits are generally well behaved. 
 I do not show values for the best-fit parameters and their uncertainties because of the caveats I mentioned before
-related to the estimator and the covariance matrices. Also at the time of my analysis, we did not have mock catalogues 
-to test my methodology.  
+related to the estimator and the covariance matrices. 
+Also at the time of my analysis, we did not have mock catalogues to test my methodology.  
 
 \cite{wolzConstraintsCrosscorrelationEBOSS2022} proceeded with the analysis of the cross power spectrum monopole
 and fitted for the amplitude of the signal, after testing our methods on mock catalogues. 
 Using different scale ranges, we obtained constraints on the combination $\Omega_\text{HI}b_\text{HI}r$ at $z_\text{eff}=0.8$,
 where $r$ is an empirical cross-correlation term that depends on the galaxy sample. 
-Table 1 of \cite{wolzConstraintsCrosscorrelationEBOSS2022} summarises results. For instance, 
-for conservative choices for the analysis, we find $\Omega_\text{HI}b_\text{HI}r = (0.48\pm0.12)\times 10^{-3}$ for GBT x ELGs 
+Table 1 of \cite{wolzConstraintsCrosscorrelationEBOSS2022} summarises results. 
+For instance, for conservative choices for the analysis, 
+we find $\Omega_\text{HI}b_\text{HI}r = (0.48\pm0.12)\times 10^{-3}$ for GBT x ELGs 
 and $(0.38\pm0.12)\times 10^{-3}$ for GBT x LRGs, corresponding to 5 and 4.2$\sigma$ detections respectively. 
 
 This work is on the pathway for precision measurements with future 21cm surveys such as SKA 

@@ -18,7 +18,8 @@ model for gravity: general relativity.
 In this chapter I will expose the recent work we developed within the 
 cosmology group at the Centre de Physique des Particules de Marseille 
 in trying to combine galaxy surveys and peculiar velocities, 
-particularly those obtained from type-Ia supernovae.
+particularly those obtained from type-Ia supernovae. Most of the work 
+was carried out by the PhD student Bastien Carreres whom I co-supervise. 
 
 
 
@@ -95,13 +96,13 @@ TF or FP distances to obtain the same precision.
     tracer of the gas content of the galaxies and the HI line width is related to the rotation 
     velocity of these galaxies. For stellar masses, they used photometry from SDSS in optical 
     and the WISE satellite in the infrared. 
-    The infered scatter in their TF relation is of about 45\% in the distance modulus (or absolute magnitudes) 
+    The inferred scatter in their TF relation is of about 45\% in the distance modulus (or absolute magnitudes) 
     which corresponds to a scatter of $\ln(10)/5 \times 45$\%$ = 18$\% in distances.  
     Their sample extends up to $z \sim 0.05$. 
-    \cite{hoffmanCosmicflowsDistanceModuli2021} describes how to compute peculiar velocites 
+    \cite{hoffmanCosmicflowsDistanceModuli2021} describes how to compute peculiar velocities 
     from this sample of TF distances, including a correct treatment of uncertainties. 
 
-    In section~\ref{velocities:methods} I will present some of the growth-rate measuements 
+    In section~\ref{velocities:methods} I will present some of the growth-rate measurements 
     using this or a previous version of the CosmicFlows catalogue of distances. 
 
 
@@ -124,9 +125,9 @@ TF or FP distances to obtain the same precision.
     relation between the luminosity of the elliptical galaxy and 
     the velocity dispersion of their stars near their centres. The one-dimensional version is 
     known as the Faber-Jackson relation (\cite{faberVelocityDispersionsMasstolight1976}). 
-    Later, this relation was extended to two-dimenstions to relate the effective radius of the galaxy 
+    Later, this relation was extended to two-dimensions to relate the effective radius of the galaxy 
     (in kpc) to the velocity dispersion and the average surface brightness within the effective angular radius. 
-    The last two quantities are distance-independent and can be observed with speectroscopy and photometry 
+    The last two quantities are distance-independent and can be observed with spectroscopy and photometry 
     respectively. From these, we can derive the effective radius which is then converted to a distance measurement. 
 
     The largest sample of FP distances to date is the one produced from the SDSS project 
@@ -139,7 +140,7 @@ TF or FP distances to obtain the same precision.
     which corresponds to about 23\% in distances, which is similar to the scatter of 
     TF distances. 
 
-    In section~\ref{velocities:methods} I will present some of the growth-rate measuements 
+    In section~\ref{velocities:methods} I will present some of the growth-rate measurements 
     using the 6dFGSv sample of distances. Currently there are no published results using 
     the larger SDSS sample. 
 
@@ -184,7 +185,7 @@ TF or FP distances to obtain the same precision.
         type-Ia supernovae without any intrinsic scatter or observational uncertainties.
         The displacements along the redshift direction are proportional to $(1+z_\text{pec})$
         while those along the distance moduli direction are proportional to $\log_{10}(1+z_\text{pec})$.
-        The colourbar indicates the simulated peculiar velocity of each SNIa. }
+        The colour bar indicates the simulated peculiar velocity of each SNIa. }
         \label{fig:pv_hubble_diagram_snia}
     \end{figure}
 
@@ -201,9 +202,9 @@ TF or FP distances to obtain the same precision.
     prior selection of targets. As we will discuss later, selection effects are important 
     when constructing velocity fields with any type of distance tracer. 
     
-    The Zwicky Transient Facitily (ZTF, \cite{grahamZwickyTransientFacility2019}) 
+    The Zwicky Transient Facility (ZTF, \cite{grahamZwickyTransientFacility2019}) 
     is currently observing the whole available sky from the Northern 
-    hemisphere and will produce a large sample of abouth 5~000 SNIa at $z<0.1$ without any prior 
+    hemisphere and will produce a large sample of about 5~000 SNIa at $z<0.1$ without any prior 
     selection. This will be a homogeneous set ideal to perform statistical measurements with their 
     peculiar velocities.
     Figure~\ref{fig:pantheon_ztf_sky} compares the angular distribution of SNIa of the Pantheon+ sample 
@@ -248,9 +249,9 @@ the brighter objects pass the cuts. If one is interested in, say, the average di
 we will observe a bias relative to the true average distance. 
 The intrinsic scatter in luminosity of all standardisable candles worsens this type of bias 
 and it complicates any attempts to correct for these biases. 
-Typical analyses of SNIa ofter use realistic simulations of the data, including the physical 
+Typical analyses of SNIa often use realistic simulations of the data, including the physical 
 properties of SNIa that create the scatter and instrumental noise, to model these selection effects. 
-The analysis of the Panthon SNIa sample used a technique named 
+The analysis of the Pantheon SNIa sample used a technique named 
 Bayesian Estimation Applied to Multiple Species (BEAMS, \cite{kunzBayesianEstimationApplied2007}) 
 with Bias Corrections 
 (BBC, \cite{kesslerCorrectingTypeIa2017}). This technique also accounts for mis-classified supernovae. 
@@ -266,7 +267,7 @@ The inhomogeneous Malmquist bias is a similar effect but generalised to the fluc
 where $\hat{n}$ is a given direction in the sky and $d$ is the distance to us. 
 
 It is possible to correctly account for all these biases in a fully Bayesian treatment of  
-propability density functions of the distances 
+probability density functions of the distances 
 (\cite{grazianiPeculiarVelocityField2019, boruahReconstructingDarkMatter2021}). 
 
 \section{Growth-rate measurements with velocities}
@@ -298,8 +299,8 @@ is the equivalent to the one used in BAO and RSD measurements.
 These three statistics can be analysed jointly when comparing to models, 
 increasing the constraining power. 
 
-I will shortly describe a few methods available in the litterature that 
-allows us to connect models to the obseved densities and velocities, 
+I will shortly describe a few methods available in the literature that 
+allows us to connect models to the observed densities and velocities, 
 at the field level or at the two-point function level. 
 
     \subsection{Maximum likelihood method}
@@ -343,7 +344,7 @@ at the field level or at the two-point function level.
     At CPPM, Bastien Carreres is currently employing this technique to analyse 
     the ZTF sample of type-Ia supernovae. I have implemented the basic algorithm 
     and Bastien continued its development, adapting it to work with log-distance 
-    ratio instead of velocities, several mesh assignement schemes and models of clustering. 
+    ratio instead of velocities, several mesh assignment schemes and models of clustering. 
     He also implemented a whole pipeline to produce realistic simulations of ZTF SNIa light-curves, 
     which can be painted on n-body simulations, and to analyse them as real data. 
     He is currently studying 
@@ -410,7 +411,8 @@ at the field level or at the two-point function level.
         \label{fig:pv_config}
     \end{figure}
 
-    \cite{gorskiCosmologicalVelocityCorrelations1989} developed estimators that we can relate to a model that depends on $\Psi_\parallel$ and $\Psi_\perp$. 
+    \cite{gorskiCosmologicalVelocityCorrelations1989} developed estimators that we can 
+    relate to a model that depends on $\Psi_\parallel$ and $\Psi_\perp$. 
     This type of correlation functions were used in 
     \cite{wangPeculiarVelocityCorrelation2018, 
     dupuyEstimationLocalGrowth2019, 
@@ -442,7 +444,7 @@ at the field level or at the two-point function level.
     \subsection{Density-velocity comparison}
     \label{velocities:methods:comparison}
 
-    The link between density and velocity fields is straighforward 
+    The link between density and velocity fields is straightforward 
     on quite large scales, where linear theory is valid. 
     Another method to test for the consistency of the standard cosmological model 
     is to compare the observed (radial) velocity field with 
@@ -500,13 +502,13 @@ at the field level or at the two-point function level.
     ust as one does when creating mock catalogues. 
     Also, by modelling the observed field entirely, we capture 
     more information from higher-order statistics than just the two-point function. 
-    The inconvience of this method is the computing time required to perform the inference,
+    The inconvenience of this method is the computing time required to perform the inference,
     given the large number of free parameters and the time to evolve each sample from initial conditions. 
     
     \cite{lavauxBayesian3DVelocity2016} implemented the forward-modelling applied to 
     both density and velocity fields. A similar approach was used on CosmicFlows3 data 
     by \cite{grazianiPeculiarVelocityField2019}. In \cite{boruahReconstructingDarkMatter2021}
-    they discuss the treatment of the inhomogenous Malmquist bias in the Bayesian formalism 
+    they discuss the treatment of the inhomogeneous Malmquist bias in the Bayesian formalism 
     (see section~\ref{velocities:biases}).
     In \cite{prideaux-gheeFieldBasedPhysicalInference2022}, they used a Bayesian hierarchical modelling 
     approach to fit both density and velocity fields using a Hamiltonian Monte Carlo sampling of the 
@@ -653,7 +655,7 @@ First, we can see how the uncertainties on $f\sigma_8$ are
 significantly reduced when including ZTF SNIa, particularly when 
 the intrinsic scatter is small and when using a larger range of scales. 
 We see an improvement of a factor of 2.3 at most.  
-Second, we see how increasing the scale range $k_\text{max}$ also improves contraints. 
+Second, we see how increasing the scale range $k_\text{max}$ also improves constraints. 
 This is why it is important to be able to model the clustering of galaxies and 
 peculiar velocities on non-linear scales. 
 Third, we see how improving the standardisation of SNIa also helps 
@@ -716,7 +718,7 @@ with matter only. The first set is named Dark Energy and Massive Neutrino Univer
 (DEMNUni, \cite{castorinaDEMNUniClusteringLargescale2015}) aimed at account correctly for 
 the impact of massive neutrinos in the formation of structures. 
 They were produced with the tree particle mesh-smoothed particle hydrodynamics 
-(TreePM-SPH) code Gadget-3 with a recipee given by \cite{vielEffectNeutrinosMatter2010} 
+(TreePM-SPH) code Gadget-3 with a recipe given by \cite{vielEffectNeutrinosMatter2010} 
 to simulate massive neutrinos. The DEMNUni boxes are 2 $h^{-1}$Gpc on a side, 
 and contain 2048$^3$ matter particles and $2048^3$ neutrino particles. Initial conditions 
 are set at $z=99$ and evolved assuming a flat $\Lambda$CDM universe with parameters 
@@ -733,8 +735,8 @@ spanning 97 cosmological models. These cosmological models have different
 values for $\omega_b$, $\omega_\text{cdm}$, $h$, $A_s$, $n_s$, $\alpha_s$, 
 $N_\text{eff}$, $w_0$ and $w_a$. Initial conditions are created using 
 first order Lagrangian perturbation theory with the public code
-\textsc{zeldovich-PLT}\footnote{\url{https://github.com/abacusorg/zeldovich-PLT}}.
-Halos are found using the CompaSO tehcnique (\cite{hadzhiyskaCOMPASONewHalo2022}).
+\textsc{Zeldovich-PLT}\footnote{\url{https://github.com/abacusorg/zeldovich-PLT}}.
+Halos are found using the CompaSO technique (\cite{hadzhiyskaCOMPASONewHalo2022}).
 These simulations and several data products are publicly available and 
 documented\footnote{\url{https://abacussummit.readthedocs.io/}}. 
 The AbacusSummit suite is currently the state-of-the-art in the market 
@@ -752,12 +754,12 @@ Eventually we convert comoving distances into redshifts assuming a fiducial cosm
 At this step, we can also include the effect of redshift-space distortions (RSD) using the radial velocities.
 Currently we do not apply any halo mass cuts in our halo samples. 
 
-With halo samples in hand, we randomly assing SNIa events following a given rate of 
+With halo samples in hand, we randomly assign SNIa events following a given rate of 
 events per volume, e.g., $(2.35 \pm 0.24) \times 10^4 \text{Gpc}^{-3} \text{yr}^{-1}$ 
 (\cite{perleyZwickyTransientFacility2020}).
 Using observation logs from real ZTF observations, we can know which exposures 
 could observe our SNIa events within some time window comparable to the duration of 
-a SNIa light-curve. For each observed SNIa, we draw strech and colour parameters 
+a SNIa light-curve. For each observed SNIa, we draw stretch and colour parameters 
 defined as in the SALT2 formalism (\cite{guySALT2UsingDistant2007}) and following 
 realistic distributions
 (\cite{scolnicMEASURINGTYPEIA2016, nicolasRedshiftEvolutionUnderlying2021}).
@@ -797,7 +799,7 @@ the cosmological dependency with $\Omega_m$ or $\Omega_\Lambda$ only kicks in at
 much higher than our sample. 
 The peculiar velocity estimator uses the residuals of the observed distance moduli to the
 best-fit Hubble diagram. While most of the displacements due to velocities happen in the redshift direction,
-the noise is much larger in the distance moduli diretion, so the most convient observable is 
+the noise is much larger in the distance moduli direction, so the most convenient observable is 
 the Hubble residual $\Delta \mu \equiv \mu_\text{obs} - \mu_\text{model}(z_\text{obs})$. 
 Using a linear expansion of the Hubble diagram, one can write an approximation of the corresponding 
 peculiar velocity, though its noise properties become non-Gaussian. Therefore most studies 
@@ -808,14 +810,14 @@ simply use $\Delta \mu$ as the peculiar velocity observable.
     \centering
     \includegraphics[width=0.6\textwidth]{fig/velocities/snsim_lightcurves.png}
     \caption{Three simulated type-Ia supernovae light-curves as observed by ZTF, ranging from low to mid and high redshift. 
-    The solid line represents the input light-curve model while points with errorbars are simulated observed fluxes 
-    including instrumental noise. The flux is in arbitraty units. Figure extracted from Carreres et al. (in prep). }
+    The solid line represents the input light-curve model while points with error bars are simulated observed fluxes 
+    including instrumental noise. The flux is in arbitrary units. Figure extracted from Carreres et al. (in prep). }
     \label{fig:ztf_snsim_lightcurves}
 \end{figure}
 
 Figure~\ref{fig:ztf_snsim_hubble_diagram} displays the residuals of the Hubble diagram 
 fitted on simulated samples of ZTF light-curves, relative to the true input Hubble diagram. 
-The average of eight independent realisations is also displayed with errorbars. 
+The average of eight independent realisations is also displayed with error bars. 
 A clear bias relative to the input model is seen at $z > 0.06$, 
 due mainly to the selection for spectroscopic follow-up. 
 If the simulations are realistic enough, this bias is an indication that ZTF SNIa samples 
@@ -835,14 +837,14 @@ velocities and subsequently on the estimates of the growth-rate $f\sigma_8$.
     \label{fig:ztf_snsim_hubble_diagram}
 \end{figure}
 
-For our measument of $f\sigma_8$ using peculiar velocities, we are currently employing 
-the maximum-likelihodd method (section~\ref{velocities:methods:maximum_likelihood}). 
+For our measurement of $f\sigma_8$ using peculiar velocities, we are currently employing 
+the maximum-likelihood method (section~\ref{velocities:methods:maximum_likelihood}). 
 Instead of using a linear matter power spectrum as a model for the velocity divergence 
 power spectrum, we are trying to use improved models including regularised perturbation 
 theory (RegPT, \cite{taruyaDirectFastCalculation2012}) and empirical formulas derived
 from n-body simulations (\cite{belAccurateFittingFunctions2019}). 
 These models include some level of non-linearities which would allow us to use 
-a larger range of scales when constraining growth. Also, linear theory is knwon to break 
+a larger range of scales when constraining growth. Also, linear theory is known to break 
 at quite large scales $k\sim 0.1$, particularly at $z\sim0$. 
 
 When building the model covariance matrix used in the likelihood (Eq.~\ref{eq:likelihood})
@@ -855,7 +857,7 @@ The mesh smoothing is taken into account in the model covariance matrix.
 
 There are three free parameters in the model covariance matrix: $f\sigma_8$ which is simply to overall 
 amplitude of velocity-velocity correlations, $\sigma_v$ accounting for the remaining non-linear 
-velocities, $\sigma_u$ accouting for the change in the signal due to redshift-space distortions. 
+velocities, $\sigma_u$ accounting for the change in the signal due to redshift-space distortions. 
 We use the \textsc{iMinuit} package\footnote{\url{https://iminuit.readthedocs.io/}} to find the maximum 
 of the likelihood and to estimate uncertainties. We also explore the full posterior distribution 
 using a Monte Carlo Markov Chain (MCMC). 
@@ -872,7 +874,13 @@ are quite large.
 \begin{figure}
     \centering
     \includegraphics[width=0.6\textwidth]{fig/velocities/bastien_posterior_fs8.png}
-    \caption{ Figure extracted from Carreres et al. (in prep).}
+    \caption{Example of posterior probability distribution for the growth-rate $f\sigma_8$ 
+    and the dispersion parameters $\sigma_v$ and $\sigma_u$, obtained from an analysis 
+    on a mock ZTF sample. Green contours are the result when halo radial peculiar velocities 
+    are used directly without any source of noise. Red contours are the case of a full ZTF mock 
+    SNIa catalogue, including light-curve simulation and fitting. The dashed vertical line represents
+    the input value of the simulation.  
+    Figure extracted from Carreres et al. (in prep).}
     \label{fig:ztf_snsim_posterior}
 \end{figure}
 
