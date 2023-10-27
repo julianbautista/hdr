@@ -1,7 +1,3 @@
-\chaptertoc{}
-
-\vspace{1em}
-
 At redshifts between 0 and 2, galaxies can be used as tracers of
 the matter distribution. With the statistics of the galaxy distribution 
 we can measure the characteristic scale of the baryon acoustic oscillations (BAO) 
@@ -34,7 +30,7 @@ bautistaCompletedSDSSIVExtended2021,
 gil-marinCompletedSDSSIVExtended2020,
 rossCompletedSDSSIVExtended2020,
 zhaoCompletedSDSSIVExtended2021,
-dumerchatBaryonAcousticOscillations2022a}. 
+dumerchatBaryonAcousticOscillations2022}. 
 
 \section{From redshifts to clustering catalogues}
 \label{galaxies:catalogue}
@@ -80,7 +76,7 @@ The \emph{fibre completeness} of each sector is defined as the ratio between
 the number of spectroscopically observed targets to the number of available targets in the sector. 
 Randoms are sub-sampled or de-weighted following the fibre completeness to correct for its effect. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=0.9\textwidth]{fig/galaxies/eboss_footprint.png}
     \caption{ The DR16 footprint for each eBOSS tracer: Luminous Red Galaxies (LRG), 
@@ -138,7 +134,7 @@ with a particular focus on the low-redshift BGS sample.
 
 
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=0.7\textwidth]{fig/galaxies/photometric_weights_lrg.png}
     \caption{ Fluctuations in the angular LRG density as a function of 
@@ -173,7 +169,7 @@ These \emph{redshift-failure weights} are assigned to the
 galaxies with confident redshift measurements, to compensate for the eventual 
 non-confident ones at the same location in the focal plane. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=0.49\textwidth]{fig/galaxies/eboss_z_failures_focalplane.png}
     \includegraphics[width=0.49\textwidth]{fig/galaxies/eboss_z_failures_sn.png}
@@ -212,7 +208,7 @@ for surveys such as the eBOSS ELG (see Figure~\ref{fig:eboss_footprint} and
 \cite{tamoneCompletedSDSSIVExtended2020, demattiaCompletedSDSSIVExtended2021}). 
 
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=0.6\textwidth]{fig/galaxies/eboss_z_distribution.png}
     \caption{ The weighted comoving number densities $\bar{n}(z)$ of eBOSS DR16 tracers
@@ -515,7 +511,7 @@ for the combined sample of BOSS DR12 and eBOSS DR16 luminous red galaxies and th
 catalogues. Figure~\ref{fig:LRG_data_ezmock_correlations_prerec} shows results from standard catalogues while 
 Figure~\ref{fig:LRG_data_ezmock_correlations_postrec} displays results from reconstructed catalogues. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.8\textwidth]{fig/galaxies/DR16LRG_data_ezmock_prerecon.pdf}
     \caption{Pre-reconstruction multipoles of the two-point statistics for the combination of BOSS DR12 and 
@@ -527,7 +523,7 @@ Figure~\ref{fig:LRG_data_ezmock_correlations_postrec} displays results from reco
     \label{fig:LRG_data_ezmock_correlations_prerec}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.8\textwidth]{fig/galaxies/DR16LRG_data_ezmock_postrecon.pdf}
     \caption{Same as Figure~\ref{fig:LRG_data_ezmock_correlations_prerec} but for reconstructed 
@@ -552,7 +548,7 @@ correlations. Also shown are the cross-covariance between Fourier space and conf
 measurements, which will be discussed in section~\ref{galaxies:joint}. As expected, these
 two spaces are highly correlated since they originate from the same sample of galaxies and randoms. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=0.49\textwidth]{fig/galaxies/covariance_prerecon.pdf}
     \includegraphics[width=0.49\textwidth]{fig/galaxies/covariance.pdf}
@@ -561,7 +557,7 @@ two spaces are highly correlated since they originate from the same sample of ga
     from \textsc{EZmocks} reproducing the combined BOSS DR12 and eBOSS DR16 LRG sample.
     Left panel shows results from the standard catalogues while the right panel 
     shows the results from Zeldovich reconstructed catalogues. 
-    Figure extracted from \cite{dumerchatBaryonAcousticOscillations2022a}.
+    Figure extracted from \cite{dumerchatBaryonAcousticOscillations2022}.
     }
     \label{fig:covariance_ezmock}
 \end{figure}
@@ -632,7 +628,7 @@ bulk motions.
 Third, there is a very weak dependency of our results with the choice of
 $\Omega_m^\text{fid}$, which is reassuring. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=0.49\textwidth]{fig/galaxies/bao_bias_prerecon.png}
     \includegraphics[width=0.49\textwidth]{fig/galaxies/bao_bias_postrecon.png}
@@ -681,7 +677,7 @@ and 2.8 per cent in the radial direction.
 Radial and transverse BAO measurements are correlated by -33\% for this dataset.  
 These are the best constraints obtained from galaxies at redshifts above $0.6$.
 
-\begin{figure} 
+\begin{figure}[t] 
     \centering 
     \includegraphics[width=0.33\textwidth]{fig/galaxies/eboss_dr16_lrg_bao_mono.png}
     \includegraphics[width=0.33\textwidth]{fig/galaxies/eboss_dr16_lrg_bao_quad.png}
@@ -702,7 +698,7 @@ as introduced in section~\ref{intro:probes:rsd}, by quantifying the anisotropies
 of galaxies. As we seen before, assuming an incorrect fiducial cosmology when converting redshifts 
 into distances also introduces anisotropies (the AP effect). Therefore in practice, an RSD analysis
 yields simultaneously the combination $f(z)\sigma_8(z)$ and 
-the distance ratios $D_H(z)/r_\text{drag}, D_M(z)/r_\text{drag}$. 
+the distance ratios $D_H(z)/r_\text{drag}$, $D_M(z)/r_\text{drag}$. 
 
 The main differences with respect to the BAO analysis (see previous section) is that the information 
 about anisotropies come from the full shape of the two-point statistics, not only the peak. 
@@ -774,7 +770,7 @@ Figure~\ref{fig:rsd_bias_mocks} presents the results compared to expected values
 for both TNS and CLPT-GS models. The shaded green area shows the fiducial choice 
 to be used in the data. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=0.7\textwidth]{fig/galaxies/rsd_rmin_nseries.pdf}
     \caption{Biases in the measurement of $f\sigma_8, \apara, \aperp$ obtained 
@@ -817,7 +813,7 @@ the recomputed $\sigma_8$ for each case, showing that this procedure indeed redu
 trend of $f\sigma_8$ with $\Omega_m^\text{fid}$. 
 This topic is also discussed in Appendix A of \cite{alamCompletedSDSSIVExtended2021}. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=0.6\textwidth]{fig/galaxies/rsd_nseries_fidcosmo_updated.pdf}
     \caption{Biases in best-fit parameters for both CLPT-GS (blue) and TNS (red) 
@@ -876,7 +872,7 @@ and with BAO results from the previous section.
 The combination between Fourier and configuration space results
 will be discussed in the following section. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.33\textwidth]{fig/galaxies/DR16_LRG_RSD_v7_2_bestfits_mono.pdf}
     \includegraphics[width=0.33\textwidth]{fig/galaxies/DR16_LRG_RSD_v7_2_bestfits_quad_scaler1.pdf}
@@ -892,7 +888,7 @@ will be discussed in the following section.
 \end{figure}
 
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.5\textwidth]{fig/galaxies/DR16_LRG_consensus_rsd_planck.pdf}
     \caption{Constraints on $D_M/r_d, D_H/r_d$ and $f\sigma_8$ $z_\text{eff} = 0.7$ 
@@ -939,14 +935,14 @@ and their uncertainties. In \cite{bautistaCompletedSDSSIVExtended2021} we develo
 a method to account for this fact, where we adjust the correlations for each realisation based on 
 the vectors $\vec{p}$ and their error matrices of that particular realisation. 
 
-In \cite{dumerchatBaryonAcousticOscillations2022a}, we developed an analysis where we fit jointly 
+In \cite{dumerchatBaryonAcousticOscillations2022}, we developed an analysis where we fit jointly 
 the correlation function and power spectrum while accounting for their covariance.
 I refer to it as the joint space (JS) method.  
 The covariance is built at the multipole level, using a set of mock catalogues.
 Figure~\ref{fig:covariance_ezmock} shows the correlation coefficients of CS and FS multipoles, 
 including the cross-correlation terms. The wiggles observed in the cross-correlation terms 
 can be simply explained by the fact that CS and FS are related via Hankel transforms 
-(see Appendix A of \cite{dumerchatBaryonAcousticOscillations2022a} for an explicit derivation). 
+(see Appendix A of \cite{dumerchatBaryonAcousticOscillations2022} for an explicit derivation). 
 We tested and validated this framework on the BAO analysis of the eBOSS LRG sample 
 (section~\ref{galaxies:bao}) where we fit for a single $\aperp$ and $\apara$, though 
 amplitudes of power-laws are independent for each space. 
@@ -960,7 +956,7 @@ For the non-Gaussian cases, the GA method fails to correctly describe the poster
 underestimating uncertainties. 
 
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.45\textwidth]{fig/galaxies/gaussian_contours0.pdf}  
     \includegraphics[width=0.45\textwidth]{fig/galaxies/non_gaussian_contours1.pdf}  
@@ -976,7 +972,7 @@ underestimating uncertainties.
   The expected value is the intersection of the dotted black lines,
   and the best fit values are described by a star for the JS and GA methods. 
   We can see how the JS method yields better combined results that are not necessarily Gaussian.
-  Extracted from \cite{dumerchatBaryonAcousticOscillations2022a}. 
+  Extracted from \cite{dumerchatBaryonAcousticOscillations2022}. 
   }
   \label{fig:non_gaussian_contours}
   \end{figure}
@@ -1055,7 +1051,7 @@ Once the final area of GBT maps was fixed, I cut the eBOSS LRG and ELG samples t
 Figure~\ref{fig:gbt_footprint} shows a redshift slice (or one channel) of the foreground-cleaned GBT HI map
 and the LRG and ELG angular distribution in the same patch of sky. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=0.6\textwidth]{fig/galaxies/gbt_map.png}
     \includegraphics[width=\textwidth]{fig/galaxies/gbt_eboss_galaxies.png}
@@ -1084,7 +1080,7 @@ The covariance matrix of the multipoles was computed with the jacknife technique
 using 96 independent subsets of the data. Due to the estimator I used, neighbouring separation bins in the 
 monopole are strongly correlated. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=\textwidth]{fig/galaxies/gbt_mono_quad.png}
     \caption{Cross-correlation function multipoles between 21cm temperature fluctuation maps from the Green Bank Telescope 

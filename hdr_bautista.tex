@@ -1,105 +1,164 @@
-\documentclass[english]{amu_these}
+\documentclass[a4paper, 11pt, twoside]{book}
+
+\usepackage[bottom=8em]{geometry}
+\usepackage[utf8]{inputenc}
+%\usepackage[T1, TS1]{fontenc}		
+\usepackage{fourier}
+
+\usepackage{emptypage} %prevents page numbers and headings from appearing on empty pages
+\usepackage{fancyhdr} 
+\pagestyle{fancy}
+\setlength{\headheight}{13.59999pt}
+\fancyhf{}
+\fancyhead[LE]{\nouppercase{\leftmark}}
+\fancyhead[RO]{\nouppercase{\rightmark}}
+\fancyfoot[C]{\thepage}
+
+\usepackage{amsmath}
+\usepackage{siunitx}
+\DeclareSIUnit\angstrom{\text {Å}}
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{graphicx}
+\graphicspath{{fig/}{logo/}}
+
+% Unicode characters
+% α 
+
+\usepackage[backend=biber,							%% compilateur par défaut pour biblatex
+	maxcitenames=2,								%% nombre max. de noms auteurs
+	mincitenames=1,								%% nombre min. de noms auteurs
+	sorting=nyt,							%% trier par nom, année, titre
+	citestyle=authoryear,					%% style de citation auteur-année
+	bibstyle=authoryear,					%% style de bibliographie alphabétique
+	%	bibstyle=iso-authoryear,				%% style de bibliographie ISO 690
+	backref=true,							%% liens retour des références (cf. p.)
+	maxbibnames=6,
+	uniquelist=false,
+	url=false]
+	{biblatex}
+\addbibresource{MyLibrary.bib}	
+
+%\usepackage{tocloft}
+%\usepackage{etoc}   
+%\usepackage{minitoc}  
+
+\newcommand{\dinteg}{\mathrm{d}}
+\newcommand{\kms}{\,$\text{km}/\text{s}$\,}
+\newcommand{\hmpc}{\,$h^{-1}$Mpc\,}
+\newcommand{\ihmpc}{\,$h$ Mpc$^{-1}$\,}
+\newcommand{\rperp}{{r_\perp}}
+\newcommand{\rpara}{{r_\parallel}}
+\newcommand{\aperp}{{\alpha_\perp}}
+\newcommand{\apara}{{\alpha_\parallel}}
+\newcommand{\lya}{\,$\text{Ly}\alpha$\,}
+\newcommand{\lyb}{\,$\text{Ly}\beta$\,}
+\newcommand{\zeff}{z_\mathrm{eff}}
+
+
+%\newcommand{\chaptertoc}[1][Contents]{%		%% définit une commande pour la TOC locale (Sommaire)
+%	\localtableofcontents
+%}
+
+
+%% ====
+%% Pour la page de garde seulement 
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+
+\definecolor{blueamu}{RGB}{0, 101, 189}
+\definecolor{cyanamu}{RGB}{61, 183, 228}
+
+
+\newcommand{\dhorline}[3][0]{%
+    \tikz[baseline=-2pt]{\path[decoration={markings, 
+      mark=between positions 0 and 1 step 2*#3
+      with {\node[color=blueamu, fill, circle, minimum width=#3, inner sep=0pt, anchor=south west] {};}},postaction={decorate}]  (0,#1) -- ++(#2,0);}}
+\newcommand{\dvertline}[3][0]{%
+    \tikz[baseline=2em]{\path[decoration={markings,
+      mark=between positions 0 and 1 step 2*#2
+      with {\node[color=black!50, fill, circle, minimum width=#2, inner sep=0pt, anchor=south west] {};}},postaction={decorate}] (0, #1) -- ++(0,#3);}}
+\makeatletter\newcommand\HUGE{\@setfontsize\Huge{28}{0}}\makeatother
+%% == 
+
 
 \begin{document}
 
-										%% page de titre
-	\chead{}
-	\pdfbookmark[0]{Page de titre}{titre}
+	\frontmatter
+	%% page de titre
 	\thispagestyle{empty}
 	\input{tex/titre.tex}
-										%% licence
-	\newpage
-	\pdfbookmark[0]{Affidavit}{affidavit}
+	
+
 	\thispagestyle{empty}
 	\input{tex/licence}
 
-
-	%\chapter*{Résumé}					%% résumé
-    %\addcontentsline{toc}{chapter}{Résumé}
-	%\input{tex/resume}
-
-
-	\chapter*{Abstract}					%% abstract
+	\chapter*{Abstract}					
     \addcontentsline{toc}{chapter}{Abstract}
-	%\selectlanguage{english}
 	\input{tex/abstract}
-	%\selectlanguage{french}
 
-
-	\chapter*{Acknowledgements}			%% remerciements
+	\chapter*{Acknowledgements}			
     \addcontentsline{toc}{chapter}{Acknowledgements}
 	\input{tex/remercie}
 
 
+    \tableofcontents					%% TOC
+    
+	
 
-    \microtypesetup{protrusion=false}	%% désactive la protrusion (TOC LOFT GLS)
-	\tableofcontents					%% TOC
-	% \listoffigures						%% LOF
-	% \listoftables						%% LOT
-	% \printglossary[						%% Acronymes
-	% 	type=\acronymtype,
-	% 	title={Liste des acronymes},
-	% 	toctitle={Liste des acronymes}
-	% 	]
-	% \printglossary[						%% Glossaire
-	% 	title={Glossaire},
-	% 	toctitle={Glossaire}
-	% 	]
-	% \printglossary[						%% Nomenclature
-	% 	type=notation,
-	% 	title={Nomenclature},
-	% 	toctitle={Nomenclature}
-	% 	]
-    \microtypesetup{protrusion=true}	%% rétabli la protrusion
+	\mainmatter 
 
-	\ohead{\leftmark\ifstr{\rightmark}{\leftmark}{}{ -- \rightmark}}	%% place le chapître et la partie en en-tête
+	\begin{refsection}
+		\chapter{Introduction}
+		\label{chap:intro}
+		\input{tex/intro}
+		\printbibliography[heading=subbibintoc]
+	\end{refsection}
 
-	\chapter{Introduction}
-	\label{chap:intro}
-	%\addcontentsline{toc}{chapter}{Introduction}
-	\input{tex/intro}
+	\begin{refsection}
+		\chapter{Observing the Universe with spectroscopy}
+		\label{chap:spectro}
+		\input{tex/spectro}
+		\printbibliography[heading=subbibintoc]
+	\end{refsection}
 
-	\chapter{ Observing the Universe with spectroscopy}
-	\label{chap:spectro}
-	\input{tex/spectro}
+	\begin{refsection}
+		\chapter{The high-redshift Universe and its forests }
+		\label{chap:forests}
+		\input{tex/forests}
+		\printbibliography[heading=subbibintoc]
+	\end{refsection}
 
-	\chapter{ The high-redshift Universe and its forests }
-	\label{chap:forests}
-	\input{tex/forests}
+	\begin{refsection}
+		\chapter{The mid-redshift Universe and its galaxies }
+		\label{chap:galaxies}
+		\input{tex/galaxies}
+		\printbibliography[heading=subbibintoc]
+	\end{refsection}
 
-	\chapter{ The mid-redshift Universe and its galaxies }
-	\label{chap:galaxies}
-	\input{tex/galaxies}
+	\begin{refsection}
+		\chapter{The low-redshift Universe and its velocities }
+		\label{chap:velocities}
+		\input{tex/velocities}
+		\printbibliography[heading=subbibintoc]
+	\end{refsection}
 
-	\chapter{ The low-redshift Universe and its velocities }
-	\label{chap:velocities}
-	\input{tex/velocities}
-
+	
 	\chapter*{Conclusion and future outlook}
 	\addcontentsline{toc}{chapter}{Conclusion and future outlook}
 	\input{tex/conc}
+	
 
 	\appendix
 
-	\newpage
-	\printbibliography[					%% bibliographie
-	heading=bibintoc
-	]	
-	% \newpage
-	% \printindex							%% index
-	% \newpage
-	% \printendnotes						%% notes
 
-	%% annexes
-	%\setcounter{chapter}{0}
-	%\renewcommand{\thesection}{\Alph{section}}
-	
-	%\chapter*{Appendix}
+
 	%\newpage
-	%\addcontentsline{toc}{chapter}{Appendix}
-	
-	%\input{tex/annexe1}
-	%\newpage
-	%\input{tex/annexe2}
+	%\printbibliography[					%% bibliographie
+	%		heading=bibintoc
+	%	]	
+
+
 
 \end{document}

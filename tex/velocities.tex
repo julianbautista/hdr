@@ -1,8 +1,3 @@
-\chaptertoc{}
-
-\vspace{1em}
-
-
 At low redshifts, peculiar velocities of galaxies can be directly measured 
 and be used to learn about gravity on large scales. 
 As presented in chapters~\ref{chap:intro} and \ref{chap:galaxies}, velocities 
@@ -106,7 +101,7 @@ TF or FP distances to obtain the same precision.
     using this or a previous version of the CosmicFlows catalogue of distances. 
 
 
-    \begin{figure}
+    \begin{figure}[t]
         \centering 
         \includegraphics[width=\textwidth]{fig/velocities/pv_footprints.png}
         \caption{Angular distribution of peculiar velocity samples in Galactic coordinates:
@@ -144,7 +139,7 @@ TF or FP distances to obtain the same precision.
     using the 6dFGSv sample of distances. Currently there are no published results using 
     the larger SDSS sample. 
 
-    \begin{figure} 
+    \begin{figure}[t] 
         \centering 
         \includegraphics[width=0.5\textwidth]{fig/velocities/pv_zdistrib.png}
         \caption{The redshift distribution of the distance samples: 
@@ -178,7 +173,7 @@ TF or FP distances to obtain the same precision.
     scatter. We can see how displacements are majoritarily along the redshift direction. 
 
 
-    \begin{figure}
+    \begin{figure}[t]
         \centering 
         \includegraphics[width=0.7\textwidth]{fig/velocities/pv_hubble_diagram_snia.png}
         \caption{Effect of peculiar velocities on an ideal case of a Hubble Diagram of 
@@ -193,7 +188,7 @@ TF or FP distances to obtain the same precision.
     constructing the Hubble Diagram. 
     \cite{petersonPantheonAnalysisEvaluating2021} 
     attempted to correct for peculiar velocities of some SNIa of the Pantheon+ sample 
-    (\cite{scolnicPantheonAnalysisFull2021}) by using reconstruction techniques on 
+    (\cite{scolnicPantheonAnalysisFull2022}) by using reconstruction techniques on 
     galaxy survey data and by identifying groups of galaxies. 
     Peculiar velocities from SNIa have not been widely used to measure growth-rate for two main 
     reasons. First, the small number of detected SNIa at low redshifts, where uncertainties in 
@@ -213,7 +208,7 @@ TF or FP distances to obtain the same precision.
     In section~\ref{velocities:desi_ztf}, I will present the plan of the project of measuring 
     the clustering of ZTF peculiar velocities in combination with galaxies from DESI. 
     
-    \begin{figure} 
+    \begin{figure}[t] 
         \centering 
         \includegraphics[width=\textwidth]{fig/velocities/ztf_pantheon_gaia.pdf}
         \caption{Angular distribution of type-Ia supernovae in Galactic coordinates
@@ -223,7 +218,7 @@ TF or FP distances to obtain the same precision.
         \label{fig:pantheon_ztf_sky}
     \end{figure}
 
-    \begin{figure} 
+    \begin{figure}[t] 
         \centering 
         \includegraphics[width=0.6\textwidth]{fig/velocities/nz_ztfy1_pantheon.pdf}
         \caption{Redshift distribution of host galaxies of type-Ia supernovae 
@@ -397,7 +392,7 @@ at the field level or at the two-point function level.
     
     
 
-    \begin{figure}
+    \begin{figure}[t]
         \centering 
         \includegraphics[width=0.6\textwidth]{fig/velocities/pv_config.png}
         \caption{Non-parallel lines-of-sight of a pair of galaxies A and B as seen by an observer O.
@@ -406,7 +401,7 @@ at the field level or at the two-point function level.
         The peculiar velocities of galaxies A and B are represented by $\vec{v}_A$ and $\vec{v}_B$, 
         and the radial component of these velocities are represented by $\vec{u}_A$ and $\vec{u}_B$. 
         The pair line-of-sight $\vec{d}$ is defined at the mid-angle and $\mu \equiv \hat{d} \cdot \hat{r}$. 
-        Figure extracted from \cite{turnerLocalMeasurementGrowth2022}. 
+        Figure extracted from \cite{turnerLocalMeasurementGrowth2023}. 
         }
         \label{fig:pv_config}
     \end{figure}
@@ -417,7 +412,7 @@ at the field level or at the two-point function level.
     \cite{wangPeculiarVelocityCorrelation2018, 
     dupuyEstimationLocalGrowth2019, 
     turnerImprovingEstimatesGrowth2021,
-    turnerLocalMeasurementGrowth2022}. 
+    turnerLocalMeasurementGrowth2023}. 
 
     In Fourier space, given the sparsity of the data, it is hard to use FFTs on the 
     observed velocity field. This is because voxels without data cannot be assigned 
@@ -510,7 +505,7 @@ at the field level or at the two-point function level.
     by \cite{grazianiPeculiarVelocityField2019}. In \cite{boruahReconstructingDarkMatter2021}
     they discuss the treatment of the inhomogeneous Malmquist bias in the Bayesian formalism 
     (see section~\ref{velocities:biases}).
-    In \cite{prideaux-gheeFieldBasedPhysicalInference2022}, they used a Bayesian hierarchical modelling 
+    In \cite{prideaux-gheeFieldbasedPhysicalInference2023}, they used a Bayesian hierarchical modelling 
     approach to fit both density and velocity fields using a Hamiltonian Monte Carlo sampling of the 
     likelihood. 
 
@@ -551,7 +546,7 @@ In the following section I will introduce two datasets that will be used in our 
 \cite{johnson6dFGalaxySurvey2014}           & 6dFGSv    & Max-likelihood    & $ 0.428^{+0.079}_{-0.068} $   \\
 \cite{hutererTestingLCDMLowest2017}         & 6dFGSv    & Max-likelihood    & $ 0.428^{+0.048}_{-0.045} $   \\
 \cite{adamsJointGrowthrateMeasurements2020} & 6dFGSz,6dFGSv & Max-likelihood & $ 0.384 \pm 0.052^\text{(stat)} \pm 0.061^\text{(syst)} $ \\  
-\cite{laiConstrainingGrowthRate2022}        & SDSS-FP   & Max-likelihood    & $ 0.405^{+0.076 \text{(stat)}}_{-0.071} \pm 0.009^\text{(syst)} $ \\
+\cite{laiUsingPeculiarVelocity2023}        & SDSS-FP   & Max-likelihood    & $ 0.405^{+0.076 \text{(stat)}}_{-0.071} \pm 0.009^\text{(syst)} $ \\
 \cite{qinRedshiftspaceMomentumPower2019}    & 6dFGSv,2MTF & Compressed 2pt  & $ 0.404^{+0.082}_{-0.081} $ \\
 \cite{howlett2MTFVIMeasuring2017}           & 2MTF      & Compressed 2pt    & $ 0.510^{+0.090}_{-0.080} $ \\
 \cite{nusserVelocitydensityCorrelationsCosmicflows32017} 
@@ -568,7 +563,7 @@ In the following section I will introduce two datasets that will be used in our 
     \end{tabular}
 \end{table}
 
-\begin{figure}
+\begin{figure}[t]
     \centering 
     \includegraphics[width=0.8\textwidth]{fig/velocities/plot_fs8_pv.pdf}
     \caption{Measurements of the growth-rate of structures $f\sigma_8$ from peculiar velocity 
@@ -616,7 +611,7 @@ While the density of ZTF SNIa is several orders of magnitudes lower
 than those of BGS galaxies, the fact that each SNIa yields a measurement of the velocity field 
 makes them a powerful tracer nevertheless. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.5\textwidth]{fig/velocities/nz_desi_ztf.pdf}
     \caption{Comoving density of tracers as a function of redshift for the galaxies of 
@@ -806,7 +801,7 @@ peculiar velocity, though its noise properties become non-Gaussian. Therefore mo
 simply use $\Delta \mu$ as the peculiar velocity observable. 
 
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.6\textwidth]{fig/velocities/snsim_lightcurves.png}
     \caption{Three simulated type-Ia supernovae light-curves as observed by ZTF, ranging from low to mid and high redshift. 
@@ -827,7 +822,7 @@ account for biases if one is interested in constraining cosmology with the Hubbl
 In this work, we studied the impact of this selection bias in the measurement of peculiar 
 velocities and subsequently on the estimates of the growth-rate $f\sigma_8$.  
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.6\textwidth]{fig/velocities/bastien_hd_residuals.pdf}
     \caption{Distance moduli inferred from simulated ZTF SNIa light-curves compared to the input cosmological model. 
@@ -871,7 +866,7 @@ are the result when including all the effects of a realistic dataset and analysi
 Both measurements are consistent with the expected value for $f\sigma_8$, even though uncertainties 
 are quite large.
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.6\textwidth]{fig/velocities/bastien_posterior_fs8.png}
     \caption{Example of posterior probability distribution for the growth-rate $f\sigma_8$ 
@@ -896,7 +891,7 @@ Figure~\ref{fig:nz_desi_ztf}.
 Also in the same redshift range, a large set of DESI galaxies will be available to 
 perform a joint density-velocity analysis. 
 
-\begin{figure}
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.6\textwidth]{fig/velocities/bastien_fs8_bias.pdf}
     \caption{Estimates of the growth-rate $f\sigma_8$ from mock ZTF SNIa data. 

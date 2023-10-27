@@ -1,7 +1,3 @@
-\chaptertoc{}
-
-\vspace{1em}
-
 Until today, the \lya forest in quasar spectra has been the only 
 tracer of large-scale structures producing measurements of 
 baryon acoustic oscillations (BAO) at redshifts above 2. 
@@ -34,14 +30,14 @@ The \lya forest is the name for a series of absorption lines observed in quasar
 spectra caused by the presence of neutral hydrogen along the line of 
 sight between us and the quasars. 
 Figure~\ref{fig:forest} shows an example of a optical quasar spectrum with its \lya forest.
-The forest is seen bluewards of the \lya emission peak of the quasar at $\lambda_\text{obs} \sim 4900$~\angstrom.
-corresponding to a quasar rest-frame wavelength of $\lambda_\mathrm{rest}=1216~\angstrom$. 
+The forest is seen bluewards of the \lya emission peak of the quasar at $\lambda_\text{obs} \sim 4900 ~\unit{\angstrom}$.
+corresponding to a quasar rest-frame wavelength of $\lambda_\mathrm{rest}= \qty{1216}{\angstrom}$. 
 The absorption is not limited to the first transition; bluewards of the 
-Ly$\beta$ peak ($\lambda_\text{obs} \sim 4200~\angstrom$ or $\lambda_\mathrm{rest} = 1025~\angstrom$) 
+Ly$\beta$ peak ($\lambda_\text{obs} \sim \qty{4200}{\angstrom}$ or $\lambda_\mathrm{rest} = \qty{1205}{\angstrom}$) 
 we also observe Ly$\beta$ absorption lines on top of the \lya ones, and similarly for all
-Lyman series until the Lyman break at 912~$\angstrom$.
+Lyman series until the Lyman break at $\qty{912}{\angstrom}$.
 
-\begin{figure}
+\begin{figure}[!th]
     \centering
     \includegraphics[width=0.7\textwidth]{fig/forests/forest_example.png}
     \caption{Example of a \lya and Ly$\beta$ forests from a high signal-to-noise ratio 
@@ -62,10 +58,10 @@ is no longer at the \lya wavelength in the \emph{quasar} rest-frame:
 it is light from a bluer wavelength. 
 If a given quasar sits at a redshift $z_q$ and 
 a given intervening atom sits at a redshift $z_a < z_q$, the \lya photon being absorbed
-by the atom corresponds to a photon at $\lambda_\mathrm{rest}= 1216(1+z_a)/(1+z_q)~\angstrom$
+by the atom corresponds to a photon at $\lambda_\mathrm{rest}= 1216(1+z_a)/(1+z_q)~\unit{\angstrom}$
 in the quasar rest-frame. 
 In our frame, the atom absorb \lya photons at the observed wavelength
-$\lambda_\mathrm{obs}= 1216(1+z_a)~\angstrom$ which does not depend on the quasar redshift.
+$\lambda_\mathrm{obs}= {1216(1+z_a)}~\unit{\angstrom}$ which does not depend on the quasar redshift.
 Quasar redshifts are only needed to identify the \lya forest regions in quasar spectra. 
 The result is that a single forest of lines maps the neutral
 hydrogen density across a large range in redshifts. 
@@ -79,7 +75,7 @@ Given the high cross-section of the \lya resonance,
 very low densities of neutral hydrogen are sufficient to create a visible absorption line. 
 At redshifts $2 < z < 4$ where \lya forests are observed in the optical, 
 typical densities found in the intergalactic medium (IGM) are of the order of 
-$n_\mathrm{HI} \sim 10^{-11}~\si{\cm}^{-3}$,
+$n_\mathrm{HI} \sim {10^{-11}}~\unit{\centi\meter^{-3}}$,
 enough to absorb a significant fraction of the photons. 
 This HI density corresponds to 
 less than 1 part in $10^5$ of the total amount of baryons: most of the HI is ionised.
@@ -146,7 +142,7 @@ because it is mostly independent of the \lya forest auto-correlation.
 This is mainly because the quasar sample has a low density (shot-noise dominated)
 compared to the amplitude of the power spectrum on large scales ($\bar{n}P_0 \ll 1$).
 The first measurement of BAO in the quasar-forest cross-correlation was also possible with 
-BOSS data (\cite{font-riberaQuasarLymanAlphaForest2014}). 
+BOSS data (\cite{font-riberaQuasarLymanalphaForestCrosscorrelation2014}). 
 The BAO constraints from the auto and cross correlations 
 were combined assuming that these two are independent. 
 
@@ -157,7 +153,7 @@ They are associated with the official SDSS Data Releases (DR):
  \item DR9: First measurement of large-scale \lya correlations without BAO (\cite{slosarLymanAlphaForest2011}); 
  \item DR9: First detection of BAO in the \lya auto-correlation 
             (\cite{buscaBaryonAcousticOscillations2013, slosarMeasurementBaryonAcoustic2013, kirkbyFittingMethodsBaryon2013});
- \item DR11: First detection of BAO in the quasar-\lya cross-correlation (\cite{font-riberaQuasarLymanAlphaForest2014}), 
+ \item DR11: First detection of BAO in the quasar-\lya cross-correlation (\cite{font-riberaQuasarLymanalphaForestCrosscorrelation2014}), 
              updated auto-correlation measurement (\cite{delubacBaryonAcousticOscillations2015});
  \item DR12: Final BOSS auto-correlation (\cite{bautistaMeasurementBaryonAcoustic2017}) 
              and cross-correlation measurements (\cite{dumasdesbourbouxBaryonAcousticOscillations2017});
@@ -198,7 +194,7 @@ of neutral hydrogen and is therefore a tracer of structures.
 The main observable used to compute correlations is the so-called
 \emph{transmission} $F$, defined as 
 \begin{equation}
-    F(\hat{n}, \lambda) = f(\hat{n}, \lambda)/C(\hat{n}, \lambda) = \exp{-\tau(\hat{n}, \lambda)}
+    F(\hat{n}, \lambda) = \frac{f(\hat{n}, \lambda)}{C(\hat{n}, \lambda)} = \exp{\left[-\tau(\hat{n}, \lambda) \right]}
     \label{eq:transmission}
 \end{equation} 
 where 
@@ -269,11 +265,11 @@ We name this effect the \emph{distortion by continuum fitting}
 and we attempt to model it when fitting the measured correlation function.
 
 Typical wavelength ranges chosen to define the \lya forest and extract the transmission field
-are between 1040 and $1200~\angstrom$ in the quasar rest-frame. 
-Recent analyses also consider the Ly$\beta$ forest region, between 920 and 1020~\angstrom, 
+are between 1040 and $\qty{1200}{\angstrom}$ in the quasar rest-frame. 
+Recent analyses also consider the Ly$\beta$ forest region, between 920 and $\qty{1020}{\angstrom}$, 
 where both \lya and Ly$\beta$ absorption are present. The absorption in this region 
 can be assigned a redshift that depends on the choice of $\lambda_\mathrm{rest}$, 
-which can be either \lya$ = 1216~\angstrom$  or Ly$\beta = 1025$~\angstrom. 
+which can be either \lya$ = \qty{1216}{\angstrom}$  or Ly$\beta = \qty{1025}{\angstrom}$. 
 These rest-frame wavelengths are separated enough such that both can be used 
 in clustering measurements without much contamination at separations below 200\hmpc.
 
@@ -358,13 +354,13 @@ where $W_A^s$ is the total weight in bin $A$ of sub-sample $s$ and $W_A \equiv \
 This estimator has been tested with 100 realisations of synthetic datasets (mocks) and 
 it shows to be robust at the current precision level. 
 
-The data vector contains around 50x50 bins, making the covariance matrix too large (2500x2500)
+The data vector contains around $50 \times 50$ bins, making the covariance matrix too large ($2500 \times 2500$)
 for the usual number of available sub-samples ($\sim 1000$). To avoid the matrix to be 
 singular, we apply a smoothing to it. The smoothing procedure considers that the 
 correlation coefficients, defined as $\rho_{AB} = C_{AB}/\sqrt{C_{AA} C_{BB}}$, 
 are only a function of $\Delta \rperp \equiv \rperp_B - \rperp_A$ and 
 $\Delta \rpara \equiv \rpara_B - \rpara_A$. By averaging all correlation coefficients
-with the same $(\Delta \rperp, \Delta \rpara)$, we obtain a 50x50 matrix which is now 
+with the same $(\Delta \rperp, \Delta \rpara)$, we obtain a $50 \times 50$ matrix which is now 
 positive definite. The new covariance matrix is constructed by taking these averaged 
 coefficients and multiplying them by the variances. This method is used to estimate 
 covariance matrices for both auto and cross correlation functions, but also for the 
@@ -410,7 +406,7 @@ auto-correlation of forests, metal absorption creates confusion because
 it is interpreted as a distinct \lya absorber when in fact it is the same
 absorber but at a different wavelength.
 For example, the \textsc{SiIII} absorption happens at 
-$\lambda_\mathrm{rest} = 1207~\angstrom$, close to \lya for which $\lambda_\mathrm{rest} = 1216~\angstrom$. 
+$\lambda_\mathrm{rest} = \qty{1207}{\angstrom}$, close to \lya for which $\lambda_\mathrm{rest} = \qty{1216}{\angstrom}$. 
 In comoving coordinates, assuming a standard fiducial cosmology, this corresponds
 to $\Delta \rpara \approx 21$\hmpc at $z \sim 2.3$. 
 At these radial separations and when $\rperp \sim 0$, we see a 
@@ -468,7 +464,7 @@ which can be relatively large for quasars ($\sim 500$\kms).
 This term can be modelled as a Gaussian or as a Lorentzian, as a function of a 
 velocity dispersion parameter $\sigma_v$ (in units of \kms).
 The impact of redshift errors was studied in detail in 
-\cite{youlesEffectQuasarRedshift2022a} and it is also described in 
+\cite{youlesEffectQuasarRedshift2022} and it is also described in 
 section~\ref{forests:zerrors}.
 
 The effect of high-column density systems, if identified and modelled 
@@ -522,7 +518,7 @@ For instance, the sky-subtraction and flux calibration processes
 correlate pixels at the same observed wavelength in two distinct lines-of-sight, 
 provided they are observed with the same spectrograph (set of 500 fibres). 
 These correlations have been studied using quasar spectral regions deprived of \lya absorption,
-such as the MgII spectral region ($\lambda_\mathrm{rf} \in [2600, 2760]$\angstrom).
+such as the MgII spectral region ($\lambda_\mathrm{rf} \in {[2600, 2760]}~\unit{\angstrom}$).
 An empirical model for this effect is included: 
 a Gaussian, function of $\rperp$, centred in $\rperp = 0$ but only when $\rpara = 0$. 
 Due to the effect of distortion caused by continuum fitting, these spurious
@@ -597,7 +593,7 @@ which represent a 2.2 per cent BAO measurement in the radial direction
 and a 3.2 per cent in the transverse direction. 
 
 
-\begin{figure}[t]
+\begin{figure}[!th][t]
 \centering 
 \includegraphics[width=0.6\textwidth]{fig/forests/baolya_dr16.png}
 \caption{BAO constraints from the SDSS DR16 sample of \lya forests. 
@@ -621,7 +617,7 @@ Extracted Figure 12 from \cite{dumasdesbourbouxhelionCompletedSDSSIVExtended2020
 
 This section concerns work led by Samantha Youles, PhD candidate under 
 my supervision at the University of Portsmouth between 2018 and 2022. 
-The full details are presented in \cite{youlesEffectQuasarRedshift2022a}. 
+The full details are presented in \cite{youlesEffectQuasarRedshift2022}. 
 
 Quasar redshifts are a key ingredient in the BAO analysis using forests. 
 Quasar redshifts can be challenging to measure precisely when compared to galaxy redshifts. 
@@ -643,7 +639,7 @@ In addition to statistical uncertainties in the determination of redshift,
 broad emission lines of quasars have intrinsic scatter and systematic shifts
 of the order of hundreds of \kms with respect to the host galaxy redshift. 
 Current redshift fitting algorithms based on templates do not account for these shifts. 
-While \cite{youlesEffectQuasarRedshift2022a} studies the impact of scatter, 
+While \cite{youlesEffectQuasarRedshift2022} studies the impact of scatter, 
 we left the study of systematic shifts to future work. 
 
 
@@ -682,7 +678,7 @@ in averages over $\mu_r \equiv \rpara/r$. There are three sets of mocks
 \item[3)] mocks with $\sigma_\mathrm{v, FoG} = 150$\kms and $\sigma_{v, z} = 500$\kms. 
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[!th]
     \centering 
     \includegraphics[width=\textwidth]{fig/forests/zerrors_cross.png}
     \includegraphics[width=\textwidth]{fig/forests/zerrors_auto.png}
@@ -716,7 +712,7 @@ line-of-sight. Using other mock catalogues with increasing values of
 $\sigma_{v, z}$ (not shown here) makes these features stronger. 
 It is the first time this effect is put into evidence. 
 
-In \cite{youlesEffectQuasarRedshift2022a}, we claim that the oscillatory
+In \cite{youlesEffectQuasarRedshift2022}, we claim that the oscillatory
 features appearing when adding redshift errors to quasars is due to 
 two main factors: the smoothing of emission lines in the continua and 
 the auto correlation function of  quasars. 
@@ -727,7 +723,7 @@ These oscillatory features defined by the difference between true and estimated 
 on the clustering thanks to the fact that quasars themselves are clustered. 
 
 
-\begin{figure}
+\begin{figure}[!th]
     \centering 
     \includegraphics[width=0.5\textwidth]{fig/forests/zerros_impact_continua.png}
     \caption{Effect of redshift errors on the mean continuum. 
@@ -820,7 +816,7 @@ would be an opposite dilation in the transverse direction.
 
 
 
-\begin{figure}
+\begin{figure}[!th]
     \centering
     \includegraphics[width=0.9\textwidth]{fig/forests/unlensed_forests.png}
     \includegraphics[width=0.9\textwidth]{fig/forests/lensed_forests.png}
@@ -894,7 +890,7 @@ the variation of power with $r_\perp^\mathrm{max}$
 as ``damping''. Both effects combined are shown as a purple line.
 
 
-\begin{figure}
+\begin{figure}[!th]
     \centering
     \includegraphics[width=0.7\textwidth]{fig/forests/forest_lensing_power_spectra.png}
     \caption{Angular power spectra of convergence maps from simulations of the 5-year DESI sample of \lya forests. 

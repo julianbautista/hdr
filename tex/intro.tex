@@ -1,4 +1,4 @@
-\chaptertoc{}
+%\localtableofcontents
 
 \vspace{1em}
 
@@ -101,7 +101,8 @@
     
     The first indirect evidences for dark energy come from measurements 
     of galaxy clustering in the 1980's 
-    (\cite{maddoxGalaxyCorrelationsLarge1990, 
+    (\cite{peeblesTestsCosmologicalModels1984,
+    maddoxGalaxyCorrelationsLarge1990, 
     efstathiouCosmologicalConstantCold1990}). 
     At the end of the 1990's, two independent teams measured the expansion of 
     the Universe using type-Ia supernovae as standard candles
@@ -190,7 +191,7 @@
     The expansion rate can be derived from GR equations and be written as a function of 
     redshift and the densities of each constituent
     \begin{equation}
-        H^2(z) = H^2_0 \left[ \Omega_m(1+z)^3 + \Omega_r (1+z)^4 + \Omega_{de}(z) + \Omega_k(1+z)^2\right]
+        H^2(z) = H^2_0 \left[ \Omega_m(1+z)^3 + \Omega_r (1+z)^4 + \Omega_\mathrm\mathrm{de}(z) + \Omega_k(1+z)^2\right]
         \label{eq:expansion_rate}
     \end{equation}
     where $\Omega_x = \rho_x / \rho_\mathrm{ crit}$ is the ratio between the density 
@@ -205,7 +206,7 @@
     proportional to $a^{-3} = (1+z)^3$. Relativistic species dilute as well but have an
     extra factor of $a^{-1}$ due to redshifting. 
     The dark energy term is written as a general function of redshift in Eq.~\ref{eq:expansion_rate}.
-    In the simplest case of a cosmological constant, $\Omega_{de}(z) = \Omega_\Lambda$, i.e. a constant.
+    In the simplest case of a cosmological constant, $\Omega_\mathrm\mathrm{de}(z) = \Omega_\Lambda$, i.e. a constant.
     The dependency of curvature with $a^{-2}$ simply comes from the field equations. 
 
     Figure~\ref{fig:hubble_theory} shows the Hubble expansion rate (times $a(z)$) as a function of redshift $z$
@@ -216,13 +217,13 @@
     Also, for increasing values of $\Omega_m$, the transition between matter-dominated to dark energy-dominated era 
     happens at lower redshift. 
 
-    \begin{figure}
+    \begin{figure}[t]
         \centering 
         \includegraphics[width=0.9\textwidth]{fig/intro/hubble.pdf}
         \caption{The Hubble expansion rate divided by $(1+z)$, i.e., the speed of expansion $\dot{a}(z)$, 
         versus redshift $z$ for several cosmological models. }
         \label{fig:hubble_theory}
-    \end{figure}
+    \end{figure}[t]
 
     \subsection{Distances in cosmology}
     \label{intro:model:distances}
@@ -300,17 +301,17 @@
     These are the units used in the vast majority of analyses of the large-scale structures 
     and they will be also used throughout this manuscript. 
     
-    \subsection{dark energy models}
+    \subsection{Dark energy models}
     \label{intro:model:dark_energy_models}
 
     In the Eq.~\ref{eq:expansion_rate} for the expansion rate of the Universe, 
     the dark energy density term is written as a general function of redshift.
     As mentioned before, the simplest model is to consider a cosmological constant
-    $\Omega_{de}(z) = \Omega_\Lambda$.  
+    $\Omega_\mathrm{de}(z) = \Omega_\Lambda$.  
     The cosmological constant can be thought as equivalent to a fluid with 
-    negative relativistic pressure $p_{de} = -\rho_{de}$. 
+    negative relativistic pressure $p_\mathrm{de} = -\rho_\mathrm{de}$. 
     This model can be extended by considering a different equation of state 
-    $p_{de} = p_{de}(\rho_{de}) = w(z) \rho_{de}$, 
+    $p_\mathrm{de} = p_\mathrm{de}(\rho_\mathrm{de}) = w(z) \rho_\mathrm{de}$, 
     where $w(z)$ can be a constant or a more general function of redshift.
     The only constraint is that $w(z) < -1/3$, which is required to obtain 
     an accelerated expansion in a dark energy dominated Universe. 
@@ -532,7 +533,7 @@
     When dark energy is dominant, the expansion accelerates and 
     growth of structures slows down slightly. 
     
-    \begin{figure}
+    \begin{figure}[t]
         \centering
         \includegraphics[width=0.49\textwidth]{fig/intro/pk_versus_time_k0.001.pdf}
         \includegraphics[width=0.49\textwidth]{fig/intro/pk_versus_time_k0.01.pdf}
@@ -540,9 +541,10 @@
         \includegraphics[width=0.49\textwidth]{fig/intro/pk_versus_time_k1.pdf}
         \caption{Evolution of the amplitude of the power spectrum versus the scale factor 
         for four different species and four different scales (one per panel). 
-        The evolution was computed using \textsc{CAMB}.}
+        The evolution was computed using \textsc{CAMB}. A movie version can be found 
+        at \url{https://github.com/julianbautista/movie_correlations}.}
         \label{fig:pk_evolution}
-    \end{figure}
+    \end{figure}[t]
 
     Well after recombination,
     matter (baryons + dark) density perturbations obey the following differential equation, if we 
